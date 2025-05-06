@@ -9,27 +9,23 @@ export const navMenuMiddleElements = [
   },
   {
     label: "Shop",
-    path: ICustomerRoutes.Home,
-  },
-  {
-    label: "About Us",
-    path: ICustomerRoutes.Home,
+    path: ICustomerRoutes.Shop,
   },
   {
     label: "Orders",
-    path: ICustomerRoutes.Home,
+    path: ICustomerRoutes.Orders,
   },
 ];
 
 export const navMenuCornerElements = [
   {
     label: "Cart",
-    path: ICustomerRoutes.Home,
+    path: ICustomerRoutes.Cart,
     icon: BsCartFill,
   },
   {
     label: "Account",
-    path: ICustomerRoutes.Home,
+    path: ICustomerRoutes.Account,
     icon: AiOutlineUser,
   },
 ];

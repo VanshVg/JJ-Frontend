@@ -4,9 +4,13 @@ import {
   navMenuCornerElements,
   navMenuMiddleElements,
 } from "../../types/constants";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const navigate = useNavigate();
+  const path = useLocation().pathname;
 
   return (
     <nav className="text-[#2b2b2b]">
@@ -17,15 +21,16 @@ const Navbar = () => {
             return (
               <div
                 className={`pr-4 max-h-[25px] ${
-                  index !== navMenuMiddleElements.length - 1
-                    ? "border-r-[1px]"
-                    : ""
+                  index !== navMenuMiddleElements.length - 1 && "border-r-[1px]"
                 }`}
                 key={element.label}
               >
                 <h2
                   key={element.label}
-                  className={`text-center cursor-pointer mx-auto ease-in duration-100 hover:text-[#707070]`}
+                  className={`text-center cursor-pointer mx-auto ease-in duration-100 hover:text-[#707070] ${
+                    path === element.path && "text-[#707070]"
+                  }`}
+                  onClick={() => navigate(element.path)}
                 >
                   {element.label}
                 </h2>
@@ -39,9 +44,14 @@ const Navbar = () => {
               <div
                 className="flex gap-2 max-h-[25px] cursor-pointer"
                 key={element.label}
+                onClick={() => navigate(element.path)}
               >
                 <element.icon className="mt-[3px] text-[20px]" />
-                <h2 className="text-center ease-in duration-100 hover:text-[#707070]">
+                <h2
+                  className={`text-center ease-in duration-100 hover:text-[#707070] ${
+                    path === element.path && "text-[#707070]"
+                  }`}
+                >
                   {element.label}
                 </h2>
               </div>
@@ -79,7 +89,17 @@ const Navbar = () => {
                   className="mt-5 border-b-[1px] max-w-[250px] mx-auto"
                   key={element.label}
                 >
-                  <h2 className="text-center mx-auto pb-2">{element.label}</h2>
+                  <h2
+                    className={`text-center mx-auto pb-2 ${
+                      path === element.path && "text-[#707070]"
+                    }`}
+                    onClick={() => {
+                      setIsOpen(false);
+                      navigate(element.path);
+                    }}
+                  >
+                    {element.label}
+                  </h2>
                 </div>
               );
             }

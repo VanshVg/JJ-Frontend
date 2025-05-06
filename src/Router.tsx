@@ -1,7 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { IRoutes } from "./types";
-import { Suspense } from "react";
-import customerRoutes from "./portals/Customer/Routes";
+import customerRoutes from "./modules/Customer/Routes";
 
 const Router = () => {
   const router = createBrowserRouter([...customerRoutes]);
