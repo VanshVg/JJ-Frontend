@@ -12,6 +12,10 @@ export const navMenuMiddleElements = [
     path: ICustomerRoutes.Shop,
   },
   {
+    label: "About",
+    path: ICustomerRoutes.About,
+  },
+  {
     label: "Orders",
     path: ICustomerRoutes.Orders,
   },

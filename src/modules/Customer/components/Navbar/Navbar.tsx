@@ -13,10 +13,10 @@ const Navbar = () => {
   const path = useLocation().pathname;
 
   return (
-    <nav className="text-[#2b2b2b]">
-      <div className="p-4 border-t-[1px] border-b-[1px] border-[#2b2b2b] flex justify-between">
+    <nav className="text-primary font-secondary">
+      <div className="p-4 border-t-[1px] border-b-[1px] border-primary flex justify-between">
         <div className="md:mt-3 md:w-[200px]">Search...</div>
-        <div className="md:flex hidden md:box gap-4 mt-3 text-[18px]">
+        <div className="md:flex hidden md:box gap-4 mt-3 text-[18px] font-[]">
           {navMenuMiddleElements.map((element, index) => {
             return (
               <div
@@ -27,8 +27,8 @@ const Navbar = () => {
               >
                 <h2
                   key={element.label}
-                  className={`text-center cursor-pointer mx-auto ease-in duration-100 hover:text-[#707070] ${
-                    path === element.path && "text-[#707070]"
+                  className={`text-center cursor-pointer mx-auto ease-in duration-100 hover:text-light-gray ${
+                    path === element.path && "text-light-gray"
                   }`}
                   onClick={() => navigate(element.path)}
                 >
@@ -48,8 +48,8 @@ const Navbar = () => {
               >
                 <element.icon className="mt-[3px] text-[20px]" />
                 <h2
-                  className={`text-center ease-in duration-100 hover:text-[#707070] ${
-                    path === element.path && "text-[#707070]"
+                  className={`text-center ease-in duration-100 hover:text-light-gray ${
+                    path === element.path && "text-light-gray"
                   }`}
                 >
                   {element.label}
@@ -91,7 +91,7 @@ const Navbar = () => {
                 >
                   <h2
                     className={`text-center mx-auto pb-2 ${
-                      path === element.path && "text-[#707070]"
+                      path === element.path && "text-light-gray"
                     }`}
                     onClick={() => {
                       setIsOpen(false);
