@@ -69,7 +69,7 @@ const Navbar = () => {
         </div>
       </div>
       <div
-        className={`md:hidden w-full h-full bg-[#fafafa] fixed top-0 transition-opacity duration-500 ${
+        className={`md:hidden w-full h-full bg-white fixed top-0 transition-opacity duration-500 z-10 ${
           !isOpen ? "opacity-0 pointer-events-none" : "opacity-100"
         }`}
       >
