@@ -7,7 +7,7 @@ const HeroSection = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="p-3 text-primary uppercase">
+    <section className="p-3 text-primary uppercase">
       <div className="relative">
         <div className="absolute text-[17px] font-semibold top-[25%] left-[5%] sm:text-[23px] sm:top-[28%] md:text-[29px] lg:text-[39px] xl:text-[49px] xl:left-[8%]">
           <h1 className="font-primary">Everyday Essentials,</h1>
@@ -21,7 +21,7 @@ const HeroSection = () => {
         </div>
         <img src="/images/heroSectionBG.jpg"></img>
       </div>
-    </div>
+    </section>
   );
 };
 
