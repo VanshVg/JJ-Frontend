@@ -45,3 +45,22 @@ export const topProductsData = [
     productName: "Product 8",
   },
 ];
+
+export const categoryImagesData = [
+  {
+    imageUrl: "/images/category1.jpg",
+    label: "Besan",
+  },
+  {
+    imageUrl: "/images/category2.jpg",
+    label: "Rice",
+  },
+  {
+    imageUrl: "/images/category3.jpg",
+    label: "Maida",
+  },
+  {
+    imageUrl: "/images/category4.jpg",
+    label: "Wheat",
+  },
+];

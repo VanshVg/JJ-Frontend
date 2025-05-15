@@ -30,7 +30,7 @@ const TopProductsSection = () => {
                 />
               </div>
               <div className="min-h-[80px] lg:min-h-[100px] bg-primary text-white text-[17px] md:text-[18px] lg:text-[20px] pt-6 lg:pt-8 text-center">
-                <h2 className="hover:underline inline">
+                <h2 className="group-hover:underline inline">
                   {product.productName}
                 </h2>
               </div>
@@ -38,12 +38,12 @@ const TopProductsSection = () => {
           </div>
         ))}
       </div>
-      <p
+      {/* <p
         className="text-[22px] font-semibold cursor-pointer hover:underline inline"
         onClick={() => navigate(ICustomerRoutes.Shop)}
       >
         View All {"->"}
-      </p>
+      </p> */}
     </section>
   );
 };
