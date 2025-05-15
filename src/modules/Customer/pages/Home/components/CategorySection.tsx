@@ -7,12 +7,15 @@ const CategorySection = () => {
         Shop by Category
       </h1>
       <div className="mt-6">
-        <div className="flex flex-wrap">
+        <div className="flex flex-wrap mx-auto">
           {categoryImagesData.map((image) => (
-            <div className="w-[25%] relative group cursor-pointer">
+            <div
+              className="w-[25%] relative group cursor-pointer"
+              key={image.imageUrl}
+            >
               <img
                 src={image.imageUrl}
-                className="hover:opacity-50 duration-500"
+                className="group-hover:opacity-50 duration-500"
               />
               <p className="text-primary absolute top-1/2 w-full font-semibold text-[25px] p-6 opacity-0 group-hover:bg-primary group-hover:text-white group-hover:opacity-100 z-10 duration-500 font-secondary">
                 {image.label}
