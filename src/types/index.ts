@@ -1,4 +1,5 @@
 import { JSX, MouseEvent } from "react";
+import { Control, FieldErrors, FieldValues, Path } from "react-hook-form";
 import { RouteObject } from "react-router-dom";
 
 export interface IRoutes {
@@ -19,4 +20,16 @@ export interface IButtonProps {
   displayType: ButtonDisplayType;
   onClickHandler?: (e: MouseEvent<HTMLElement>) => void;
   externalClasses?: string;
+}
+
+export type FormControlProp<T extends FieldValues = FieldValues> = Control<T>;
+
+export interface InputProps<T extends FieldValues> {
+  name: Path<T>;
+  control: FormControlProp<T>;
+  type: string;
+  placeholder: string;
+  externalClasses?: string;
+  isDisabled?: boolean;
+  errors?: FieldErrors;
 }

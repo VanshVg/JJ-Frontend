@@ -1,4 +1,5 @@
 export const logoPath = "./images/logo.png";
+export const beigeLogoPath = "./images/logo-beige.png";
 
 export const rupeesSymbol = "₹";
 
