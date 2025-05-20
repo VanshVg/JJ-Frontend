@@ -17,7 +17,7 @@ const Register = () => {
 
   return (
     <div className="sm:flex sm:h-screen sm:justify-center sm:items-center">
-      <div className="flex h-screen justify-center bg-primary flex-col sm:block sm:w-[60%] sm:h-[90%] sm:shadow-lg lg:w-[40%] xl:w-[30%]">
+      <div className="flex h-screen justify-center bg-primary flex-col sm:block sm:w-[60%] sm:h-[90%] sm:shadow-lg sm:rounded lg:w-[45%] lg:h-[85%] xl:h-[75%] sm:p-8 xl:w-[30%]">
         <div className="h-[25%] sm:h-[27%]">
           <img
             src={beigeLogoPath}
@@ -28,7 +28,7 @@ const Register = () => {
             Create Account
           </h1>
         </div>
-        <div className="h-[75%] sm:h-[73%] w-full bg-beige p-6 rounded-tl-[50px]">
+        <div className="h-[75%] sm:h-[73%] w-full bg-beige p-6 rounded rounded-tl-[50px]">
           <div className="mt-4 px-4 w-full">
             <Input
               name="firstname"
@@ -71,7 +71,7 @@ const Register = () => {
               externalClasses="w-full mt-4"
             />
           </div>
-          <p className="text-[12px] mt-6 text-primary">
+          <p className="text-[12px] mt-6 text-primary lg:text-[14px]">
             Already have an account?{" "}
             <Link
               className="text-blue-700 hover:underline cursor-pointer"
@@ -83,7 +83,7 @@ const Register = () => {
           <Button
             label="Create Account"
             displayType={ButtonDisplayType.Primary}
-            externalClasses="text-[12px] mx-auto py-3 px-4 mt-6"
+            externalClasses="text-[12px] mx-auto py-3 px-4 mt-6 lg:text-[14px]"
             onClickHandler={() => navigate(ICustomerRoutes.Shop)}
           />
         </div>
