@@ -12,6 +12,7 @@ const ForgotPassword = lazy(
 const OtpVerification = lazy(
   () => import("./pages/OtpVerification/OtpVerification")
 );
+const ResetPassword = lazy(() => import("./pages/ResetPassword/ResetPassword"));
 
 const authenticationRoutes: IRoutes[] = applySuspense([
   {
@@ -33,6 +34,10 @@ const authenticationRoutes: IRoutes[] = applySuspense([
       {
         path: IAuthenticationRoutes.Verification,
         element: <OtpVerification />,
+      },
+      {
+        path: IAuthenticationRoutes.ResetPassword,
+        element: <ResetPassword />,
       },
     ],
   },

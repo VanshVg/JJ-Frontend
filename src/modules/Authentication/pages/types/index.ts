@@ -18,3 +18,8 @@ export interface IForgotPassword {
 export interface IOtpVerification {
   otp: string;
 }
+
+export interface IResetPassword {
+  password: string;
+  confirm_password: string;
+}
