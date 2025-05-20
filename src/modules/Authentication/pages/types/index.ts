@@ -10,3 +10,7 @@ export interface ILogin {
   contact_no: string;
   password: string;
 }
+
+export interface IForgotPassword {
+  contact_no: string;
+}

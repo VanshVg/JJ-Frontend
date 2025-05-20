@@ -6,6 +6,9 @@ import { IAuthenticationRoutes } from "./types";
 const Authentication = lazy(() => import("./Authentication"));
 const Register = lazy(() => import("./pages/Register/Register"));
 const Login = lazy(() => import("./pages/Login/Login"));
+const ForgotPassword = lazy(
+  () => import("./pages/ForgotPassword/ForgotPassword")
+);
 
 const authenticationRoutes: IRoutes[] = applySuspense([
   {
@@ -19,6 +22,10 @@ const authenticationRoutes: IRoutes[] = applySuspense([
       {
         path: IAuthenticationRoutes.Login,
         element: <Login />,
+      },
+      {
+        path: IAuthenticationRoutes.ForgotPassword,
+        element: <ForgotPassword />,
       },
     ],
   },
