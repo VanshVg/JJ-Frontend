@@ -14,3 +14,7 @@ export interface ILogin {
 export interface IForgotPassword {
   contact_no: string;
 }
+
+export interface IOtpVerification {
+  otp: string;
+}
