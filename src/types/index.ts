@@ -33,3 +33,10 @@ export interface InputProps<T extends FieldValues> {
   isDisabled?: boolean;
   errors?: FieldErrors;
 }
+
+export type ApiResponseType = {
+  data: any;
+  message: string;
+  toast: boolean;
+  response_type: string;
+};
