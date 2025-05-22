@@ -5,8 +5,8 @@ import { beigeLogoPath } from "../../../../types/constants";
 import { Link, useNavigate } from "react-router-dom";
 import { ICustomerRoutes } from "../../../Customer/types";
 import Button from "../../../../components/Button";
-import { ButtonDisplayType } from "../../../../types";
 import { IAuthenticationRoutes } from "../../types";
+import { ButtonDisplayType } from "../../../../components/types";
 
 const Login = () => {
   const {

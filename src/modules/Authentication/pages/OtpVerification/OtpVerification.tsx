@@ -1,18 +1,20 @@
-import { useForm } from "react-hook-form";
-import Input from "../../../../components/form-fields/Input";
-import { IOtpVerification } from "../types";
 import { beigeLogoPath } from "../../../../types/constants";
 import { useNavigate } from "react-router-dom";
 import { ICustomerRoutes } from "../../../Customer/types";
 import Button from "../../../../components/Button";
-import { ButtonDisplayType } from "../../../../types";
+import { ButtonDisplayType } from "../../../../components/types";
+import OTP from "../../../../components/form-fields/OTP";
+import { useState } from "react";
 
 const OtpVerification = () => {
-  const {
-    control,
-    formState: { errors },
-  } = useForm<IOtpVerification>();
   const navigate = useNavigate();
+
+  const [otp, setOtp] = useState<string>("");
+
+  const otpChangeHandler = (value: string) => {
+    console.log(value);
+    setOtp(value);
+  };
 
   return (
     <div className="sm:flex sm:h-screen sm:justify-center sm:items-center">
@@ -32,19 +34,14 @@ const OtpVerification = () => {
               An OTP has been sent to your registered mobile number via SMS.
               Please enter the OTP to reset your password.
             </p>
-            <Input
-              name="otp"
-              control={control}
-              type="text"
-              placeholder="Verify the otp"
-              errors={errors}
-              externalClasses="w-full mt-4"
-            />
+            <div className="flex justify-center mt-12">
+              <OTP value={otp} onChangeHandler={otpChangeHandler} />
+            </div>
           </div>
           <Button
             label="Continue"
             displayType={ButtonDisplayType.Primary}
-            externalClasses="text-[12px] mx-auto py-3 px-4 mt-8 lg:text-[14px]"
+            externalClasses="text-[12px] mx-auto py-3 px-4 mt-8 lg:text-[14px] mt-12"
             onClickHandler={() => navigate(ICustomerRoutes.Shop)}
           />
         </div>

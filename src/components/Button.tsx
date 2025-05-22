@@ -1,4 +1,4 @@
-import { ButtonDisplayType, IButtonProps } from "../types";
+import { ButtonDisplayType, IButtonProps } from "./types";
 
 const Button = ({
   label,

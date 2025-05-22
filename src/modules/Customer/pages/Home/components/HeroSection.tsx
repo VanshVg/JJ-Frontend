@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import Button from "../../../../../components/Button";
-import { ButtonDisplayType } from "../../../../../types";
 import { ICustomerRoutes } from "../../../types";
+import { ButtonDisplayType } from "../../../../../components/types";
 
 const HeroSection = () => {
   const navigate = useNavigate();

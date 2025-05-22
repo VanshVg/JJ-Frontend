@@ -1,8 +1,8 @@
 import { Controller, FieldValues } from "react-hook-form";
-import { InputProps } from "../../types";
 import { useState } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { ErrorMessage } from "@hookform/error-message";
+import { InputProps } from "../types";
 
 const Input = <T extends FieldValues>({
   name,
