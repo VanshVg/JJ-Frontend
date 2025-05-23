@@ -29,7 +29,7 @@ const Register = () => {
           </h1>
         </div>
         <div className="h-[75%] sm:h-[73%] w-full bg-beige p-6 rounded rounded-tl-[50px]">
-          <div className="px-4 w-full">
+          <div className="px-4 w-full mt-4 md:mt-8">
             <Input
               name="firstname"
               control={control}
@@ -83,7 +83,7 @@ const Register = () => {
           <Button
             label="Register"
             displayType={ButtonDisplayType.Primary}
-            externalClasses="text-[12px] mx-auto py-3 px-4 mt-6 md:mt-4 lg:mt-6 lg:text-[14px]"
+            externalClasses="text-[12px] mx-auto py-3 px-4 mt-6 md:mt-6 lg:mt-6 lg:text-[14px]"
             onClickHandler={() => navigate(ICustomerRoutes.Shop)}
           />
         </div>
