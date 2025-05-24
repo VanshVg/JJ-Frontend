@@ -1,5 +1,5 @@
 import { beigeLogoPath } from "../../../../types/constants";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { ICustomerRoutes } from "../../../Customer/types";
 import Button from "../../../../components/Button";
 import {
@@ -8,9 +8,15 @@ import {
 } from "../../../../components/types";
 import OTP from "../../../../components/form-fields/OTP";
 import { useEffect, useState } from "react";
+import { IAuthenticationRoutes } from "../../types";
+import { useOtpVerificationApi } from "../../services";
+import { ResponseType } from "../../../../types";
 
 const OtpVerification = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const { otpVerificationApi, isLoading } = useOtpVerificationApi();
 
   const [otp, setOtp] = useState<string>("");
   const [isButtonClickedOnce, setIsButtonClickedOnce] =
@@ -22,6 +28,13 @@ const OtpVerification = () => {
   const otpChangeHandler = (value: string) => {
     setOtp(value);
   };
+
+  useEffect(() => {
+    const token = location?.state?.token;
+    if (!token) {
+      navigate(IAuthenticationRoutes.Login);
+    }
+  }, [location]);
 
   useEffect(() => {
     if (otp.length !== 6) {
@@ -38,10 +51,16 @@ const OtpVerification = () => {
     }
   }, [otp, isButtonClickedOnce]);
 
-  const submitHandler = () => {
+  const submitHandler = async () => {
     setIsButtonClickedOnce(true);
     if (validationError.isError) {
       return;
+    }
+
+    const { data } = await otpVerificationApi(otp, location?.state?.token);
+
+    if (data && data.responseType === ResponseType.Success) {
+      navigate(IAuthenticationRoutes.Login);
     }
   };
 
@@ -74,6 +93,8 @@ const OtpVerification = () => {
           </div>
           <Button
             label="Continue"
+            isLoading={isLoading}
+            isDisabled={isLoading}
             displayType={ButtonDisplayType.Primary}
             externalClasses="text-[12px] mx-auto py-3 px-4 mt-8 lg:text-[14px] mt-12"
             onClickHandler={submitHandler}

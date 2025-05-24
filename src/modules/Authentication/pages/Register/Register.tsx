@@ -19,6 +19,7 @@ const Register = () => {
     handleSubmit,
   } = useForm<IRegister>({ resolver: yupResolver(registerSchema) });
   const navigate = useNavigate();
+
   const { registerApi, isLoading } = useRegisterApi();
 
   const submitHandler: SubmitHandler<IRegister> = async (
@@ -26,9 +27,9 @@ const Register = () => {
   ) => {
     const { data } = await registerApi(registerData);
     if (data && data.responseType === ResponseType.Success) {
-      navigate(
-        `${IAuthenticationRoutes.Verification}?auth=${data?.data?.token}`
-      );
+      navigate(IAuthenticationRoutes.Verification, {
+        state: { token: data?.data?.token },
+      });
     }
   };
 
@@ -105,6 +106,7 @@ const Register = () => {
             label="Register"
             displayType={ButtonDisplayType.Primary}
             type="submit"
+            isDisabled={isLoading}
             externalClasses="text-[12px] mx-auto py-3 px-4 mt-6 md:mt-6 lg:mt-6 lg:text-[14px]"
             isLoading={isLoading}
           />

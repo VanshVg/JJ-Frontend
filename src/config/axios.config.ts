@@ -5,7 +5,6 @@ import { ToastShow } from "../redux/slices/toast.slice";
 
 export const Axios = axios.create({ baseURL: `${VITE_APP_API_URL}` });
 
-console.log(VITE_APP_API_URL);
 export const setupAxios = () => {
   Axios.interceptors.request.use((request) => {
     return request;

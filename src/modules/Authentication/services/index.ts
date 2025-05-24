@@ -11,3 +11,16 @@ export const useRegisterApi = () => {
 
   return { registerApi, isError, isLoading };
 };
+
+export const useOtpVerificationApi = () => {
+  const [callApi, { isError, isLoading }] = useAxiosPost();
+
+  const otpVerificationApi = async (otp: string, verificationToken: string) => {
+    return callApi(
+      `${AUTH_APP_BASE_PATH}/verify-otp?verification_token=${verificationToken}`,
+      { otp }
+    );
+  };
+
+  return { otpVerificationApi, isError, isLoading };
+};
