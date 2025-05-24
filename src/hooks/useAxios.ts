@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import { useState } from "react";
-import { ApiResponseType } from "../types";
+import { IApiResponse } from "../types";
 import { Axios } from "../config/axios.config";
 
 export const useAxiosGet = (): [
@@ -36,7 +36,7 @@ export const useAxiosGet = (): [
       setIsSuccess(true);
       return { data: response.data, message: (response as any).message };
     } catch (error: any) {
-      const typedError = error as ApiResponseType;
+      const typedError = error as IApiResponse;
       setIsError(true);
       setIsLoading(false);
       return {
@@ -80,7 +80,7 @@ export const useAxiosPost = (): [
       setIsSuccess(true);
       return { data: response.data };
     } catch (error: any) {
-      const typedError = error as ApiResponseType;
+      const typedError = error as IApiResponse;
       setIsError(true);
       setIsLoading(false);
       return {
@@ -119,7 +119,7 @@ export const useAxiosPut = (): [
       setIsSuccess(true);
       return { data: response.data };
     } catch (error: any) {
-      const typedError = error as ApiResponseType;
+      const typedError = error as IApiResponse;
       setIsError(true);
       setIsLoading(false);
       return {
@@ -160,7 +160,7 @@ export const useAxiosPatch = (): [
       setIsSuccess(true);
       return { data: response.data };
     } catch (error: any) {
-      const typedError = error as ApiResponseType;
+      const typedError = error as IApiResponse;
       setIsError(true);
       setIsLoading(false);
       return {
@@ -197,7 +197,7 @@ export const useAxiosDelete = (): [
       setIsSuccess(true);
       return { data: response.data };
     } catch (error: any) {
-      const typedError = error as ApiResponseType;
+      const typedError = error as IApiResponse;
       setIsError(true);
       setIsLoading(false);
       return {

@@ -1,1 +1,1 @@
-export const { REACT_APP_API_URL } = process.env;
+export const { VITE_APP_API_URL } = import.meta.env;

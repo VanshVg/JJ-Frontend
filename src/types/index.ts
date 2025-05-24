@@ -7,9 +7,14 @@ export interface IRoutes {
   children?: RouteObject[];
 }
 
-export type ApiResponseType = {
+export type IApiResponse = {
   data: any;
   message: string;
   toast: boolean;
   response_type: string;
 };
+
+export enum ResponseType {
+  Success = "success",
+  Error = "error",
+}

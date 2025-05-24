@@ -9,6 +9,8 @@ import { ButtonDisplayType } from "../../../../components/types";
 import ContactInput from "../../../../components/form-fields/ContactInput";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { registerSchema } from "../../schemas";
+import { useRegisterApi } from "../../services";
+import { ResponseType } from "../../../../types";
 
 const Register = () => {
   const {
@@ -17,8 +19,18 @@ const Register = () => {
     handleSubmit,
   } = useForm<IRegister>({ resolver: yupResolver(registerSchema) });
   const navigate = useNavigate();
+  const { registerApi, isLoading } = useRegisterApi();
 
-  const submitHandler: SubmitHandler<IRegister> = () => {};
+  const submitHandler: SubmitHandler<IRegister> = async (
+    registerData: IRegister
+  ) => {
+    const { data } = await registerApi(registerData);
+    if (data && data.responseType === ResponseType.Success) {
+      navigate(
+        `${IAuthenticationRoutes.Verification}?auth=${data?.data?.token}`
+      );
+    }
+  };
 
   return (
     <div className="sm:flex sm:h-screen sm:justify-center sm:items-center">
@@ -94,6 +106,7 @@ const Register = () => {
             displayType={ButtonDisplayType.Primary}
             type="submit"
             externalClasses="text-[12px] mx-auto py-3 px-4 mt-6 md:mt-6 lg:mt-6 lg:text-[14px]"
+            isLoading={isLoading}
           />
         </form>
       </div>

@@ -24,8 +24,7 @@ const Button = ({
       onClick={onClickHandler}
       disabled={isDisabled || false}
     >
-      {label}
-      {isLoading && <p>Loading...</p>}
+      {isLoading ? <p>Loading...</p> : label}
     </button>
   );
 };
