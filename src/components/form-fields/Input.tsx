@@ -53,7 +53,7 @@ const Input = <T extends FieldValues>({
         errors={errors}
         name={name}
         render={({ message }) => (
-          <span className="errorText text-red-600 font-medium text-sm">
+          <span className="errorText flex justify-start pt-1 pl-1 text-red-600 font-medium text-[11px] text-left">
             {message}
           </span>
         )}

@@ -1,15 +1,10 @@
-/* eslint-disable no-underscore-dangle */
 import axios from "axios";
 import { REACT_APP_API_URL } from "../config/env.config";
 
 export const Axios = axios.create({ baseURL: `${REACT_APP_API_URL}` });
 
 export const setupAxios = () => {
-  const { timeZone } = Intl.DateTimeFormat().resolvedOptions();
   Axios.interceptors.request.use((request) => {
-    request.headers["accept-timezone"] = timeZone;
-
-    request.withCredentials = true;
     return request;
   });
 

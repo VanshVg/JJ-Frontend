@@ -1,19 +1,26 @@
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import Input from "../../../../components/form-fields/Input";
-import { ILogin } from "../types";
 import { beigeLogoPath } from "../../../../types/constants";
 import { Link, useNavigate } from "react-router-dom";
 import { ICustomerRoutes } from "../../../Customer/types";
 import Button from "../../../../components/Button";
-import { IAuthenticationRoutes } from "../../types";
+import { IAuthenticationRoutes, ILogin } from "../../types";
 import { ButtonDisplayType } from "../../../../components/types";
+import ContactInput from "../../../../components/form-fields/ContactInput";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { loginSchema } from "../../schemas";
 
 const Login = () => {
   const {
     control,
     formState: { errors },
-  } = useForm<ILogin>();
+    handleSubmit,
+  } = useForm<ILogin>({
+    resolver: yupResolver(loginSchema),
+  });
   const navigate = useNavigate();
+
+  const submitHandler: SubmitHandler<ILogin> = () => {};
 
   return (
     <div className="sm:flex sm:h-screen sm:justify-center sm:items-center">
@@ -27,15 +34,17 @@ const Login = () => {
           <p className="text-[16px] text-beige font-primary ">Ready to shop?</p>
           <h1 className="text-[26px] text-beige font-primary">Login</h1>
         </div>
-        <div className="h-[65%] w-full bg-beige p-6 rounded rounded-tl-[50px]">
+        <form
+          className="h-[65%] w-full bg-beige p-6 rounded rounded-tl-[50px]"
+          onSubmit={handleSubmit(submitHandler)}
+        >
           <div className="px-4 w-full">
-            <Input
+            <ContactInput
               name="contact_no"
               control={control}
-              type="text"
               placeholder="Mobile Number"
               errors={errors}
-              externalClasses="w-full mt-4"
+              externalClasses="mt-4"
             />
             <Input
               name="password"
@@ -55,9 +64,9 @@ const Login = () => {
           </Link>
           <Button
             label="Sign In"
+            type="submit"
             displayType={ButtonDisplayType.Primary}
             externalClasses="text-[12px] mx-auto py-3 px-4 mt-6 md:mt-4 lg:mt-6 lg:text-[14px]"
-            onClickHandler={() => navigate(ICustomerRoutes.Shop)}
           />
           <p className="text-[12px] mt-6 text-primary lg:text-[14px]">
             Are you a new customer?{" "}
@@ -68,7 +77,7 @@ const Login = () => {
               Register
             </Link>
           </p>
-        </div>
+        </form>
       </div>
     </div>
   );

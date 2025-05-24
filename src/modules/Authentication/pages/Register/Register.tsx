@@ -1,19 +1,24 @@
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import Input from "../../../../components/form-fields/Input";
-import { IRegister } from "../types";
 import { beigeLogoPath } from "../../../../types/constants";
 import { Link, useNavigate } from "react-router-dom";
 import { ICustomerRoutes } from "../../../Customer/types";
 import Button from "../../../../components/Button";
-import { IAuthenticationRoutes } from "../../types";
+import { IAuthenticationRoutes, IRegister } from "../../types";
 import { ButtonDisplayType } from "../../../../components/types";
+import ContactInput from "../../../../components/form-fields/ContactInput";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { registerSchema } from "../../schemas";
 
 const Register = () => {
   const {
     control,
     formState: { errors },
-  } = useForm<IRegister>();
+    handleSubmit,
+  } = useForm<IRegister>({ resolver: yupResolver(registerSchema) });
   const navigate = useNavigate();
+
+  const submitHandler: SubmitHandler<IRegister> = () => {};
 
   return (
     <div className="sm:flex sm:h-screen sm:justify-center sm:items-center">
@@ -28,31 +33,35 @@ const Register = () => {
             Create Account
           </h1>
         </div>
-        <div className="h-[75%] sm:h-[73%] w-full bg-beige p-6 rounded rounded-tl-[50px]">
-          <div className="px-4 w-full mt-4 md:mt-8">
-            <Input
-              name="firstname"
-              control={control}
-              type="text"
-              placeholder="First Name"
-              errors={errors}
-              externalClasses="w-full mt-4"
-            />
-            <Input
-              name="lastname"
-              control={control}
-              type="text"
-              placeholder="Last Name"
-              errors={errors}
-              externalClasses="w-full mt-4"
-            />
-            <Input
+        <form
+          className="h-[75%] sm:h-[73%] w-full bg-beige p-6 rounded rounded-tl-[50px]"
+          onSubmit={handleSubmit(submitHandler)}
+        >
+          <div className="px-4 w-full">
+            <div className="flex justify-between gap-2">
+              <Input
+                name="firstname"
+                control={control}
+                type="text"
+                placeholder="First Name"
+                errors={errors}
+                externalClasses="w-full mt-4"
+              />
+              <Input
+                name="lastname"
+                control={control}
+                type="text"
+                placeholder="Last Name"
+                errors={errors}
+                externalClasses="w-full mt-4"
+              />
+            </div>
+            <ContactInput
               name="contact_no"
               control={control}
-              type="text"
               placeholder="Mobile Number"
               errors={errors}
-              externalClasses="w-full mt-4"
+              externalClasses="mt-4"
             />
             <Input
               name="password"
@@ -83,10 +92,10 @@ const Register = () => {
           <Button
             label="Register"
             displayType={ButtonDisplayType.Primary}
+            type="submit"
             externalClasses="text-[12px] mx-auto py-3 px-4 mt-6 md:mt-6 lg:mt-6 lg:text-[14px]"
-            onClickHandler={() => navigate(ICustomerRoutes.Shop)}
           />
-        </div>
+        </form>
       </div>
     </div>
   );

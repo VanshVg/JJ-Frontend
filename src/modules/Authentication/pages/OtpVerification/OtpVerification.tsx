@@ -2,18 +2,47 @@ import { beigeLogoPath } from "../../../../types/constants";
 import { useNavigate } from "react-router-dom";
 import { ICustomerRoutes } from "../../../Customer/types";
 import Button from "../../../../components/Button";
-import { ButtonDisplayType } from "../../../../components/types";
+import {
+  ButtonDisplayType,
+  IOtpValidationError,
+} from "../../../../components/types";
 import OTP from "../../../../components/form-fields/OTP";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const OtpVerification = () => {
   const navigate = useNavigate();
 
   const [otp, setOtp] = useState<string>("");
+  const [isButtonClickedOnce, setIsButtonClickedOnce] =
+    useState<boolean>(false);
+  const [validationError, setValidationError] = useState<IOtpValidationError>({
+    isError: false,
+  });
 
   const otpChangeHandler = (value: string) => {
-    console.log(value);
     setOtp(value);
+  };
+
+  useEffect(() => {
+    if (otp.length !== 6) {
+      if (isButtonClickedOnce) {
+        setValidationError({
+          isError: true,
+          message: otp.length === 0 ? "OTP is required" : "OTP is not valid",
+        });
+      }
+    } else {
+      setValidationError({
+        isError: false,
+      });
+    }
+  }, [otp, isButtonClickedOnce]);
+
+  const submitHandler = () => {
+    setIsButtonClickedOnce(true);
+    if (validationError.isError) {
+      return;
+    }
   };
 
   return (
@@ -28,23 +57,28 @@ const OtpVerification = () => {
           <p className="text-[16px] text-beige font-primary ">Almost There!</p>
           <h1 className="text-[26px] text-beige font-primary">Verify OTP</h1>
         </div>
-        <div className="h-[65%] w-full bg-beige p-6 rounded rounded-tl-[50px]">
+        <form className="h-[65%] w-full bg-beige p-6 rounded rounded-tl-[50px]">
           <div className="px-4 w-full">
             <p className="text-primary text-[12px] lg:text-[14px] text-justify mb-6">
               An OTP has been sent to your registered mobile number via SMS.
-              Please enter the OTP to reset your password.
+              Please enter the OTP to verify your mobile number.
             </p>
             <div className="flex justify-center mt-12">
-              <OTP value={otp} onChangeHandler={otpChangeHandler} />
+              <OTP
+                value={otp}
+                onChangeHandler={otpChangeHandler}
+                isButtonClickedOnce={isButtonClickedOnce}
+                validationError={validationError}
+              />
             </div>
           </div>
           <Button
             label="Continue"
             displayType={ButtonDisplayType.Primary}
             externalClasses="text-[12px] mx-auto py-3 px-4 mt-8 lg:text-[14px] mt-12"
-            onClickHandler={() => navigate(ICustomerRoutes.Shop)}
+            onClickHandler={submitHandler}
           />
-        </div>
+        </form>
       </div>
     </div>
   );

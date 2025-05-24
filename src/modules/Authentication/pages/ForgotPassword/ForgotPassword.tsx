@@ -1,18 +1,25 @@
-import { useForm } from "react-hook-form";
-import Input from "../../../../components/form-fields/Input";
-import { IForgotPassword } from "../types";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { beigeLogoPath } from "../../../../types/constants";
 import { useNavigate } from "react-router-dom";
 import { ICustomerRoutes } from "../../../Customer/types";
 import Button from "../../../../components/Button";
 import { ButtonDisplayType } from "../../../../components/types";
+import { IForgotPassword } from "../../types";
+import ContactInput from "../../../../components/form-fields/ContactInput";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { forgotPasswordSchema } from "../../schemas";
 
 const ForgotPassword = () => {
   const {
     control,
     formState: { errors },
-  } = useForm<IForgotPassword>();
+    handleSubmit,
+  } = useForm<IForgotPassword>({
+    resolver: yupResolver(forgotPasswordSchema),
+  });
   const navigate = useNavigate();
+
+  const submitHandler: SubmitHandler<IForgotPassword> = () => {};
 
   return (
     <div className="sm:flex sm:h-screen sm:justify-center sm:items-center">
@@ -30,28 +37,30 @@ const ForgotPassword = () => {
             Account Recovery
           </h1>
         </div>
-        <div className="h-[65%] w-full bg-beige p-6 rounded rounded-tl-[50px]">
+        <form
+          className="h-[65%] w-full bg-beige p-6 rounded rounded-tl-[50px]"
+          onSubmit={handleSubmit(submitHandler)}
+        >
           <div className="px-4 w-full">
             <p className="text-primary text-[12px] lg:text-[14px] text-justify mb-6">
               Enter your registered mobile number to receive an OTP. Once you
               receive it, please verify the OTP to reset your password.
             </p>
-            <Input
+            <ContactInput
               name="contact_no"
               control={control}
-              type="text"
               placeholder="Mobile Number"
               errors={errors}
-              externalClasses="w-full mt-4"
+              externalClasses="mt-4"
             />
           </div>
           <Button
             label="Send OTP"
+            type="submit"
             displayType={ButtonDisplayType.Primary}
             externalClasses="text-[12px] mx-auto py-3 px-4 mt-8 lg:text-[14px]"
-            onClickHandler={() => navigate(ICustomerRoutes.Shop)}
           />
-        </div>
+        </form>
       </div>
     </div>
   );

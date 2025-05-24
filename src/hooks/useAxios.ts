@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import { useState } from "react";
-import { Axios } from "../base-axios";
 import { ApiResponseType } from "../types";
+import { Axios } from "../config/axios.config";
 
 export const useAxiosGet = (): [
   (

@@ -1,18 +1,25 @@
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import Input from "../../../../components/form-fields/Input";
-import { IResetPassword } from "../types";
 import { beigeLogoPath } from "../../../../types/constants";
 import { useNavigate } from "react-router-dom";
 import { ICustomerRoutes } from "../../../Customer/types";
 import Button from "../../../../components/Button";
 import { ButtonDisplayType } from "../../../../components/types";
+import { IResetPassword } from "../../types";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { resetPasswordSchema } from "../../schemas";
 
 const ResetPassword = () => {
   const {
     control,
     formState: { errors },
-  } = useForm<IResetPassword>();
+    handleSubmit,
+  } = useForm<IResetPassword>({
+    resolver: yupResolver(resetPasswordSchema),
+  });
   const navigate = useNavigate();
+
+  const submitHandler: SubmitHandler<IResetPassword> = () => {};
 
   return (
     <div className="sm:flex sm:h-screen sm:justify-center sm:items-center">
@@ -27,7 +34,10 @@ const ResetPassword = () => {
             Reset Password
           </h1>
         </div>
-        <div className="h-[65%] w-full bg-beige p-6 rounded rounded-tl-[50px]">
+        <form
+          className="h-[65%] w-full bg-beige p-6 rounded rounded-tl-[50px]"
+          onSubmit={handleSubmit(submitHandler)}
+        >
           <div className="px-4 mt-8 w-full">
             <Input
               name="password"
@@ -48,11 +58,11 @@ const ResetPassword = () => {
           </div>
           <Button
             label="Reset Password"
+            type="submit"
             displayType={ButtonDisplayType.Primary}
             externalClasses="text-[12px] mx-auto py-3 px-4 mt-8 lg:text-[14px]"
-            onClickHandler={() => navigate(ICustomerRoutes.Shop)}
           />
-        </div>
+        </form>
       </div>
     </div>
   );
