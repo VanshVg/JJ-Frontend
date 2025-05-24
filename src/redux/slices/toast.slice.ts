@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IToastType } from "../types";
 
-const initialState = {
+const initialState: IToastType = {
   message: null,
   type: null,
 };

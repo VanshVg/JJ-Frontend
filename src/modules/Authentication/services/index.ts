@@ -1,5 +1,5 @@
 import { useAxiosPost } from "../../../hooks/useAxios";
-import { IRegister } from "../types";
+import { ILogin, IRegister } from "../types";
 import { AUTH_APP_BASE_PATH } from "../types/constants";
 
 export const useRegisterApi = () => {
@@ -23,4 +23,14 @@ export const useOtpVerificationApi = () => {
   };
 
   return { otpVerificationApi, isError, isLoading };
+};
+
+export const useLoginApi = () => {
+  const [callApi, { isError, isLoading }] = useAxiosPost();
+
+  const loginApi = async (payload: ILogin) => {
+    return callApi(`${AUTH_APP_BASE_PATH}/login`, payload);
+  };
+
+  return { loginApi, isError, isLoading };
 };

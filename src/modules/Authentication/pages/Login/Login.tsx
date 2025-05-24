@@ -9,6 +9,10 @@ import { ButtonDisplayType } from "../../../../components/types";
 import ContactInput from "../../../../components/form-fields/ContactInput";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../../schemas";
+import { useLoginApi } from "../../services";
+import { ResponseType } from "../../../../types";
+import { useDispatch } from "react-redux";
+import { setCredentials, setUser } from "../../../../redux/slices/auth.slice";
 
 const Login = () => {
   const {
@@ -19,8 +23,28 @@ const Login = () => {
     resolver: yupResolver(loginSchema),
   });
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const submitHandler: SubmitHandler<ILogin> = () => {};
+  const { loginApi, isLoading } = useLoginApi();
+
+  const submitHandler: SubmitHandler<ILogin> = async (loginData: ILogin) => {
+    const { data } = await loginApi(loginData);
+    if (data && data.responseType === ResponseType.Success) {
+      const userData = data?.data?.user;
+      dispatch(setCredentials({ token: data?.data?.accessToken }));
+      dispatch(
+        setUser({
+          userData: {
+            firstname: userData.first_name,
+            lastname: userData.last_name,
+            contact_no: userData.contact_no,
+            role: userData.role,
+          },
+        })
+      );
+      navigate(ICustomerRoutes.Home);
+    }
+  };
 
   return (
     <div className="sm:flex sm:h-screen sm:justify-center sm:items-center">
@@ -65,6 +89,8 @@ const Login = () => {
           <Button
             label="Sign In"
             type="submit"
+            isLoading={isLoading}
+            isDisabled={isLoading}
             displayType={ButtonDisplayType.Primary}
             externalClasses="text-[12px] mx-auto py-3 px-4 mt-6 md:mt-4 lg:mt-6 lg:text-[14px]"
           />

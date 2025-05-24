@@ -18,3 +18,15 @@ export enum ResponseType {
   Success = "success",
   Error = "error",
 }
+
+export enum UserRoles {
+  Admin = "admin",
+  Customer = "customer",
+}
+
+export interface IUser {
+  firstname: string;
+  lastname: string;
+  contact_no: string;
+  role: UserRoles;
+}
