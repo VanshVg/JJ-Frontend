@@ -4,10 +4,12 @@ import { useNavigate } from "react-router-dom";
 import { ICustomerRoutes } from "../../../Customer/types";
 import Button from "../../../../components/Button";
 import { ButtonDisplayType } from "../../../../components/types";
-import { IForgotPassword } from "../../types";
+import { IAuthenticationRoutes, IForgotPassword } from "../../types";
 import ContactInput from "../../../../components/form-fields/ContactInput";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { forgotPasswordSchema } from "../../schemas";
+import { useForgotPasswordApi } from "../../services";
+import { ResponseType } from "../../../../types";
 
 const ForgotPassword = () => {
   const {
@@ -19,7 +21,18 @@ const ForgotPassword = () => {
   });
   const navigate = useNavigate();
 
-  const submitHandler: SubmitHandler<IForgotPassword> = () => {};
+  const { forgotPasswordApi, isLoading } = useForgotPasswordApi();
+
+  const submitHandler: SubmitHandler<IForgotPassword> = async (
+    forgotPasswordData: IForgotPassword
+  ) => {
+    const { data } = await forgotPasswordApi(forgotPasswordData);
+    if (data && data.responseType === ResponseType.Success) {
+      navigate(IAuthenticationRoutes.Verification, {
+        state: { token: data?.data?.token },
+      });
+    }
+  };
 
   return (
     <div className="sm:flex sm:h-screen sm:justify-center sm:items-center">
@@ -57,6 +70,8 @@ const ForgotPassword = () => {
           <Button
             label="Send OTP"
             type="submit"
+            isLoading={isLoading}
+            isDisabled={isLoading}
             displayType={ButtonDisplayType.Primary}
             externalClasses="text-[12px] mx-auto py-3 px-4 mt-8 lg:text-[14px]"
           />

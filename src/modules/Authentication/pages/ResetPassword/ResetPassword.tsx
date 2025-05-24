@@ -1,13 +1,16 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import Input from "../../../../components/form-fields/Input";
 import { beigeLogoPath } from "../../../../types/constants";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { ICustomerRoutes } from "../../../Customer/types";
 import Button from "../../../../components/Button";
 import { ButtonDisplayType } from "../../../../components/types";
-import { IResetPassword } from "../../types";
+import { IAuthenticationRoutes, IResetPassword } from "../../types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { resetPasswordSchema } from "../../schemas";
+import { useEffect } from "react";
+import { useResetPasswordApi } from "../../services";
+import { ResponseType } from "../../../../types";
 
 const ResetPassword = () => {
   const {
@@ -18,8 +21,28 @@ const ResetPassword = () => {
     resolver: yupResolver(resetPasswordSchema),
   });
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const submitHandler: SubmitHandler<IResetPassword> = () => {};
+  const { resetPasswordApi, isLoading } = useResetPasswordApi();
+
+  useEffect(() => {
+    const token = location?.state?.token;
+    if (!token) {
+      navigate(IAuthenticationRoutes.Login);
+    }
+  }, [location]);
+
+  const submitHandler: SubmitHandler<IResetPassword> = async (
+    passwordData: IResetPassword
+  ) => {
+    const { data } = await resetPasswordApi(
+      passwordData,
+      location?.state?.token
+    );
+    if (data && data.responseType === ResponseType.Success) {
+      navigate(IAuthenticationRoutes.Login);
+    }
+  };
 
   return (
     <div className="sm:flex sm:h-screen sm:justify-center sm:items-center">
@@ -42,7 +65,7 @@ const ResetPassword = () => {
             <Input
               name="password"
               control={control}
-              type="text"
+              type="password"
               placeholder="Enter a new password"
               errors={errors}
               externalClasses="w-full mt-4"
@@ -59,6 +82,8 @@ const ResetPassword = () => {
           <Button
             label="Reset Password"
             type="submit"
+            isLoading={isLoading}
+            isDisabled={isLoading}
             displayType={ButtonDisplayType.Primary}
             externalClasses="text-[12px] mx-auto py-3 px-4 mt-8 lg:text-[14px]"
           />

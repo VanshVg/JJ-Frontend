@@ -1,5 +1,5 @@
 import { useAxiosPost } from "../../../hooks/useAxios";
-import { ILogin, IRegister } from "../types";
+import { IForgotPassword, ILogin, IRegister, IResetPassword } from "../types";
 import { AUTH_APP_BASE_PATH } from "../types/constants";
 
 export const useRegisterApi = () => {
@@ -33,4 +33,30 @@ export const useLoginApi = () => {
   };
 
   return { loginApi, isError, isLoading };
+};
+
+export const useForgotPasswordApi = () => {
+  const [callApi, { isError, isLoading }] = useAxiosPost();
+
+  const forgotPasswordApi = async (payload: IForgotPassword) => {
+    return callApi(`${AUTH_APP_BASE_PATH}/forgot-password`, payload);
+  };
+
+  return { forgotPasswordApi, isError, isLoading };
+};
+
+export const useResetPasswordApi = () => {
+  const [callApi, { isError, isLoading }] = useAxiosPost();
+
+  const resetPasswordApi = async (
+    payload: IResetPassword,
+    verificationToken: string
+  ) => {
+    return callApi(
+      `${AUTH_APP_BASE_PATH}/reset-password?verification_token=${verificationToken}`,
+      payload
+    );
+  };
+
+  return { resetPasswordApi, isError, isLoading };
 };

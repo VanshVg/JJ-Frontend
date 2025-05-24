@@ -60,7 +60,13 @@ const OtpVerification = () => {
     const { data } = await otpVerificationApi(otp, location?.state?.token);
 
     if (data && data.responseType === ResponseType.Success) {
-      navigate(IAuthenticationRoutes.Login);
+      if (location?.state?.newUser) {
+        navigate(IAuthenticationRoutes.Login);
+      } else {
+        navigate(IAuthenticationRoutes.ResetPassword, {
+          state: { token: data?.data?.accessToken },
+        });
+      }
     }
   };
 
@@ -93,6 +99,7 @@ const OtpVerification = () => {
           </div>
           <Button
             label="Continue"
+            type="submit"
             isLoading={isLoading}
             isDisabled={isLoading}
             displayType={ButtonDisplayType.Primary}
