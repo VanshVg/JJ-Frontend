@@ -28,7 +28,7 @@ const Register = () => {
     const { data } = await registerApi(registerData);
     if (data && data.responseType === ResponseType.Success) {
       navigate(IAuthenticationRoutes.Verification, {
-        state: { token: data?.data?.token },
+        state: { token: data?.data?.token, newUser: true },
       });
     }
   };
