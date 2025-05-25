@@ -1,4 +1,4 @@
-import { ButtonDisplayType, IButtonProps } from "../types";
+import { ButtonDisplayType, IButtonProps } from "./types";
 
 const Button = ({
   label,
@@ -24,8 +24,7 @@ const Button = ({
       onClick={onClickHandler}
       disabled={isDisabled || false}
     >
-      {label}
-      {isLoading && <p>Loading...</p>}
+      {isLoading ? <p>Loading...</p> : label}
     </button>
   );
 };

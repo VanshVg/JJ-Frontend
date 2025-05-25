@@ -1,4 +1,4 @@
-import { JSX, MouseEvent } from "react";
+import { JSX } from "react";
 import { RouteObject } from "react-router-dom";
 
 export interface IRoutes {
@@ -7,16 +7,26 @@ export interface IRoutes {
   children?: RouteObject[];
 }
 
-export enum ButtonDisplayType {
-  Primary = "primary",
-  Secondary = "secondary",
+export type IApiResponse = {
+  data: any;
+  message: string;
+  toast: boolean;
+  response_type: string;
+};
+
+export enum ResponseType {
+  Success = "success",
+  Error = "error",
 }
-export interface IButtonProps {
-  label: string;
-  type?: "button" | "submit";
-  isLoading?: boolean;
-  isDisabled?: boolean;
-  displayType: ButtonDisplayType;
-  onClickHandler?: (e: MouseEvent<HTMLElement>) => void;
-  externalClasses?: string;
+
+export enum UserRoles {
+  Admin = "admin",
+  Customer = "customer",
+}
+
+export interface IUser {
+  firstname: string;
+  lastname: string;
+  contact_no: string;
+  role: UserRoles;
 }

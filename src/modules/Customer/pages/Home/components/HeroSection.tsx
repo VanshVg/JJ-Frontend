@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import Button from "../../../../../components/Button";
-import { ButtonDisplayType } from "../../../../../types";
 import { ICustomerRoutes } from "../../../types";
+import { ButtonDisplayType } from "../../../../../components/types";
 
 const HeroSection = () => {
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ const HeroSection = () => {
           <Button
             label="Shop Now"
             displayType={ButtonDisplayType.Primary}
-            externalClasses="text-[12px] mx-auto py-2 px-4 mt-4 sm:text-[14px] md:text-[16px] lg:text-[18px] xl:text-[22px] xl:mt-8"
+            externalClasses="text-[14px] mx-auto py-2 px-4 mt-4 sm:text-[16px] md:text-[18px] lg:text-[20px] xl:text-[22px] xl:mt-8"
             onClickHandler={() => navigate(ICustomerRoutes.Shop)}
           />
         </div>
