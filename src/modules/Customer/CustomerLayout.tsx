@@ -1,8 +1,7 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import { logoPath } from "../../types/constants";
-import Navbar from "./components/Navbar/Navbar";
 import { ICustomerRoutes } from "./types";
-import Footer from "./components/Navbar/Footer";
+import Navbar from "./components/Navbar";
 
 const CustomerLayout = () => {
   const navigate = useNavigate();
@@ -18,7 +17,6 @@ const CustomerLayout = () => {
       </div>
       <Navbar />
       <Outlet />
-      <Footer />
     </div>
   );
 };

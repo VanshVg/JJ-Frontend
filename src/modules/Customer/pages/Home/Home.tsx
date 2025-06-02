@@ -1,13 +1,15 @@
 import CategorySection from "./components/CategorySection";
+import Footer from "../../components/Footer";
 import HeroSection from "./components/HeroSection";
 import TopProductsSection from "./components/TopProductsSection";
 
 const Home = () => {
   return (
-    <div className="mt-6">
+    <div>
       <HeroSection />
       <TopProductsSection />
       <CategorySection />
+      <Footer />
     </div>
   );
 };

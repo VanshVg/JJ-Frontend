@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   navMenuCornerElements,
   navMenuMiddleElements,
-} from "../../types/constants";
-import { useLocation, useNavigate } from "react-router-dom";
+} from "../types/constants";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
