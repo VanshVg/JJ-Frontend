@@ -28,7 +28,7 @@ const CategorySection = () => {
         }`}
       >
         {categories.map((category) => (
-          <div className="w-full flex mt-4 ml-6">
+          <div className="w-full flex mt-4 ml-1" key={category.value}>
             <Checkbox
               name="category"
               value={category.value}
