@@ -1,13 +1,14 @@
 import { AiOutlineClose } from "react-icons/ai";
 import CategorySection from "./CategorySection";
 import PriceRangeSection from "./PriceRangeSection";
-import Button from "../../../../../../../components/Button";
-import { ButtonDisplayType } from "../../../../../../../components/types";
 import { IMobileSidebarProps } from "../../../types";
 
 const SidebarMobile = ({
   isSidebarOpen,
   setIsSidebarOpen,
+  priceRange,
+  setPriceRange,
+  setSelectedCategories,
 }: IMobileSidebarProps) => {
   return (
     <div
@@ -21,7 +22,7 @@ const SidebarMobile = ({
           <AiOutlineClose
             color="#2b2b2b"
             size={"20px"}
-            className="mt-1"
+            className="mt-1 cursor-pointer"
             onClick={() => {
               setIsSidebarOpen(false);
             }}
@@ -29,22 +30,10 @@ const SidebarMobile = ({
         </div>
         <div className="h-[1px] bg-primary mt-3 opacity-30" />
 
-        <CategorySection />
-        <PriceRangeSection />
-      </div>
-      <div className="flex mb-16">
-        <Button
-          label="Apply"
-          type="button"
-          displayType={ButtonDisplayType.Primary}
-          externalClasses="text-[12px] mx-auto py-3 px-4 mt-8 lg:text-[14px]"
-        />
-        <Button
-          label="Cancel"
-          type="button"
-          displayType={ButtonDisplayType.Secondary}
-          externalClasses="text-[12px] mx-auto py-3 px-4 mt-8 lg:text-[14px]"
-          onClickHandler={() => setIsSidebarOpen(false)}
+        <CategorySection setSelectedCategories={setSelectedCategories} />
+        <PriceRangeSection
+          priceRange={priceRange}
+          setPriceRange={setPriceRange}
         />
       </div>
     </div>

@@ -2,11 +2,10 @@ import { useState } from "react";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { rupeesSymbol } from "../../../../../../../types/constants";
 import Slider from "@mui/material/Slider";
+import { IPriceRangeProps } from "../../../types";
 
-const PriceRangeSection = () => {
+const PriceRangeSection = ({ priceRange, setPriceRange }: IPriceRangeProps) => {
   const [isSectionOpen, setIsSectionOpen] = useState<boolean>(true);
-
-  const [priceRange, setPriceRange] = useState<number[]>([50, 2500]);
 
   const priceRangeHandler = (event: Event, newValue: number[]) => {
     if (newValue[1] - newValue[0] < 20) {
@@ -24,11 +23,13 @@ const PriceRangeSection = () => {
         {!isSectionOpen ? (
           <AiOutlinePlus
             size={"22px"}
+            className="cursor-pointer"
             onClick={() => setIsSectionOpen(!isSectionOpen)}
           />
         ) : (
           <AiOutlineMinus
             size={"22px"}
+            className="cursor-pointer"
             onClick={() => setIsSectionOpen(!isSectionOpen)}
           />
         )}
@@ -43,11 +44,12 @@ const PriceRangeSection = () => {
           value={priceRange}
           onChange={priceRangeHandler}
           valueLabelDisplay="auto"
+          max={2500}
+          min={50}
           getAriaValueText={(price: number) => `${price}${rupeesSymbol}`}
           size="small"
           disableSwap
           step={5}
-          min={20}
           sx={{
             color: "#2b2b2b",
             "& .MuiSlider-thumb": {

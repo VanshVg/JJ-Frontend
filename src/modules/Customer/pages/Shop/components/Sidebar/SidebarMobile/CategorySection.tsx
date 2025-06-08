@@ -2,8 +2,9 @@ import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import Checkbox from "../../../../../../../components/form-fields/Checkbox";
 import { categories } from "../../../types/constants";
 import { useState } from "react";
+import { ICategoryFilterProps } from "../../../types";
 
-const CategorySection = () => {
+const CategorySection = ({ setSelectedCategories }: ICategoryFilterProps) => {
   const [isSectionOpen, setIsSectionOpen] = useState<boolean>(true);
 
   return (
@@ -13,11 +14,13 @@ const CategorySection = () => {
         {!isSectionOpen ? (
           <AiOutlinePlus
             size={"22px"}
+            className="cursor-pointer"
             onClick={() => setIsSectionOpen(!isSectionOpen)}
           />
         ) : (
           <AiOutlineMinus
             size={"22px"}
+            className="cursor-pointer"
             onClick={() => setIsSectionOpen(!isSectionOpen)}
           />
         )}
@@ -33,6 +36,15 @@ const CategorySection = () => {
               name="category"
               value={category.value}
               label={category.label}
+              onChange={(e) => {
+                setSelectedCategories((prev) => {
+                  if (e?.target?.checked) {
+                    return [...prev, e?.target?.value];
+                  } else {
+                    return prev.filter((item) => item !== e?.target?.value);
+                  }
+                });
+              }}
             />
           </div>
         ))}
