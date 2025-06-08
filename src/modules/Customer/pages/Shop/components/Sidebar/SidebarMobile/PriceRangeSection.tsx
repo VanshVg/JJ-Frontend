@@ -35,34 +35,46 @@ const PriceRangeSection = ({ priceRange, setPriceRange }: IPriceRangeProps) => {
         )}
       </div>
       <div
-        className={`transition-all duration-300 ease-in-out overflow-hidden px-6 pt-7 ${
+        className={`transition-all duration-300 ease-in-out overflow-hidden ${
           isSectionOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <Slider
-          getAriaLabel={() => "Price Range"}
-          value={priceRange}
-          onChange={priceRangeHandler}
-          valueLabelDisplay="auto"
-          max={2500}
-          min={50}
-          getAriaValueText={(price: number) => `${price}${rupeesSymbol}`}
-          size="small"
-          disableSwap
-          step={5}
-          sx={{
-            color: "#2b2b2b",
-            "& .MuiSlider-thumb": {
-              backgroundColor: "#2b2b2b",
-            },
-            "& .MuiSlider-track": {
-              backgroundColor: "#2b2b2b",
-            },
-            "& .MuiSlider-rail": {
-              backgroundColor: "#2b2b2b",
-            },
-          }}
-        />
+        <div className="px-6 pt-7">
+          <Slider
+            getAriaLabel={() => "Price Range"}
+            value={priceRange}
+            onChange={priceRangeHandler}
+            valueLabelDisplay="auto"
+            max={2500}
+            min={50}
+            getAriaValueText={(price: number) => `${price}${rupeesSymbol}`}
+            size="small"
+            disableSwap
+            step={5}
+            sx={{
+              color: "#2b2b2b",
+              "& .MuiSlider-thumb": {
+                backgroundColor: "#2b2b2b",
+              },
+              "& .MuiSlider-track": {
+                backgroundColor: "#2b2b2b",
+              },
+              "& .MuiSlider-rail": {
+                backgroundColor: "#2b2b2b",
+              },
+            }}
+          />
+        </div>
+        <div className="w-full flex justify-between text-primary font-semibold px-3">
+          <span>
+            {priceRange[0]}
+            {rupeesSymbol}
+          </span>
+          <span>
+            {priceRange[1]}
+            {rupeesSymbol}
+          </span>
+        </div>
       </div>
     </div>
   );

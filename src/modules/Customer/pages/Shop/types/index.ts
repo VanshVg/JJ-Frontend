@@ -4,6 +4,7 @@ export interface IPriceRangeProps {
 }
 
 export interface ICategoryFilterProps {
+  selectedCategories: string[];
   setSelectedCategories: React.Dispatch<React.SetStateAction<string[]>>;
 }
 

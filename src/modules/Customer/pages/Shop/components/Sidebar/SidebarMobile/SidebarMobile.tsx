@@ -8,11 +8,12 @@ const SidebarMobile = ({
   setIsSidebarOpen,
   priceRange,
   setPriceRange,
+  selectedCategories,
   setSelectedCategories,
 }: IMobileSidebarProps) => {
   return (
     <div
-      className={`h-full fixed px-6 top-0 bg-beige w-full text-primary flex flex-col justify-between transition-all duration-300 ease-in-out ${
+      className={`h-full fixed px-6 top-0 bg-beige w-full text-primary justify-between transition-all duration-300 ease-in-out ${
         !isSidebarOpen ? "opacity-0 pointer-events-none" : "opacity-100"
       }`}
     >
@@ -30,12 +31,24 @@ const SidebarMobile = ({
         </div>
         <div className="h-[1px] bg-primary mt-3 opacity-30" />
 
-        <CategorySection setSelectedCategories={setSelectedCategories} />
+        <CategorySection
+          setSelectedCategories={setSelectedCategories}
+          selectedCategories={selectedCategories}
+        />
         <PriceRangeSection
           priceRange={priceRange}
           setPriceRange={setPriceRange}
         />
       </div>
+      <p
+        className="underline font-secondary text-center cursor-pointer text-primary mt-10"
+        onClick={() => {
+          setPriceRange([50, 2500]);
+          setSelectedCategories([]);
+        }}
+      >
+        Clear Filters
+      </p>
     </div>
   );
 };

@@ -4,7 +4,10 @@ import { categories } from "../../../types/constants";
 import { useState } from "react";
 import { ICategoryFilterProps } from "../../../types";
 
-const CategorySection = ({ setSelectedCategories }: ICategoryFilterProps) => {
+const CategorySection = ({
+  selectedCategories,
+  setSelectedCategories,
+}: ICategoryFilterProps) => {
   const [isSectionOpen, setIsSectionOpen] = useState<boolean>(true);
 
   return (
@@ -45,6 +48,7 @@ const CategorySection = ({ setSelectedCategories }: ICategoryFilterProps) => {
                   }
                 });
               }}
+              isChecked={selectedCategories.includes(category.value)}
             />
           </div>
         ))}

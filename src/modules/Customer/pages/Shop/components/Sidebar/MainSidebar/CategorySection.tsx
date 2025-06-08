@@ -2,7 +2,10 @@ import Checkbox from "../../../../../../../components/form-fields/Checkbox";
 import { ICategoryFilterProps } from "../../../types";
 import { categories } from "../../../types/constants";
 
-const CategorySection = ({ setSelectedCategories }: ICategoryFilterProps) => {
+const CategorySection = ({
+  selectedCategories,
+  setSelectedCategories,
+}: ICategoryFilterProps) => {
   return (
     <div>
       <h1 className="font-primary text-left text-primary text-[18px]">
@@ -27,6 +30,7 @@ const CategorySection = ({ setSelectedCategories }: ICategoryFilterProps) => {
                   }
                 });
               }}
+              isChecked={selectedCategories.includes(category.value)}
             />
           </div>
         ))}

@@ -7,16 +7,13 @@ const Shop = () => {
   const [priceRange, setPriceRange] = useState<number[]>([50, 2500]);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
-  useEffect(() => {
-    console.log(selectedCategories, "<<<<");
-  }, [selectedCategories]);
-
   return (
     <div className="h-screen flex fixed w-full">
       <MainSidebar
         priceRange={priceRange}
         setPriceRange={setPriceRange}
         setSelectedCategories={setSelectedCategories}
+        selectedCategories={selectedCategories}
       />
       <SidebarMobile
         isSidebarOpen={isSidebarOpen}
@@ -24,8 +21,9 @@ const Shop = () => {
         priceRange={priceRange}
         setPriceRange={setPriceRange}
         setSelectedCategories={setSelectedCategories}
+        selectedCategories={selectedCategories}
       />
-      <div className="h-screen overflow-y-auto w-full p-2 hidden">
+      <div className="h-screen overflow-y-auto w-full p-2">
         <p
           className="underline font-secondary text-right text-primary mt-3 mr-3 cursor-pointer"
           onClick={() => setIsSidebarOpen(true)}
