@@ -20,3 +20,5 @@ export const categories = [
     value: "Others",
   },
 ];
+
+export const PRODUCTS_APP_BASE_PATH = "/products";

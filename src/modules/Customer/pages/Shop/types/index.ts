@@ -1,3 +1,5 @@
+import { SortTypes } from "../../../../../types";
+
 export interface IPriceRangeProps {
   priceRange: number[];
   setPriceRange: React.Dispatch<React.SetStateAction<number[]>>;
@@ -18,3 +20,13 @@ export interface IMobileSidebarProps
 export interface IMainSidebarProps
   extends IPriceRangeProps,
     ICategoryFilterProps {}
+
+export interface IProductAPiFilters {
+  minPrice: number;
+  maxPrice: number;
+  limit?: number;
+  page?: number;
+  search?: string;
+  sortDirection?: SortTypes;
+  sortField?: string;
+}

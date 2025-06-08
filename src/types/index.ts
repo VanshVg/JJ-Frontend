@@ -30,3 +30,8 @@ export interface IUser {
   contact_no: string;
   role: UserRoles;
 }
+
+export enum SortTypes {
+  Ascending = "ASC",
+  Descending = "DESC",
+}
