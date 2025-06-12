@@ -30,3 +30,18 @@ export interface IProductAPiFilters {
   sortDirection?: SortTypes;
   sortField?: string;
 }
+
+export interface IProducts {
+  id: number;
+  name: string;
+  MRP: number;
+  created_at: Date;
+  category: {
+    name: string;
+  };
+  productImages?: {
+    image_url: string;
+    is_primary: boolean;
+    is_secondary: boolean;
+  }[];
+}

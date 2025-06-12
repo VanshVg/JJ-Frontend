@@ -2,25 +2,47 @@ import { useEffect, useState } from "react";
 import MainSidebar from "./components/Sidebar/MainSidebar/MainSidebar";
 import SidebarMobile from "./components/Sidebar/SidebarMobile/SidebarMobile";
 import { useFetchProductsApi } from "./services";
+import ProductCard from "./components/ProductCard/ProductCard";
+import { IProducts } from "./types";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const Shop = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
   const [priceRange, setPriceRange] = useState<number[]>([50, 2500]);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<IProducts[]>([]);
+  const [page, setPage] = useState<number>(1);
+  const [hasMore, setHasMore] = useState<boolean>(true);
 
   const { fetchProductsApi, isError, isLoading } = useFetchProductsApi();
 
+  const limit = 5;
+
   const fetchProducts = async () => {
+    if (isLoading || !hasMore) {
+      return;
+    }
     const { data } = await fetchProductsApi({
       minPrice: priceRange[0],
       maxPrice: priceRange[1],
-      limit: 20,
+      limit,
+      page,
     });
-    if (data.products) {
-      setProducts(data?.data?.products);
+
+    if (data?.data?.products) {
+      setProducts((prev) => [...prev, ...(data?.data?.products || [])]);
+      if (limit * page >= data?.data?.totalRecords) {
+        setHasMore(false);
+      }
     }
+    setPage((prev) => prev + 1);
   };
+
+  useEffect(() => {
+    setPage(1);
+    setHasMore(true);
+    setProducts([]);
+  }, [priceRange, selectedCategories]);
 
   useEffect(() => {
     fetchProducts();
@@ -42,7 +64,7 @@ const Shop = () => {
         setSelectedCategories={setSelectedCategories}
         selectedCategories={selectedCategories}
       />
-      <div className="overflow-y-auto w-full p-2">
+      <div>
         <p
           className="underline font-secondary text-right text-primary mt-3 mr-3 cursor-pointer"
           onClick={() => setIsSidebarOpen(true)}
@@ -53,9 +75,25 @@ const Shop = () => {
       {isLoading ? (
         <div>loading....</div>
       ) : isError ? (
-        <div>Something went wrong...</div>
+        <p className="text-red-600">Something went wrong...</p>
       ) : (
-        <div>{products.length}</div>
+        <div id="productsDiv" className="overflow-y-auto w-full p-2 h-screen">
+          {products.length > 0 ? (
+            <InfiniteScroll
+              dataLength={products.length}
+              next={fetchProducts}
+              hasMore={hasMore}
+              loader={<p>Loading...</p>}
+              scrollableTarget={"productsDiv"}
+            >
+              {products.map((product: IProducts) => (
+                <ProductCard key={product.id + product.name} />
+              ))}
+            </InfiniteScroll>
+          ) : (
+            <p>Products not found</p>
+          )}
+        </div>
       )}
     </div>
   );
