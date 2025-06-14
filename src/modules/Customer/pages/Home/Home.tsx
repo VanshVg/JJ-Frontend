@@ -5,7 +5,7 @@ import TopProductsSection from "./components/TopProductsSection";
 
 const Home = () => {
   return (
-    <div>
+    <div className="min-h-screen">
       <HeroSection />
       <TopProductsSection />
       <CategorySection />
