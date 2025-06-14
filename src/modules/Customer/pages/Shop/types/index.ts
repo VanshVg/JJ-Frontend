@@ -45,3 +45,7 @@ export interface IProducts {
     is_secondary: boolean;
   }[];
 }
+
+export interface IProductCardProps {
+  product: IProducts;
+}

@@ -13,7 +13,7 @@ const SidebarMobile = ({
 }: IMobileSidebarProps) => {
   return (
     <div
-      className={`h-full fixed px-6 top-0 bg-beige w-full text-primary justify-between transition-all duration-300 ease-in-out ${
+      className={`h-full z-10 fixed px-6 top-0 bg-beige w-full text-primary justify-between transition-all duration-300 ease-in-out ${
         !isSidebarOpen ? "opacity-0 pointer-events-none" : "opacity-100"
       }`}
     >

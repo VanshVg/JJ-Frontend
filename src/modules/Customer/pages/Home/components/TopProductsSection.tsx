@@ -15,7 +15,7 @@ const TopProductsSection = () => {
             key={product.productName + ` ${index}`}
           >
             <div className="border-primary border-[1px] min-h-[250px] lg:min-h-[350px] group relative overflow-hidden cursor-pointer">
-              <div className="min-h-[170px] lg:min-h-[250px] bg-beige relative">
+              <div className="min-h-[170px] lg:min-h-[250px] bg-gray relative">
                 <img
                   src={product.frontImageUrl}
                   className="h-[130px] lg:h-[160px] mx-auto absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-opacity duration-500 opacity-100 group-hover:opacity-0"

@@ -65,8 +65,9 @@ const Shop = () => {
         selectedCategories={selectedCategories}
       />
       <div>
+        <h1 className="font-primary text-[24px] mt-[20px]">All Products</h1>
         <p
-          className="underline font-secondary text-right text-primary mt-3 mr-3 cursor-pointer"
+          className="underline font-secondary text-right text-primary mt-5 mr-3 cursor-pointer"
           onClick={() => setIsSidebarOpen(true)}
         >
           Apply Filters
@@ -77,7 +78,10 @@ const Shop = () => {
       ) : isError ? (
         <p className="text-red-600">Something went wrong...</p>
       ) : (
-        <div id="productsDiv" className="overflow-y-auto w-full p-2 h-screen">
+        <div
+          id="productsDiv"
+          className="overflow-y-auto w-full p-2 h-screen mt-3"
+        >
           {products.length > 0 ? (
             <InfiniteScroll
               dataLength={products.length}
@@ -87,7 +91,10 @@ const Shop = () => {
               scrollableTarget={"productsDiv"}
             >
               {products.map((product: IProducts) => (
-                <ProductCard key={product.id + product.name} />
+                <ProductCard
+                  product={product}
+                  key={product.id + product.name}
+                />
               ))}
             </InfiniteScroll>
           ) : (
