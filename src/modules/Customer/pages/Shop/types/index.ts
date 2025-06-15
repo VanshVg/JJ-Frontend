@@ -35,6 +35,9 @@ export interface IProducts {
   id: number;
   name: string;
   MRP: number;
+  discount: number | null;
+  selling_price: number;
+  average_rating: number | null;
   created_at: Date;
   category: {
     name: string;
