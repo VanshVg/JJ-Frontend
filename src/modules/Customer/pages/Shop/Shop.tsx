@@ -16,7 +16,7 @@ const Shop = () => {
 
   const { fetchProductsApi, isError, isLoading } = useFetchProductsApi();
 
-  const limit = 5;
+  const limit = 20;
 
   const fetchProducts = async () => {
     if (isLoading || !hasMore) {
@@ -49,7 +49,7 @@ const Shop = () => {
   }, []);
 
   return (
-    <div className="md:h-screen md:flex md:fixed w-full">
+    <div className="lg:h-screen lg:flex">
       <MainSidebar
         priceRange={priceRange}
         setPriceRange={setPriceRange}
@@ -64,44 +64,49 @@ const Shop = () => {
         setSelectedCategories={setSelectedCategories}
         selectedCategories={selectedCategories}
       />
-      <div>
-        <h1 className="font-primary text-[24px] mt-[20px]">All Products</h1>
-        <p
-          className="underline font-secondary text-right text-primary mt-5 mr-3 cursor-pointer"
-          onClick={() => setIsSidebarOpen(true)}
-        >
-          Apply Filters
-        </p>
-      </div>
-      {isLoading ? (
-        <div>loading....</div>
-      ) : isError ? (
-        <p className="text-red-600">Something went wrong...</p>
-      ) : (
-        <div
-          id="productsDiv"
-          className="overflow-y-auto w-full p-2 h-screen mt-3"
-        >
-          {products.length > 0 ? (
-            <InfiniteScroll
-              dataLength={products.length}
-              next={fetchProducts}
-              hasMore={hasMore}
-              loader={<p>Loading...</p>}
-              scrollableTarget={"productsDiv"}
-            >
-              {products.map((product: IProducts) => (
-                <ProductCard
-                  product={product}
-                  key={product.id + product.name}
-                />
-              ))}
-            </InfiniteScroll>
-          ) : (
-            <p>Products not found</p>
-          )}
+      <div className="lg:w-[78%]">
+        <div>
+          <h1 className="font-primary text-[24px] sm:text-[28px] mt-[20px] lg:hidden">
+            All Products
+          </h1>
+          <p
+            className="underline font-secondary text-right text-primary mt-5 mr-3 cursor-pointer sm:text-[18px] lg:hidden"
+            onClick={() => setIsSidebarOpen(true)}
+          >
+            Apply Filters
+          </p>
         </div>
-      )}
+        {isLoading ? (
+          <div>loading....</div>
+        ) : isError ? (
+          <p className="text-red-600">Something went wrong...</p>
+        ) : (
+          <div
+            id="productsDiv"
+            className="overflow-y-auto w-full p-2 h-screen mt-3"
+          >
+            {products.length > 0 ? (
+              <InfiniteScroll
+                dataLength={products.length}
+                next={fetchProducts}
+                hasMore={hasMore}
+                loader={<p>Loading...</p>}
+                scrollableTarget={"productsDiv"}
+                className="sm:flex flex-wrap"
+              >
+                {products.map((product: IProducts) => (
+                  <ProductCard
+                    product={product}
+                    key={product.id + product.name}
+                  />
+                ))}
+              </InfiniteScroll>
+            ) : (
+              <p>Products not found</p>
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 };

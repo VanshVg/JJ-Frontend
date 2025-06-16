@@ -9,7 +9,7 @@ const MainSidebar = ({
   setSelectedCategories,
 }: IMainSidebarProps) => {
   return (
-    <div className="h-screen w-[22%] px-8 py-5 hidden z-10">
+    <div className="h-screen w-[22%] px-8 py-5 hidden z-10 lg:block overflow-y-auto">
       <CategorySection
         setSelectedCategories={setSelectedCategories}
         selectedCategories={selectedCategories}
