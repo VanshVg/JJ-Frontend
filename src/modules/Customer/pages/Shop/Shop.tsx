@@ -81,10 +81,7 @@ const Shop = () => {
         ) : isError ? (
           <p className="text-red-600">Something went wrong...</p>
         ) : (
-          <div
-            id="productsDiv"
-            className="overflow-y-auto w-full p-2 h-screen mt-3"
-          >
+          <div className="p-2 mt-3">
             {products.length > 0 ? (
               <InfiniteScroll
                 dataLength={products.length}

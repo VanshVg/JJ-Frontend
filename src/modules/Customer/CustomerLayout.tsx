@@ -5,9 +5,6 @@ import Navbar from "./components/Navbar";
 
 const CustomerLayout = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-
-  const isScrollDisabled = location.pathname === ICustomerRoutes.Shop;
 
   return (
     <div className="flex flex-col h-screen overflow-hidden">
@@ -21,7 +18,7 @@ const CustomerLayout = () => {
         </div>
         <Navbar />
       </div>
-      <div className={`flex-1 ${isScrollDisabled ? "" : "overflow-y-auto"}`}>
+      <div id="productsDiv" className={`flex-1 overflow-y-auto`}>
         <Outlet />
       </div>
     </div>
