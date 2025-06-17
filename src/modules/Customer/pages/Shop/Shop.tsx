@@ -13,6 +13,7 @@ const Shop = () => {
   const [products, setProducts] = useState<IProducts[]>([]);
   const [page, setPage] = useState<number>(1);
   const [hasMore, setHasMore] = useState<boolean>(true);
+  const [isProductsLoading, setIsProductsLoading] = useState<boolean>(false);
 
   const { fetchProductsApi, isError, isLoading } = useFetchProductsApi();
 
@@ -36,6 +37,7 @@ const Shop = () => {
       }
     }
     setPage((prev) => prev + 1);
+    setIsProductsLoading(false);
   };
 
   useEffect(() => {
@@ -45,6 +47,7 @@ const Shop = () => {
   }, [priceRange, selectedCategories]);
 
   useEffect(() => {
+    setIsProductsLoading(true);
     fetchProducts();
   }, []);
 
@@ -76,18 +79,20 @@ const Shop = () => {
             Apply Filters
           </p>
         </div>
-        {isLoading ? (
+        {isProductsLoading ? (
           <div>loading....</div>
         ) : isError ? (
           <p className="text-red-600">Something went wrong...</p>
         ) : (
-          <div className="p-2 mt-3">
+          <div className="p-2 mt-3" style={{ height: "calc(100vh - 100px)" }}>
             {products.length > 0 ? (
               <InfiniteScroll
                 dataLength={products.length}
                 next={fetchProducts}
                 hasMore={hasMore}
-                loader={<p>Loading...</p>}
+                loader={
+                  <h3 className="text-center mx-auto mb-12">Loading...</h3>
+                }
                 scrollableTarget={"productsDiv"}
                 className="sm:flex flex-wrap"
               >
