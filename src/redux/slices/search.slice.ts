@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState, SearchInterface } from "../types";
-import authSlice from "./auth.slice";
 
 const initialState: SearchInterface = {
   query: null,

@@ -3,7 +3,7 @@ import Slider from "@mui/material/Slider";
 import { IFiltersProps } from "../../../types";
 
 const PriceRangeSection = ({ filters, setFilters }: IFiltersProps) => {
-  const priceRangeHandler = (event: Event, newValue: number[]) => {
+  const priceRangeHandler = (_: Event, newValue: number[]) => {
     if (newValue[1] - newValue[0] < 20) {
       return;
     }

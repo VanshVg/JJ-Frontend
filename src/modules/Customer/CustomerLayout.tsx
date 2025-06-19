@@ -1,4 +1,4 @@
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { logoPath } from "../../types/constants";
 import { ICustomerRoutes } from "./types";
 import Navbar from "./components/Navbar";
