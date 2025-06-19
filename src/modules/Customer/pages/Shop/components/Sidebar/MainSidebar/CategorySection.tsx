@@ -1,11 +1,8 @@
 import Checkbox from "../../../../../../../components/form-fields/Checkbox";
-import { ICategoryFilterProps } from "../../../types";
+import { IFiltersProps } from "../../../types";
 import { categories } from "../../../types/constants";
 
-const CategorySection = ({
-  selectedCategories,
-  setSelectedCategories,
-}: ICategoryFilterProps) => {
+const CategorySection = ({ filters, setFilters }: IFiltersProps) => {
   return (
     <div>
       <h1 className="font-primary text-left text-primary text-[18px]">
@@ -22,15 +19,23 @@ const CategorySection = ({
               value={category.value}
               label={category.label}
               onChange={(e) => {
-                setSelectedCategories((prev) => {
+                setFilters((prev) => {
                   if (e?.target?.checked) {
-                    return [...prev, e?.target?.value];
+                    return {
+                      priceRange: prev.priceRange,
+                      categories: [...prev.categories, e?.target?.value],
+                    };
                   } else {
-                    return prev.filter((item) => item !== e?.target?.value);
+                    return {
+                      priceRange: prev.priceRange,
+                      categories: prev.categories.filter(
+                        (item) => item !== e?.target?.value
+                      ),
+                    };
                   }
                 });
               }}
-              isChecked={selectedCategories.includes(category.value)}
+              isChecked={filters?.categories?.includes(category.value)}
             />
           </div>
         ))}

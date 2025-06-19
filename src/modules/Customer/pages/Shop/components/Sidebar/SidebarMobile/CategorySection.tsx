@@ -2,12 +2,9 @@ import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import Checkbox from "../../../../../../../components/form-fields/Checkbox";
 import { categories } from "../../../types/constants";
 import { useState } from "react";
-import { ICategoryFilterProps } from "../../../types";
+import { IFiltersProps } from "../../../types";
 
-const CategorySection = ({
-  selectedCategories,
-  setSelectedCategories,
-}: ICategoryFilterProps) => {
+const CategorySection = ({ filters, setFilters }: IFiltersProps) => {
   const [isSectionOpen, setIsSectionOpen] = useState<boolean>(true);
 
   return (
@@ -40,15 +37,23 @@ const CategorySection = ({
               value={category.value}
               label={category.label}
               onChange={(e) => {
-                setSelectedCategories((prev) => {
+                setFilters((prev) => {
                   if (e?.target?.checked) {
-                    return [...prev, e?.target?.value];
+                    return {
+                      priceRange: prev.priceRange,
+                      categories: [...prev.categories, e?.target?.value],
+                    };
                   } else {
-                    return prev.filter((item) => item !== e?.target?.value);
+                    return {
+                      priceRange: prev.priceRange,
+                      categories: prev.categories.filter(
+                        (item) => item !== e?.target?.value
+                      ),
+                    };
                   }
                 });
               }}
-              isChecked={selectedCategories.includes(category.value)}
+              isChecked={filters?.categories?.includes(category.value)}
             />
           </div>
         ))}

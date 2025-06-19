@@ -1,25 +1,21 @@
 import { SortTypes } from "../../../../../types";
 
-export interface IPriceRangeProps {
+export interface IProductFilters {
   priceRange: number[];
-  setPriceRange: React.Dispatch<React.SetStateAction<number[]>>;
+  categories: string[];
 }
 
-export interface ICategoryFilterProps {
-  selectedCategories: string[];
-  setSelectedCategories: React.Dispatch<React.SetStateAction<string[]>>;
+export interface IFiltersProps {
+  filters: IProductFilters;
+  setFilters: React.Dispatch<React.SetStateAction<IProductFilters>>;
 }
 
-export interface IMobileSidebarProps
-  extends IPriceRangeProps,
-    ICategoryFilterProps {
+export interface IMobileSidebarProps extends IFiltersProps {
   isSidebarOpen: boolean;
   setIsSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export interface IMainSidebarProps
-  extends IPriceRangeProps,
-    ICategoryFilterProps {}
+export interface IMainSidebarProps extends IFiltersProps {}
 
 export interface IProductAPiFilters {
   minPrice: number;
@@ -29,6 +25,7 @@ export interface IProductAPiFilters {
   search?: string;
   sortDirection?: SortTypes;
   sortField?: string;
+  category?: string[];
 }
 
 export interface IProducts {

@@ -6,10 +6,8 @@ import { IMobileSidebarProps } from "../../../types";
 const SidebarMobile = ({
   isSidebarOpen,
   setIsSidebarOpen,
-  priceRange,
-  setPriceRange,
-  selectedCategories,
-  setSelectedCategories,
+  filters,
+  setFilters,
 }: IMobileSidebarProps) => {
   return (
     <div
@@ -31,20 +29,16 @@ const SidebarMobile = ({
         </div>
         <div className="h-[1px] bg-primary mt-3 opacity-30" />
 
-        <CategorySection
-          setSelectedCategories={setSelectedCategories}
-          selectedCategories={selectedCategories}
-        />
-        <PriceRangeSection
-          priceRange={priceRange}
-          setPriceRange={setPriceRange}
-        />
+        <CategorySection filters={filters} setFilters={setFilters} />
+        <PriceRangeSection filters={filters} setFilters={setFilters} />
       </div>
       <p
         className="underline font-secondary text-center cursor-pointer text-primary mt-10"
         onClick={() => {
-          setPriceRange([50, 2500]);
-          setSelectedCategories([]);
+          setFilters({
+            priceRange: [50, 2500],
+            categories: [],
+          });
         }}
       >
         Clear Filters

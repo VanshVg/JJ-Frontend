@@ -3,13 +3,16 @@ import MainSidebar from "./components/Sidebar/MainSidebar/MainSidebar";
 import SidebarMobile from "./components/Sidebar/SidebarMobile/SidebarMobile";
 import { useFetchProductsApi } from "./services";
 import ProductCard from "./components/ProductCard/ProductCard";
-import { IProducts } from "./types";
+import { IProductFilters, IProducts } from "./types";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { useDebounce } from "../../../../hooks/useDebounce";
 
 const Shop = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
-  const [priceRange, setPriceRange] = useState<number[]>([50, 2500]);
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [filters, setFilters] = useState<IProductFilters>({
+    priceRange: [50, 2500],
+    categories: [],
+  });
   const [products, setProducts] = useState<IProducts[]>([]);
   const [page, setPage] = useState<number>(1);
   const [hasMore, setHasMore] = useState<boolean>(true);
@@ -19,53 +22,47 @@ const Shop = () => {
 
   const limit = 20;
 
-  const fetchProducts = async () => {
-    if (isLoading || !hasMore) {
+  const debouncedFilters = useDebounce<IProductFilters>(filters, 500);
+
+  const fetchProducts = async (newPage: number = page) => {
+    if (isLoading) {
       return;
     }
+
     const { data } = await fetchProductsApi({
-      minPrice: priceRange[0],
-      maxPrice: priceRange[1],
+      minPrice: debouncedFilters.priceRange?.[0],
+      maxPrice: debouncedFilters.priceRange?.[1],
       limit,
-      page,
+      page: newPage,
+      category: debouncedFilters.categories,
     });
 
     if (data?.data?.products) {
       setProducts((prev) => [...prev, ...(data?.data?.products || [])]);
-      if (limit * page >= data?.data?.totalRecords) {
+      if (limit * newPage >= data?.data?.totalRecords) {
         setHasMore(false);
       }
     }
-    setPage((prev) => prev + 1);
+    setPage(newPage + 1);
     setIsProductsLoading(false);
   };
 
   useEffect(() => {
+    setIsProductsLoading(true);
     setPage(1);
     setHasMore(true);
     setProducts([]);
-  }, [priceRange, selectedCategories]);
-
-  useEffect(() => {
-    setIsProductsLoading(true);
-    fetchProducts();
-  }, []);
+    fetchProducts(1);
+  }, [debouncedFilters]);
 
   return (
     <div className="lg:h-screen lg:flex">
-      <MainSidebar
-        priceRange={priceRange}
-        setPriceRange={setPriceRange}
-        setSelectedCategories={setSelectedCategories}
-        selectedCategories={selectedCategories}
-      />
+      <MainSidebar filters={filters} setFilters={setFilters} />
       <SidebarMobile
         isSidebarOpen={isSidebarOpen}
         setIsSidebarOpen={setIsSidebarOpen}
-        priceRange={priceRange}
-        setPriceRange={setPriceRange}
-        setSelectedCategories={setSelectedCategories}
-        selectedCategories={selectedCategories}
+        filters={filters}
+        setFilters={setFilters}
       />
       <div className="lg:w-[78%]">
         <div>

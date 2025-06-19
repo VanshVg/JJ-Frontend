@@ -13,6 +13,7 @@ export const useFetchProductsApi = () => {
     search,
     sortDirection,
     sortField,
+    category,
   }: IProductAPiFilters) => {
     return callApi(`${PRODUCTS_APP_BASE_PATH}`, {
       params: {
@@ -23,6 +24,7 @@ export const useFetchProductsApi = () => {
         search,
         sortDirection,
         sortField,
+        category: category?.join(","),
       },
     });
   };

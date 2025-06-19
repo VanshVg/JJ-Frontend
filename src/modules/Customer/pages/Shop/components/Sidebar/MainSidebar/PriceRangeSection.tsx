@@ -1,13 +1,18 @@
 import { rupeesSymbol } from "../../../../../../../types/constants";
 import Slider from "@mui/material/Slider";
-import { IPriceRangeProps } from "../../../types";
+import { IFiltersProps } from "../../../types";
 
-const PriceRangeSection = ({ priceRange, setPriceRange }: IPriceRangeProps) => {
+const PriceRangeSection = ({ filters, setFilters }: IFiltersProps) => {
   const priceRangeHandler = (event: Event, newValue: number[]) => {
     if (newValue[1] - newValue[0] < 20) {
       return;
     }
-    setPriceRange(newValue);
+    setFilters((prev) => {
+      return {
+        categories: prev.categories,
+        priceRange: newValue,
+      };
+    });
   };
 
   return (
@@ -22,7 +27,7 @@ const PriceRangeSection = ({ priceRange, setPriceRange }: IPriceRangeProps) => {
         <div className="px-6 pt-7">
           <Slider
             getAriaLabel={() => "Price Range"}
-            value={priceRange}
+            value={filters.priceRange}
             onChange={priceRangeHandler}
             valueLabelDisplay="off"
             max={2500}
@@ -47,11 +52,11 @@ const PriceRangeSection = ({ priceRange, setPriceRange }: IPriceRangeProps) => {
         </div>
         <div className="w-full flex justify-between text-primary font-semibold px-4">
           <span>
-            {priceRange[0]}
+            {filters.priceRange?.[0]}
             {rupeesSymbol}
           </span>
           <span>
-            {priceRange[1]}
+            {filters.priceRange?.[1]}
             {rupeesSymbol}
           </span>
         </div>
