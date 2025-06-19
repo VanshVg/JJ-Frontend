@@ -5,6 +5,7 @@ import {
   navMenuCornerElements,
   navMenuMiddleElements,
 } from "../types/constants";
+import Search from "../../../components/Search";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,7 +16,7 @@ const Navbar = () => {
   return (
     <nav className="text-primary font-secondary">
       <div className="p-4 border-t-[1px] border-b-[1px] border-primary flex justify-between">
-        <div className="md:mt-3 md:w-[200px]">Search...</div>
+        <Search />
         <div className="md:flex hidden md:box gap-4 mt-3 text-[18px]">
           {navMenuMiddleElements.map((element, index) => {
             return (

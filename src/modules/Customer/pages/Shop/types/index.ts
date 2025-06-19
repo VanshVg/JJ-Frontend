@@ -22,7 +22,7 @@ export interface IProductAPiFilters {
   maxPrice: number;
   limit?: number;
   page?: number;
-  search?: string;
+  search?: string | null;
   sortDirection?: SortTypes;
   sortField?: string;
   category?: string[];

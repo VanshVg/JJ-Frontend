@@ -9,6 +9,7 @@ import { searchReducer } from "./slices/search.slice";
 const persistConfig = {
   key: "JJ",
   storage,
+  blacklist: ["search"],
 };
 
 const rootReducer = combineReducers({

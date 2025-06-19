@@ -6,6 +6,8 @@ import ProductCard from "./components/ProductCard/ProductCard";
 import { IProductFilters, IProducts } from "./types";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useDebounce } from "../../../../hooks/useDebounce";
+import { useSelector } from "react-redux";
+import { getSearchQuery } from "../../../../redux/slices/search.slice";
 
 const Shop = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
@@ -19,6 +21,8 @@ const Shop = () => {
   const [isProductsLoading, setIsProductsLoading] = useState<boolean>(false);
 
   const { fetchProductsApi, isError, isLoading } = useFetchProductsApi();
+
+  const searchValue = useSelector(getSearchQuery).query;
 
   const limit = 20;
 
@@ -35,6 +39,7 @@ const Shop = () => {
       limit,
       page: newPage,
       category: debouncedFilters.categories,
+      search: searchValue,
     });
 
     if (data?.data?.products) {
@@ -53,7 +58,7 @@ const Shop = () => {
     setHasMore(true);
     setProducts([]);
     fetchProducts(1);
-  }, [debouncedFilters]);
+  }, [debouncedFilters, searchValue]);
 
   return (
     <div className="lg:h-screen lg:flex">
@@ -67,7 +72,9 @@ const Shop = () => {
       <div className="lg:w-[78%]">
         <div>
           <h1 className="font-primary text-[24px] sm:text-[28px] mt-[20px] lg:hidden">
-            All Products
+            {searchValue && searchValue?.trim() !== ""
+              ? `Search Result for: ${searchValue?.trim()}`
+              : " All Products"}
           </h1>
           <p
             className="underline font-secondary text-right text-primary mt-5 mr-3 cursor-pointer sm:text-[18px] lg:hidden"
