@@ -7,6 +7,13 @@ export const Axios = axios.create({ baseURL: `${VITE_APP_API_URL}` });
 
 export const setupAxios = () => {
   Axios.interceptors.request.use((request) => {
+    const storeData = store.getState();
+    const token = storeData?.auth?.token;
+
+    if (token) {
+      request.headers.Authorization = `Bearer ${token}`;
+    }
+
     return request;
   });
 

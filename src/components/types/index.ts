@@ -1,4 +1,4 @@
-import { MouseEvent } from "react";
+import { ChangeEventHandler, MouseEvent } from "react";
 import { Control, FieldErrors, FieldValues, Path } from "react-hook-form";
 
 export enum ButtonDisplayType {
@@ -45,4 +45,14 @@ export interface IContactInputProps<T extends FieldValues> {
   externalClasses?: string;
   isDisabled?: boolean;
   errors?: FieldErrors;
+}
+
+export interface ICheckboxProps {
+  externalClasses?: string;
+  name: string;
+  value: string | number | readonly string[];
+  onChange?: ChangeEventHandler<HTMLInputElement>;
+  isChecked?: boolean;
+  isDisabled?: boolean;
+  label?: string;
 }

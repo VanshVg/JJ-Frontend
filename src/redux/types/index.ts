@@ -14,3 +14,7 @@ export interface AuthInterface {
   isAuthenticated?: boolean;
   userData?: IUser | null;
 }
+
+export interface SearchInterface {
+  query: string | null;
+}

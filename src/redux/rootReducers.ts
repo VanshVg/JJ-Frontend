@@ -4,15 +4,18 @@ import storage from "redux-persist/lib/storage";
 
 import { toastReducer } from "./slices/toast.slice";
 import { authReducer } from "./slices/auth.slice";
+import { searchReducer } from "./slices/search.slice";
 
 const persistConfig = {
   key: "JJ",
   storage,
+  blacklist: ["search"],
 };
 
 const rootReducer = combineReducers({
   toast: toastReducer,
   auth: authReducer,
+  search: searchReducer,
 });
 
 export default persistReducer(persistConfig, rootReducer);

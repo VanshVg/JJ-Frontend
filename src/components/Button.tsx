@@ -16,6 +16,11 @@ const Button = ({
       buttonClasses = `rounded-[5px] border-[1px] text-xl font-medium transition-all duration-300 flex gap-2 cursor-pointer items-center text-white bg-primary hover:bg-white hover:text-primary hover:border-primary ${
         externalClasses ?? ""
       }`;
+      break;
+    case ButtonDisplayType.Secondary:
+      buttonClasses = `rounded-[5px] border-[1px] text-xl font-medium transition-all duration-300 flex gap-2 cursor-pointer items-center text-primary bg-white hover:bg-primary hover:text-white hover:border-white ${
+        externalClasses ?? ""
+      }`;
   }
   return (
     <button
