@@ -5,7 +5,7 @@ import { IProductRoute } from "./types";
 
 const productRoutes: IRoutes[] = applySuspense([
   {
-    path: IProductRoute.Product,
+    path: IProductRoute.Product + "/:id",
     element: <Product />,
   },
 ]);

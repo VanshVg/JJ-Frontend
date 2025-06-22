@@ -1,3 +1,3 @@
 export enum IProductRoute {
-  Product = "/product/:id",
+  Product = "/product",
 }
