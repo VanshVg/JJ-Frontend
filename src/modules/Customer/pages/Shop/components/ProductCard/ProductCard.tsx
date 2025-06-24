@@ -7,6 +7,8 @@ import { IProductRoute } from "../../../../../Product/types";
 const ProductCard = ({ product }: IProductCardProps) => {
   const navigate = useNavigate();
 
+  console.log(product?.productImages?.[0]?.image_url);
+
   return (
     <div
       className={`w-[90%] mx-auto p-3 sm:w-[50%] sm:mx-0 md:w-[33%] lg:w-[33%]`}
