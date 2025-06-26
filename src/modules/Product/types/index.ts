@@ -16,7 +16,9 @@ export interface IProductDetails {
   };
   weight: number;
   weight_unit: WeightUnits;
+  discount?: number;
   MRP: number;
+  selling_price?: number;
   available_quantity: number;
   packaging_date: Date;
   expiry_date: Date;
@@ -50,4 +52,9 @@ export interface IIndicatorsProps {
   isSelected: boolean;
   index: number;
   label: string;
+}
+
+export interface IProductCarouselProps {
+  productImages?: IProductImages[];
+  discount?: number;
 }

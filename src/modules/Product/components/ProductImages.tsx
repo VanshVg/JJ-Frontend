@@ -1,15 +1,11 @@
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
-import { IProductImages } from "../types";
+import { IProductCarouselProps } from "../types";
 import { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { Indicators, NextArrow, PrevArrow } from "./CarouselComponents";
 
-const ProductImages = ({
-  productImages,
-}: {
-  productImages: IProductImages[] | undefined;
-}) => {
+const ProductImages = ({ productImages, discount }: IProductCarouselProps) => {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
 
@@ -22,12 +18,12 @@ const ProductImages = ({
     setIsFullscreen(false);
   };
   return (
-    <div className="p-4 absolute ">
+    <div>
       <Carousel
         showThumbs={false}
         showStatus={false}
         infiniteLoop={true}
-        className="w-full relative"
+        className="w-full relative mx-auto"
         onClickItem={openFullscreen}
         renderArrowPrev={(clickHandler) => (
           <NextArrow clickHandler={clickHandler} />
@@ -54,6 +50,11 @@ const ProductImages = ({
               className="h-[180px] w-[30px] object-contain"
               alt={`Product ${index}`}
             />
+            {discount && discount > 0 && index === 0 && (
+              <div className="bg-primary p-1 absolute min-w-[100px] rounded-[1px] top-2 left-2 z-10 ">
+                <h2 className="text-white text-[12px]">{discount + "% OFF"}</h2>
+              </div>
+            )}
           </div>
         ))}
       </Carousel>

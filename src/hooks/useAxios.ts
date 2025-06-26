@@ -36,7 +36,6 @@ export const useAxiosGet = (): [
       setIsSuccess(true);
       return { data: response.data, message: (response as any).message };
     } catch (error: any) {
-      console.log(error);
       const typedError = error as IApiResponse;
       setIsError(true);
       setIsLoading(false);
