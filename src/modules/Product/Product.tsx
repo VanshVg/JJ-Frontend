@@ -5,13 +5,16 @@ import { useParams } from "react-router-dom";
 import { ResponseType } from "../../types";
 import { IProductDetails } from "./types";
 import Rating from "@mui/material/Rating";
-import { AiFillCaretDown } from "react-icons/ai";
 import { rupeesSymbol } from "../../types/constants";
+import Quantity from "../../components/Quantity";
+import Button from "../../components/Button";
+import { ButtonDisplayType } from "../../components/types";
 
 const Product = () => {
   const [productDetails, setProductDetails] = useState<
     IProductDetails | undefined
   >();
+  const [quantity, setQuantity] = useState<number>(1);
 
   const productId = useParams()?.id;
 
@@ -71,7 +74,41 @@ const Product = () => {
                 {rupeesSymbol}
               </h2>
             </div>
+            {productDetails && productDetails.available_quantity > 0 ? (
+              <div className="mt-4">
+                <div className="flex justify-start">
+                  <Quantity
+                    quantity={quantity}
+                    setQuantity={setQuantity}
+                    availableQuantity={
+                      productDetails?.available_quantity as number
+                    }
+                  />
+                </div>
+                <div className="h-[1px] bg-primary mt-4 opacity-30" />
+
+                <div className="flex justify-center mt-5 gap-4">
+                  <Button
+                    label="Add to cart"
+                    type="button"
+                    displayType={ButtonDisplayType.Primary}
+                    externalClasses="p-2 w-[130px] text-center justify-center text-[17px] font-normal"
+                  />
+                  <Button
+                    label="Buy now"
+                    type="button"
+                    displayType={ButtonDisplayType.Secondary}
+                    externalClasses="p-2 w-[130px] text-center justify-center text-[17px] font-normal"
+                  />
+                </div>
+              </div>
+            ) : (
+              <p className="text-red-600 text-[23px] text-left mt-4">
+                Sold Out
+              </p>
+            )}
           </div>
+          {/* <div className="h-[1px] bg-primary mt-8 opacity-30" /> */}
         </div>
       )}
     </div>

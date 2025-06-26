@@ -56,3 +56,9 @@ export interface ICheckboxProps {
   isDisabled?: boolean;
   label?: string;
 }
+
+export interface IQuantityProps {
+  quantity: number;
+  setQuantity: React.Dispatch<React.SetStateAction<number>>;
+  availableQuantity: number;
+}
