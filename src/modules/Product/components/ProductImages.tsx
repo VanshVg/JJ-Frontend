@@ -43,7 +43,7 @@ const ProductImages = ({ productImages, discount }: IProductCarouselProps) => {
         {productImages?.map((image, index) => (
           <div
             key={index}
-            className="bg-beige w-full h-[300px] mx-auto flex justify-center items-center"
+            className="bg-gray w-full h-[300px] mx-auto flex justify-center items-center"
           >
             <img
               src={image.image_url}
@@ -59,7 +59,7 @@ const ProductImages = ({ productImages, discount }: IProductCarouselProps) => {
         ))}
       </Carousel>
       {isFullscreen && (
-        <div className="fixed inset-0 z-50 bg-beige bg-opacity-90 flex items-center justify-center">
+        <div className="fixed inset-0 z-50 bg-gray bg-opacity-90 flex items-center justify-center">
           <AiOutlineClose
             onClick={closeFullscreen}
             className="absolute top-4 right-4 text-primary text-2xl z-50"

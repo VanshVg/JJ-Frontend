@@ -58,3 +58,9 @@ export interface IProductCarouselProps {
   productImages?: IProductImages[];
   discount?: number;
 }
+
+export enum ProductDetailsTabs {
+  Description = "Description",
+  Information = "Information",
+  Reviews = "Reviews",
+}

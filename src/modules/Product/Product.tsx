@@ -9,6 +9,7 @@ import { rupeesSymbol } from "../../types/constants";
 import Quantity from "../../components/Quantity";
 import Button from "../../components/Button";
 import { ButtonDisplayType } from "../../components/types";
+import ProductDetails from "./components/ProductDetails/ProductDetails";
 
 const Product = () => {
   const [productDetails, setProductDetails] = useState<
@@ -45,10 +46,13 @@ const Product = () => {
             discount={productDetails?.discount}
           />
           <div>
-            <h1 className="font-primary text-[28px] mt-2 text-left">
+            <h1 className="font-primary text-[28px] text-left mt-2">
               {productDetails?.name}
             </h1>
-            <div className="flex justify-start gap-1">
+            <h1 className="text-[14px] -mt-2 text-left opacity-80">
+              By {productDetails?.brand}
+            </h1>
+            <div className="flex justify-start gap-1 mt-2">
               <Rating
                 name="simple-controlled"
                 value={Number(productDetails?.average_rating) || 0}
@@ -60,7 +64,8 @@ const Product = () => {
                 ({productDetails?.average_rating})
               </p>
             </div>
-            <div className="flex justify-start mt-2 gap-4">
+            <div className="h-[1px] bg-primary mt-4 opacity-30" />
+            <div className="flex justify-start mt-3 gap-4">
               {productDetails?.discount && (
                 <div className="flex justify-start gap-4">
                   <h2 className="line-through text-[22px] opacity-70 mt-1">
@@ -76,7 +81,8 @@ const Product = () => {
             </div>
             {productDetails && productDetails.available_quantity > 0 ? (
               <div className="mt-4">
-                <div className="flex justify-start">
+                <div className="flex justify-start gap-2">
+                  <h2 className="text-[15px] mt-1">Quantity</h2>
                   <Quantity
                     quantity={quantity}
                     setQuantity={setQuantity}
@@ -85,9 +91,7 @@ const Product = () => {
                     }
                   />
                 </div>
-                <div className="h-[1px] bg-primary mt-4 opacity-30" />
-
-                <div className="flex justify-center mt-5 gap-4">
+                <div className="flex justify-center mt-7 gap-4">
                   <Button
                     label="Add to cart"
                     type="button"
@@ -107,8 +111,9 @@ const Product = () => {
                 Sold Out
               </p>
             )}
+            <div className="h-[1px] bg-primary mt-6 opacity-30" />
+            <ProductDetails productDetails={productDetails} />
           </div>
-          {/* <div className="h-[1px] bg-primary mt-8 opacity-30" /> */}
         </div>
       )}
     </div>
