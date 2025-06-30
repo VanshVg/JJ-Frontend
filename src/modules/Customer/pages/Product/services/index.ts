@@ -1,5 +1,5 @@
-import { useAxiosGet } from "../../../hooks/useAxios";
-import { PRODUCTS_APP_BASE_PATH } from "../../Customer/pages/Shop/types/constants";
+import { useAxiosGet } from "../../../../../hooks/useAxios";
+import { PRODUCTS_APP_BASE_PATH } from "../../Shop/types/constants";
 
 export const useFetchProductByIdApi = () => {
   const [callApi, { isError, isLoading, isSuccess }] = useAxiosGet();

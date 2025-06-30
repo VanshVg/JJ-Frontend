@@ -1,7 +1,3 @@
-export enum IProductRoute {
-  Product = "/product",
-}
-
 export enum WeightUnits {
   Lbs = "lbs",
   Gram = "g",
@@ -9,6 +5,7 @@ export enum WeightUnits {
 }
 
 export interface IProductDetails {
+  id: number;
   name: string;
   brand?: string;
   category: {
@@ -26,17 +23,7 @@ export interface IProductDetails {
   description?: string;
   extra_note?: string;
   productImages?: IProductImages[];
-  productReviews?: [
-    {
-      rating: number;
-      review?: string;
-      created_at: Date;
-      user: {
-        first_name: string;
-        last_name: string;
-      };
-    }
-  ];
+  productReviews?: IProductReviews[];
 }
 
 export interface IProductImages {
@@ -63,4 +50,14 @@ export enum ProductDetailsTabs {
   Description = "Description",
   Information = "Information",
   Reviews = "Reviews",
+}
+
+export interface IProductReviews {
+  rating: number;
+  review?: string;
+  created_at: Date;
+  user: {
+    first_name: string;
+    last_name: string;
+  };
 }

@@ -2,7 +2,7 @@ import Rating from "@mui/material/Rating";
 import { rupeesSymbol } from "../../../../../../types/constants";
 import { IProductCardProps } from "../../types";
 import { useNavigate } from "react-router-dom";
-import { IProductRoute } from "../../../../../Product/types";
+import { ICustomerRoutes } from "../../../../types";
 
 const ProductCard = ({ product }: IProductCardProps) => {
   const navigate = useNavigate();
@@ -10,7 +10,7 @@ const ProductCard = ({ product }: IProductCardProps) => {
   return (
     <div
       className={`w-[90%] mx-auto p-3 sm:w-[50%] sm:mx-0 md:w-[33%] lg:w-[33%]`}
-      onClick={() => navigate(IProductRoute.Product + `/${product.id}`)}
+      onClick={() => navigate(ICustomerRoutes.Product + `/${product.id}`)}
     >
       <div className="border-primary border-[1px] h-[370px] lg:h-[400px] group relative overflow-hidden cursor-pointer">
         <div className="h-[250px] lg:h-[270px] bg-gray relative">

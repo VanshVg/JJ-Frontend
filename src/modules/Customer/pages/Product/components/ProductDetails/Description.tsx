@@ -14,12 +14,16 @@ const Description = ({
       }`}
     >
       <p>{productDetails?.description}</p>
-      <h2 className="font-primary mt-3 font-semibold text-[18px]">
-        Extra Note
-      </h2>
-      <ul className="list-disc pl-8">
-        <li>{productDetails?.extra_note}</li>
-      </ul>
+      {productDetails?.extra_note && (
+        <div>
+          <h2 className="font-primary mt-3 font-semibold text-[18px]">
+            Extra Note
+          </h2>
+          <ul className="list-disc pl-8">
+            <li>{productDetails?.extra_note}</li>
+          </ul>
+        </div>
+      )}
     </div>
   );
 };

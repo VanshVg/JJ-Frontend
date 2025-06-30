@@ -68,7 +68,6 @@ const Information = ({
                 )}
               </p>
             </div>
-            <div className="h-[1px] bg-gray mt-2" />
           </>
         )}
       </div>

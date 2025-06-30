@@ -10,6 +10,7 @@ const About = lazy(() => import("./pages/About/About"));
 const Orders = lazy(() => import("./pages/Orders/Orders"));
 const Cart = lazy(() => import("./pages/Cart/Cart"));
 const Account = lazy(() => import("./pages/Account/Account"));
+const Product = lazy(() => import("./pages/Product/Product"));
 
 const customerRoutes: IRoutes[] = applySuspense([
   {
@@ -39,6 +40,10 @@ const customerRoutes: IRoutes[] = applySuspense([
       {
         path: ICustomerRoutes.Account,
         element: <Account />,
+      },
+      {
+        path: ICustomerRoutes.Product + "/:id",
+        element: <Product />,
       },
     ],
   },
