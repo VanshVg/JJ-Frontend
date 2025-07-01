@@ -5,4 +5,5 @@ export enum ICustomerRoutes {
   Orders = "/orders",
   Cart = "/cart",
   Account = "/Account",
+  Product = "/product",
 }
