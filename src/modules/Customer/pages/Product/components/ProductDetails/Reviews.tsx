@@ -4,8 +4,6 @@ import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 import { useEffect, useState } from "react";
 import Typography from "@mui/material/Typography";
-import Button from "../../../../../../components/Button";
-import { ButtonDisplayType } from "../../../../../../components/types";
 
 const Reviews = ({
   productDetails,
@@ -21,8 +19,6 @@ const Reviews = ({
     2: 0,
     1: 0,
   });
-
-  const [newRating, setNewRating] = useState<number>(1);
 
   const countRatings = (reviews?: IProductReviews[]) => {
     const updatedCounts = { ...counts };
@@ -89,7 +85,7 @@ const Reviews = ({
                           borderRadius: 2,
                           backgroundColor: "#eee",
                           "& .MuiLinearProgress-bar": {
-                            backgroundColor: "#faaf00", // match the color from the image
+                            backgroundColor: "#faaf00",
                           },
                         }}
                       />
@@ -135,7 +131,7 @@ const Reviews = ({
             </h2>
             {productDetails?.productReviews?.map((review, index) => (
               <div key={productDetails?.id} className={index > 0 ? "mt-6" : ""}>
-                <div className="flex justify-start gap-4">
+                <div>
                   <h1 className="text-[16px] -mt-[2px] font-semibold">
                     {review.user.first_name} {review.user.last_name}
                   </h1>
