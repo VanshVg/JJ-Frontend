@@ -42,7 +42,7 @@ export interface IIndicatorsProps {
 }
 
 export interface IProductCarouselProps {
-  productImages?: IProductImages[];
+  productImages: IProductImages[];
   discount?: number;
 }
 

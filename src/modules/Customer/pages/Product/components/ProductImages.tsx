@@ -1,7 +1,7 @@
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import { IProductCarouselProps } from "../types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { Indicators, NextArrow, PrevArrow } from "./CarouselComponents";
 
@@ -17,12 +17,15 @@ const ProductImages = ({ productImages, discount }: IProductCarouselProps) => {
   const closeFullscreen = () => {
     setIsFullscreen(false);
   };
+
   return (
     <div>
       <Carousel
-        showThumbs={false}
+        showThumbs={true}
         showStatus={false}
         infiniteLoop={true}
+        selectedItem={selectedIndex}
+        onChange={(index) => setSelectedIndex(index)}
         className="w-full relative mx-auto"
         onClickItem={openFullscreen}
         renderArrowPrev={(clickHandler) => (
@@ -39,10 +42,22 @@ const ProductImages = ({ productImages, discount }: IProductCarouselProps) => {
             label={label}
           />
         )}
+        renderThumbs={() =>
+          productImages?.map((image, index) => (
+            <img
+              key={image.image_url}
+              src={image.image_url}
+              alt={`Thumbnail ${index}`}
+              className={`object-contain p-1 h-[80px] w-[80px] rounded-sm bg-gray border-[1px] border-gray ${
+                selectedIndex === index ? " border-primary" : ""
+              }`}
+            />
+          ))
+        }
       >
         {productImages?.map((image, index) => (
           <div
-            key={index}
+            key={image.image_url}
             className="bg-gray w-full h-[300px] mx-auto flex justify-center items-center"
           >
             <img
@@ -91,7 +106,7 @@ const ProductImages = ({ productImages, discount }: IProductCarouselProps) => {
             >
               {productImages?.map((image, index) => (
                 <div
-                  key={index}
+                  key={image.image_url}
                   className="h-screen flex items-center justify-center"
                 >
                   <img
