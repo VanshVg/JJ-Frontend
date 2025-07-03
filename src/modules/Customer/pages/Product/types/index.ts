@@ -22,7 +22,7 @@ export interface IProductDetails {
   average_rating?: number;
   description?: string;
   extra_note?: string;
-  productImages?: IProductImages[];
+  productImages: IProductImages[];
   productReviews?: IProductReviews[];
 }
 
