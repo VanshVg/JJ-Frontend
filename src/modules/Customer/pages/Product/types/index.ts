@@ -17,8 +17,8 @@ export interface IProductDetails {
   MRP: number;
   selling_price?: number;
   available_quantity: number;
-  packaging_date: Date;
-  expiry_date: Date;
+  packaging_date: string;
+  expiry_date: string;
   average_rating?: number;
   description?: string;
   extra_note?: string;
