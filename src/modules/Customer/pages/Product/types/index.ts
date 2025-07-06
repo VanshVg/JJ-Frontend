@@ -15,7 +15,7 @@ export interface IProductDetails {
   weight_unit: WeightUnits;
   discount?: number;
   MRP: number;
-  selling_price?: number;
+  selling_price: number;
   available_quantity: number;
   packaging_date: string;
   expiry_date: string;
@@ -23,7 +23,7 @@ export interface IProductDetails {
   description?: string;
   extra_note?: string;
   productImages: IProductImages[];
-  productReviews?: IProductReviews[];
+  productReviews: IProductReviews[];
 }
 
 export interface IProductImages {
@@ -57,6 +57,7 @@ export interface IProductReviews {
   review?: string;
   created_at: Date;
   user: {
+    id: number;
     first_name: string;
     last_name: string;
   };

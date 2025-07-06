@@ -5,11 +5,12 @@ import { ResponseType } from "../../../../types";
 import { IProductDetails } from "./types";
 import ProductImages from "./components/ProductImages";
 import { rupeesSymbol } from "../../../../types/constants";
-import { format, parseISO } from "date-fns";
+import { format } from "date-fns";
 import Quantity from "../../../../components/Quantity";
 import Button from "../../../../components/Button";
 import { ButtonDisplayType } from "../../../../components/types";
 import ProductReviews from "./components/ProductReviews";
+import Footer from "../../components/Footer";
 
 const Product = () => {
   const [productDetails, setProductDetails] = useState<
@@ -40,8 +41,6 @@ const Product = () => {
   if (isError || !productDetails) {
     return <p className="text-red-600">Something Went Wrong...</p>;
   }
-
-  console.log(productDetails);
 
   return (
     <div className="text-primary">
@@ -136,11 +135,12 @@ const Product = () => {
           <div className="mt-[50px]">
             <ProductReviews
               rating={productDetails.average_rating}
-              totalReviews={productDetails.productReviews?.length ?? 0}
+              reviews={productDetails.productReviews}
             />
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
