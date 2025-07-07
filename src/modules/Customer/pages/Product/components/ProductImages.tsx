@@ -58,11 +58,11 @@ const ProductImages = ({ productImages, discount }: IProductCarouselProps) => {
         {productImages?.map((image, index) => (
           <div
             key={image.image_url}
-            className="bg-gray w-full h-[300px] mx-auto flex justify-center items-center"
+            className="bg-gray w-full h-[300px] mx-auto flex justify-center items-center lg:h-[600px]"
           >
             <img
               src={image.image_url}
-              className="h-[180px] w-[30px] object-contain"
+              className="h-[180px] w-[30px] object-contain lg:h-[360px] lg:w-[60px]"
               alt={`Product ${index}`}
             />
             {discount && discount > 0 && index === 0 && (
