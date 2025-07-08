@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
-import ProductImages from "./components/ProductImages";
-import { useFetchProductByIdApi } from "./services";
 import { useParams } from "react-router-dom";
-import { IProductDetails } from "./types";
-import Rating from "@mui/material/Rating";
-import ProductDetails from "./components/ProductDetails/ProductDetails";
+import { useFetchProductByIdApi } from "./services";
 import { ResponseType } from "../../../../types";
+import { IProductDetails } from "./types";
+import ProductImages from "./components/ProductImages";
 import { rupeesSymbol } from "../../../../types/constants";
+import { format } from "date-fns";
 import Quantity from "../../../../components/Quantity";
 import Button from "../../../../components/Button";
 import { ButtonDisplayType } from "../../../../components/types";
+import ProductReviews from "./components/ProductReviews";
+import Footer from "../../components/Footer";
 
 const Product = () => {
   const [productDetails, setProductDetails] = useState<
@@ -33,91 +34,117 @@ const Product = () => {
     fetchProductById();
   }, [productId]);
 
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (isError || !productDetails) {
+    return <p className="text-red-600">Something Went Wrong...</p>;
+  }
+
   return (
     <div className="text-primary">
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : isError ? (
-        <p className="text-red-600">Something Went Wrong</p>
-      ) : (
-        <div className="p-4">
+      <div className="lg:flex lg:gap-8 lg:p-3">
+        <div className="lg:w-[45%]">
           <ProductImages
-            productImages={productDetails?.productImages}
-            discount={productDetails?.discount}
+            productImages={productDetails.productImages}
+            discount={productDetails.discount}
           />
-          <div>
-            <h1 className="font-primary text-[28px] text-left mt-2">
-              {productDetails?.name}
+        </div>
+        <div className="max-w-[90%] mx-auto lg:w-[50%] ">
+          <div className="h-[1px] bg-primary w-full opacity-50 lg:hidden" />
+          <div className="mt-[20px] lg:mt-0">
+            <h1 className="text-[20px] font-semibold text-left font-secondary">
+              {productDetails.name}
             </h1>
-            <h1 className="text-[14px] -mt-2 text-left opacity-80">
-              By {productDetails?.brand}
-            </h1>
-            {productDetails?.average_rating && (
-              <div className="flex justify-start gap-1 mt-2">
-                <Rating
-                  name="simple-controlled"
-                  value={Number(productDetails?.average_rating) || 0}
-                  precision={0.25}
-                  size="small"
-                  readOnly
-                />
-                <p className="-mt-[1px] text-[13px]">
-                  ({productDetails?.average_rating})
+            <div className="font-secondary">
+              <div className="flex justify-start mt-[15px] gap-4">
+                <p className="text-[22px]">
+                  {rupeesSymbol}
+                  {"  " + productDetails.selling_price}
+                </p>
+                {productDetails.discount && productDetails.discount > 0 && (
+                  <>
+                    <p className="text-[16px] line-through opacity-50 mt-1">
+                      MRP
+                      {" " + rupeesSymbol}
+                      {productDetails.MRP}
+                    </p>
+                    <div className="border-[1px] border-gray-300 px-2 flex items-center">
+                      <p className="text-[12px]">SALE</p>
+                    </div>
+                  </>
+                )}
+              </div>
+              <p className="mt-[15px]  opacity-80 text-left text-[15px]">
+                (Incl. of All Taxes)
+              </p>
+            </div>
+            <div className="h-[1px] bg-primary w-full opacity-50 mt-[20px]" />
+            <div className="text-[15px] opacity-90 font-primary">
+              <div className="mt-[15px] flex justify-start gap-4">
+                <p className="font-semibold">Brand:</p>
+                <p>{productDetails.brand}</p>
+              </div>
+              <div className="h-[1px] bg-primary w-full opacity-50 mt-[15px]" />
+              <div className="mt-[15px] flex justify-start gap-4">
+                <p className="font-semibold">Category:</p>
+                <p>{productDetails.category.name}</p>
+              </div>
+              <div className="h-[1px] bg-primary w-full opacity-50 mt-[15px]" />
+              <div className="mt-[15px] flex justify-start gap-4">
+                <p className="font-semibold">Weight:</p>
+                <p>
+                  {productDetails.weight} {productDetails.weight_unit}
                 </p>
               </div>
-            )}
-            <div className="h-[1px] bg-primary mt-4 opacity-30" />
-            <div className="flex justify-start mt-3 gap-4">
-              {productDetails?.discount && productDetails?.discount > 0 && (
-                <div className="flex justify-start gap-4">
-                  <h2 className="line-through text-[22px] opacity-70 mt-1">
-                    {productDetails?.MRP}
-                    {rupeesSymbol}
-                  </h2>
-                </div>
-              )}
-              <h2 className="text-[28px]">
-                {productDetails?.selling_price}
-                {rupeesSymbol}
-              </h2>
-            </div>
-            {productDetails && productDetails.available_quantity > 0 ? (
-              <div className="mt-4">
-                <div className="flex justify-start gap-2">
-                  <h2 className="text-[15px] mt-1">Quantity</h2>
-                  <Quantity
-                    quantity={quantity}
-                    setQuantity={setQuantity}
-                    availableQuantity={
-                      productDetails?.available_quantity as number
-                    }
-                  />
-                </div>
-                <div className="flex justify-center mt-7 gap-4">
-                  <Button
-                    label="Add to cart"
-                    type="button"
-                    displayType={ButtonDisplayType.Primary}
-                    externalClasses="p-2 w-[130px] text-center justify-center text-[17px] font-normal"
-                  />
-                  <Button
-                    label="Buy now"
-                    type="button"
-                    displayType={ButtonDisplayType.Secondary}
-                    externalClasses="p-2 w-[130px] text-center justify-center text-[17px] font-normal"
-                  />
-                </div>
+              <div className="h-[1px] bg-primary w-full opacity-50 mt-[15px]" />
+              <div className="mt-[15px] flex justify-start gap-4">
+                <p className="font-semibold">Packaging Date:</p>
+                <p>{format(productDetails.packaging_date, "dd/MM/yyyy")}</p>
               </div>
-            ) : (
-              <p className="text-red-600 text-[23px] text-left mt-4">
-                Sold Out
-              </p>
-            )}
-            <div className="h-[1px] bg-primary mt-6 opacity-30" />
-            <ProductDetails productDetails={productDetails} />
+              <div className="h-[1px] bg-primary w-full opacity-50 mt-[15px]" />
+              <div className="mt-[15px] flex justify-start gap-4">
+                <p className="font-semibold">Expiry Date:</p>
+                <p>{format(productDetails.expiry_date, "dd/MM/yyyy")}</p>
+              </div>
+              <div className="h-[1px] bg-primary w-full opacity-50 mt-[15px]" />
+            </div>
+            <div className="mt-[15px]">
+              <Quantity
+                quantity={quantity}
+                setQuantity={setQuantity}
+                availableQuantity={productDetails.available_quantity}
+              />
+            </div>
+            <div className="w-full flex flex-col justify-center mt-[30px] gap-3">
+              <Button
+                label="ADD TO CART"
+                displayType={ButtonDisplayType.Secondary}
+                externalClasses="justify-center text-[13px] py-[12px] px-[20px] rounded-sm w-full font-primary"
+              />
+              <Button
+                label="BUY NOW"
+                displayType={ButtonDisplayType.Primary}
+                externalClasses="justify-center text-[13px] py-[12px] px-[20px] rounded-sm w-full font-primary"
+              />
+            </div>
+            <p className="text-[15px] text-justify opacity-80 mt-[25px] font-primary">
+              {productDetails.description}
+            </p>
+            <div className="h-[1px] bg-primary w-full opacity-50 mt-[25px]" />
+            {/* <div className="mt-[50px]">
+              <ProductReviews
+                rating={productDetails.average_rating}
+                reviews={productDetails.productReviews}
+              />
+            </div> */}
           </div>
         </div>
-      )}
+      </div>
+      <div className="mt-[100px]">
+        <Footer />
+      </div>
     </div>
   );
 };

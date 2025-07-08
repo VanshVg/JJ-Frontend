@@ -37,3 +37,14 @@ input::-webkit-inner-spin-button {
     margin: 0 0.4rem;
   }
 }
+
+.carousel .thumb {
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+.carousel .thumb.selected {
+  border: none !important;
+  box-shadow: none !important;
+}

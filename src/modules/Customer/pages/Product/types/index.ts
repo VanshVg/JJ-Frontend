@@ -15,15 +15,15 @@ export interface IProductDetails {
   weight_unit: WeightUnits;
   discount?: number;
   MRP: number;
-  selling_price?: number;
+  selling_price: number;
   available_quantity: number;
-  packaging_date: Date;
-  expiry_date: Date;
+  packaging_date: string;
+  expiry_date: string;
   average_rating?: number;
   description?: string;
   extra_note?: string;
-  productImages?: IProductImages[];
-  productReviews?: IProductReviews[];
+  productImages: IProductImages[];
+  productReviews: IProductReviews[];
 }
 
 export interface IProductImages {
@@ -42,7 +42,7 @@ export interface IIndicatorsProps {
 }
 
 export interface IProductCarouselProps {
-  productImages?: IProductImages[];
+  productImages: IProductImages[];
   discount?: number;
 }
 
@@ -57,6 +57,7 @@ export interface IProductReviews {
   review?: string;
   created_at: Date;
   user: {
+    id: number;
     first_name: string;
     last_name: string;
   };

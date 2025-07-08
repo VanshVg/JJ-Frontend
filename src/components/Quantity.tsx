@@ -16,11 +16,11 @@ const Quantity = ({
   };
 
   return (
-    <div className="flex items-center gap-2 border border-gray-300 rounded-sm w-fit">
+    <div className="flex items-center gap-2 w-fit">
       <button
         type="button"
         onClick={() => setQuantity((prev) => (prev > 1 ? prev - 1 : 1))}
-        className="p-1 hover:text-red-500 transition-all"
+        className="p-1 cursor-pointer transition-all "
       >
         <AiFillMinusSquare className="text-[24px]" />
       </button>
@@ -41,7 +41,7 @@ const Quantity = ({
             prev < availableQuantity ? prev + 1 : availableQuantity
           )
         }
-        className="p-1 hover:text-green-500 transition-all"
+        className="p-1 cursor-pointer transition-all"
       >
         <AiFillPlusSquare className="text-[24px]" />
       </button>
