@@ -1,7 +1,7 @@
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import { IProductCarouselProps } from "../types";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { Indicators, NextArrow, PrevArrow } from "./CarouselComponents";
 

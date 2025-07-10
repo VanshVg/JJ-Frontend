@@ -9,7 +9,6 @@ import { format } from "date-fns";
 import Quantity from "../../../../components/Quantity";
 import Button from "../../../../components/Button";
 import { ButtonDisplayType } from "../../../../components/types";
-import ProductReviews from "./components/ProductReviews";
 import Footer from "../../components/Footer";
 
 const Product = () => {

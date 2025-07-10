@@ -1,8 +1,5 @@
 import Rating from "@mui/material/Rating";
-import { useState } from "react";
-import { AiOutlineDown, AiOutlineUp } from "react-icons/ai";
 import { IProductReviews } from "../types";
-import { format } from "date-fns";
 import { formatDate } from "../../../../../utils";
 
 const ProductReviews = ({
