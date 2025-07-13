@@ -1,7 +1,7 @@
 import { lazy } from "react";
 import { IRoutes } from "../../types";
 import { applySuspense } from "../../utils/applySuspense";
-import { ICustomerRoutes } from "./types";
+import { IAccountRoutes, ICustomerRoutes } from "./types";
 
 const CustomerLayout = lazy(() => import("./CustomerLayout"));
 const Home = lazy(() => import("./pages/Home/Home"));
@@ -11,6 +11,7 @@ const Orders = lazy(() => import("./pages/Orders/Orders"));
 const Cart = lazy(() => import("./pages/Cart/Cart"));
 const Account = lazy(() => import("./pages/Account/Account"));
 const Product = lazy(() => import("./pages/Product/Product"));
+const EditProfile = lazy(() => import("./pages/Account/pages/EditProfile"));
 
 const customerRoutes: IRoutes[] = applySuspense([
   {
@@ -40,6 +41,12 @@ const customerRoutes: IRoutes[] = applySuspense([
       {
         path: ICustomerRoutes.Account,
         element: <Account />,
+        children: [
+          {
+            path: IAccountRoutes.EditProfile,
+            element: <EditProfile />,
+          },
+        ],
       },
       {
         path: ICustomerRoutes.Product + "/:id",
