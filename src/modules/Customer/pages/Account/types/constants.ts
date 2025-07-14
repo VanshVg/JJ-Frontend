@@ -21,12 +21,12 @@ export const menuItems: IMenuItems[] = [
       {
         icon: AiOutlineMenuUnfold,
         title: "Saved Addresses",
-        path: IAccountRoutes.EditProfile,
+        path: IAccountRoutes.Address,
       },
       {
         icon: AiOutlineLock,
         title: "Change Password",
-        path: IAccountRoutes.EditProfile,
+        path: IAccountRoutes.ChangePassword,
       },
     ],
   },
@@ -36,17 +36,17 @@ export const menuItems: IMenuItems[] = [
       {
         icon: AiOutlineStar,
         title: "Reviews",
-        path: IAccountRoutes.EditProfile,
+        path: IAccountRoutes.Reviews,
       },
       {
         icon: AiOutlineHistory,
         title: "Order History",
-        path: IAccountRoutes.EditProfile,
+        path: IAccountRoutes.Orders,
       },
       {
         icon: AiOutlineLock,
         title: "Change Password",
-        path: IAccountRoutes.EditProfile,
+        path: IAccountRoutes.ChangePassword,
       },
     ],
   },

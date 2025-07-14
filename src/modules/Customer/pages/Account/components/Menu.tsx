@@ -2,9 +2,9 @@ import { VscAccount } from "react-icons/vsc";
 import { useSelector } from "react-redux";
 import { getAuth } from "../../../../../redux/slices/auth.slice";
 import { AiOutlineLogout, AiOutlineRight } from "react-icons/ai";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { ICustomerRoutes } from "../../../types";
+import { IAccountRoutes, ICustomerRoutes } from "../../../types";
 import { menuItems } from "../types/constants";
 import { IMenuItems } from "../types";
 
@@ -13,6 +13,7 @@ const Menu = () => {
   const [path, setPath] = useState<string>();
 
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setPath(location.pathname?.split(ICustomerRoutes.Account)[1]);
@@ -34,7 +35,7 @@ const Menu = () => {
       </div>
       {menuItems.map((element: IMenuItems) => (
         <div
-          className="w-full mt-10 lg:border-[1px] lg:rounded-md lg:border-gray-300 lg:py-4"
+          className="w-full mt-10 lg:border-[1px] lg:rounded-md lg:border-gray-300 lg:py-4 "
           key={element.title}
         >
           <h1 className="text-left text-[18px] font-semibold font-primary pl-4">
@@ -42,11 +43,15 @@ const Menu = () => {
           </h1>
           {element.items.map((item) => (
             <div
-              className={`rounded-lg bg-primary mt-2 p-2 flex justify-between items-center text-white lg:rounded-none lg:bg-white lg:text-primary ${
+              className={`rounded-lg bg-primary mt-2 p-2 flex justify-between items-center cursor-pointer text-white lg:rounded-none lg:bg-white lg:text-primary ${
                 path === "/" + item.path
-                  ? "lg:border-l-[3px] lg:border-primary"
+                  ? "lg:border-l-[3px] lg:border-primary lg:bg-gradient-to-r lg:from-white lg:via-gray lg:to-primary"
                   : ""
               }`}
+              key={item.path}
+              onClick={() =>
+                navigate(ICustomerRoutes.Account + "/" + item.path)
+              }
             >
               <div className="flex gap-2 items-center">
                 <item.icon />
@@ -62,7 +67,7 @@ const Menu = () => {
           Others
         </h1>
         <div
-          className={`rounded-lg bg-primary mt-2 p-2 flex justify-between items-center text-white lg:rounded-none lg:bg-white lg:text-primary`}
+          className={`rounded-lg bg-primary mt-2 p-2 flex justify-between items-center text-white lg:rounded-none lg:bg-white lg:text-primary cursor-pointer`}
         >
           <div className="flex gap-2 items-center">
             <AiOutlineLogout />
