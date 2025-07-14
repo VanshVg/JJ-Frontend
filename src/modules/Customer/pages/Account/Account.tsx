@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { getAuth } from "../../../../redux/slices/auth.slice";
-import { Navigate, Outlet, useNavigate } from "react-router-dom";
+import { Navigate, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { IAuthenticationRoutes } from "../../../Authentication/types";
 import Menu from "./components/Menu";
 import { useEffect } from "react";
@@ -10,6 +10,7 @@ const Account = () => {
   const { isAuthenticated } = useSelector(getAuth);
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   if (!isAuthenticated) {
     return <Navigate to={IAuthenticationRoutes.Login} />;
@@ -30,7 +31,14 @@ const Account = () => {
 
   return (
     <div className="mt-6 lg:flex lg:w-[80%] lg:mx-auto">
-      <div className="lg:w-[30%]">
+      <div
+        className={`lg:w-[30%] ${
+          location.pathname?.toLowerCase() !==
+            ICustomerRoutes.Account.toLowerCase() && window.innerWidth < 1024
+            ? "hidden"
+            : ""
+        }`}
+      >
         <Menu />
       </div>
       <div className="lg:w-[70%]">
