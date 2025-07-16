@@ -43,11 +43,6 @@ export const menuItems: IMenuItems[] = [
         title: "Order History",
         path: IAccountRoutes.Orders,
       },
-      {
-        icon: AiOutlineLock,
-        title: "Change Password",
-        path: IAccountRoutes.ChangePassword,
-      },
     ],
   },
 ];
