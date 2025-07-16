@@ -1,15 +1,11 @@
-import { VscAccount } from "react-icons/vsc";
-import { useSelector } from "react-redux";
-import { getAuth } from "../../../../../redux/slices/auth.slice";
 import { AiOutlineLogout, AiOutlineRight } from "react-icons/ai";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { IAccountRoutes, ICustomerRoutes } from "../../../types";
+import { ICustomerRoutes } from "../../../types";
 import { menuItems } from "../types/constants";
 import { IMenuItems } from "../types";
 
 const Menu = () => {
-  const { userData } = useSelector(getAuth);
   const [path, setPath] = useState<string>();
 
   const location = useLocation();

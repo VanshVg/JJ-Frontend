@@ -21,6 +21,7 @@ const Account = () => {
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 1024) {
+        setIsMobile(false);
         navigate(ICustomerRoutes.Account + "/" + IAccountRoutes.EditProfile);
       } else {
         setIsMobile(true);
@@ -32,8 +33,6 @@ const Account = () => {
 
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
-  console.log(location.pathname);
 
   return (
     <div className="mt-6 lg:flex lg:w-[80%] lg:mx-auto">
