@@ -3,7 +3,7 @@ import { getAuth } from "../../../../redux/slices/auth.slice";
 import { Navigate, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { IAuthenticationRoutes } from "../../../Authentication/types";
 import Menu from "./components/Menu";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { IAccountRoutes, ICustomerRoutes } from "../../types";
 
 const Account = () => {
@@ -11,6 +11,8 @@ const Account = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
+
+  const [isMobile, setIsMobile] = useState<boolean>(false);
 
   if (!isAuthenticated) {
     return <Navigate to={IAuthenticationRoutes.Login} />;
@@ -20,6 +22,8 @@ const Account = () => {
     const handleResize = () => {
       if (window.innerWidth >= 1024) {
         navigate(ICustomerRoutes.Account + "/" + IAccountRoutes.EditProfile);
+      } else {
+        setIsMobile(true);
       }
     };
 
@@ -29,12 +33,14 @@ const Account = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  console.log(location.pathname);
+
   return (
     <div className="mt-6 lg:flex lg:w-[80%] lg:mx-auto">
       <div
         className={`lg:w-[30%] ${
           location.pathname?.toLowerCase() !==
-            ICustomerRoutes.Account.toLowerCase() && window.innerWidth < 1024
+            ICustomerRoutes.Account.toLowerCase() && isMobile
             ? "hidden"
             : ""
         }`}
