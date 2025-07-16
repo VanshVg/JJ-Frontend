@@ -21,7 +21,7 @@ const Menu = () => {
 
   return (
     <div className="w-full px-4 text-primary">
-      <div className="flex justify-center gap-4 items-center lg:justify-start">
+      {/* <div className="flex justify-center gap-4 items-center lg:justify-start">
         <div>
           <VscAccount className="text-[70px] opacity-90 text-primary" />
         </div>
@@ -32,10 +32,10 @@ const Menu = () => {
           </p>
           <p className="opacity-80 ">+91{userData?.contact_no}</p>
         </div>
-      </div>
+      </div> */}
       {menuItems.map((element: IMenuItems) => (
         <div
-          className="w-full mt-10 lg:border-[1px] lg:rounded-md lg:border-gray-300 lg:py-4 "
+          className="w-full mb-10 lg:border-[1px] lg:rounded-md lg:border-gray-300 lg:py-4 "
           key={element.title}
         >
           <h1 className="text-left text-[18px] font-semibold font-primary pl-4">
