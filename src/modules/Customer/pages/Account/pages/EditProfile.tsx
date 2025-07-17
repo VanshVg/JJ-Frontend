@@ -10,7 +10,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { editProfileSchema } from "../schemas";
 import { useEditProfileApi } from "../services";
 import { IEditProfile } from "../types";
-import { UserRoles } from "../../../../../types";
+import { ResponseType, UserRoles } from "../../../../../types";
 
 const EditProfile = () => {
   const { userData } = useSelector(getAuth);
@@ -39,7 +39,7 @@ const EditProfile = () => {
   ) => {
     const { data } = await editProfileApi(profileData);
 
-    if (data.responseType) {
+    if (data.responseType === ResponseType.Success) {
       dispatch(
         setUser({
           userData: {
