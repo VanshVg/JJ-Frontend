@@ -46,3 +46,5 @@ export const menuItems: IMenuItems[] = [
     ],
   },
 ];
+
+export const USERS_APP_BASE_PATH = "/users";

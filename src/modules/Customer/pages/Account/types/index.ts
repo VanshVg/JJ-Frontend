@@ -9,3 +9,9 @@ export interface IMenuItems {
     path?: IAccountRoutes;
   }[];
 }
+
+export interface IEditProfile {
+  firstname: string;
+  lastname: string;
+  contact_no: string;
+}

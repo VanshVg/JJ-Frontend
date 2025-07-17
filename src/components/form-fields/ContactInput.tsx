@@ -15,7 +15,7 @@ const ContactInput = <T extends FieldValues>({
       <div className="flex justify-between">
         <span
           className={
-            `p-3 border-[1px] text-[11px] font-primary placeholder-primary border-gray-400 hover:outline-primary focus:outline-primary rounded-l-sm w-[15%] flex justify-center` +
+            `p-3 bg-gray border-[1px] text-[11px] font-primary placeholder-primary border-gray-400 hover:outline-primary focus:outline-primary rounded-l-sm w-[15%] flex justify-center` +
             ` ` +
             externalClasses
           }
