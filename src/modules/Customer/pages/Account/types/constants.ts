@@ -1,7 +1,6 @@
 import {
   AiOutlineHistory,
   AiOutlineLock,
-  AiOutlineLogout,
   AiOutlineMenuUnfold,
   AiOutlineStar,
   AiOutlineUser,
@@ -20,7 +19,7 @@ export const menuItems: IMenuItems[] = [
       },
       {
         icon: AiOutlineMenuUnfold,
-        title: "Saved Addresses",
+        title: "Address Book",
         path: IAccountRoutes.Address,
       },
       {
