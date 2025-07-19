@@ -12,6 +12,7 @@ const Cart = lazy(() => import("./pages/Cart/Cart"));
 const Account = lazy(() => import("./pages/Account/Account"));
 const Product = lazy(() => import("./pages/Product/Product"));
 const EditProfile = lazy(() => import("./pages/Account/pages/EditProfile"));
+const AddressBook = lazy(() => import("./pages/Account/pages/AddressBook"));
 
 const customerRoutes: IRoutes[] = applySuspense([
   {
@@ -45,6 +46,10 @@ const customerRoutes: IRoutes[] = applySuspense([
           {
             path: IAccountRoutes.EditProfile,
             element: <EditProfile />,
+          },
+          {
+            path: IAccountRoutes.Address,
+            element: <AddressBook />,
           },
         ],
       },

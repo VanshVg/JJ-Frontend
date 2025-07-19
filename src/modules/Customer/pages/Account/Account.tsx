@@ -22,7 +22,9 @@ const Account = () => {
     const handleResize = () => {
       if (window.innerWidth >= 1024) {
         setIsMobile(false);
-        navigate(ICustomerRoutes.Account + "/" + IAccountRoutes.EditProfile);
+        if (location.pathname === ICustomerRoutes.Account) {
+          navigate(ICustomerRoutes.Account + "/" + IAccountRoutes.EditProfile);
+        }
       } else {
         setIsMobile(true);
       }
