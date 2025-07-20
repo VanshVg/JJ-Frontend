@@ -1,4 +1,4 @@
-import { ChangeEventHandler, MouseEvent } from "react";
+import { ChangeEventHandler, JSX, MouseEvent } from "react";
 import { Control, FieldErrors, FieldValues, Path } from "react-hook-form";
 
 export enum ButtonDisplayType {
@@ -61,4 +61,25 @@ export interface IQuantityProps {
   quantity: number;
   setQuantity: React.Dispatch<React.SetStateAction<number>>;
   availableQuantity: number;
+}
+
+export interface IModalProps {
+  open: boolean;
+  closeModal: () => void;
+  confirmModal?: () => void;
+  title: string;
+  children?: JSX.Element | string;
+  width?: string;
+  buttonsText?: {
+    confirm?: string;
+    cancel?: string;
+  };
+  hideButtons?: {
+    confirm?: boolean;
+    cancel?: boolean;
+  };
+  disableButtons?: {
+    confirm?: boolean;
+    cancel?: boolean;
+  };
 }

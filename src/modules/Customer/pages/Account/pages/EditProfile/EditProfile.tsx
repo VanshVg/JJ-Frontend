@@ -1,16 +1,16 @@
 import { SubmitHandler, useForm } from "react-hook-form";
-import Input from "../../../../../components/form-fields/Input";
-import ContactInput from "../../../../../components/form-fields/ContactInput";
+import Input from "../../../../../../components/form-fields/Input";
+import ContactInput from "../../../../../../components/form-fields/ContactInput";
 import { AiFillInfoCircle } from "react-icons/ai";
-import { ButtonDisplayType } from "../../../../../components/types";
-import Button from "../../../../../components/Button";
+import { ButtonDisplayType } from "../../../../../../components/types";
+import Button from "../../../../../../components/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { getAuth, setUser } from "../../../../../redux/slices/auth.slice";
+import { getAuth, setUser } from "../../../../../../redux/slices/auth.slice";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { editProfileSchema } from "../schemas";
-import { useEditProfileApi } from "../services";
-import { IEditProfile } from "../types";
-import { ResponseType, UserRoles } from "../../../../../types";
+import { editProfileSchema } from "../../schemas";
+import { useEditProfileApi } from "../../services";
+import { IEditProfile } from "../../types";
+import { ResponseType, UserRoles } from "../../../../../../types";
 
 const EditProfile = () => {
   const { userData } = useSelector(getAuth);
