@@ -6,6 +6,7 @@ import {
 import { BsBuildingFill } from "react-icons/bs";
 import Modal from "../../../../../../components/Modal";
 import { useState } from "react";
+import AddAddress from "./components/AddAddress";
 
 const AddressBook = () => {
   const [openAddModal, setOpenAddModal] = useState<boolean>(true);
@@ -64,10 +65,10 @@ const AddressBook = () => {
         </div>
         <Modal
           title="Add Address"
-          open={openAddModal}
+          isOpen={openAddModal}
           closeModal={closeAddModal}
         >
-          <p>Add Address Child</p>
+          <AddAddress />
         </Modal>
       </div>
     </div>

@@ -5,7 +5,7 @@ import { ButtonDisplayType, IModalProps } from "./types";
 import Button from "./Button";
 
 const Modal = ({
-  open,
+  isOpen,
   closeModal,
   title,
   children,
@@ -24,37 +24,40 @@ const Modal = ({
   },
 }: IModalProps) => {
   return (
-    <Dialog.Root open={open} onOpenChange={(open) => !open && closeModal()}>
+    <Dialog.Root open={isOpen} onOpenChange={(open) => !open && closeModal()}>
       <Dialog.Portal>
         <Dialog.Overlay className="bg-black/50 fixed inset-0" />
-        <Dialog.Content className="fixed top-1/2 left-1/2 lg:max-w-md w-full -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-lg shadow-lg h-full lg:h-auto ">
-          <Dialog.Title className="text-xl font-semibold">{title}</Dialog.Title>
-          <div>{children}</div>
+        <Dialog.Content className="fixed top-1/2 left-1/2 lg:max-w-md w-full -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-lg shadow-lg h-full lg:h-auto flex">
+          <div className="flex flex-col items-center justify-center w-full">
+            <Dialog.Title className="text-xl font-semibold">
+              {title}
+            </Dialog.Title>
+            <div className="w-full">{children}</div>
 
-          <div className="flex justify-center gap-4">
-            {!hideButtons.cancel && (
-              <Button
-                label={buttonsText.cancel as string}
-                type="button"
-                isLoading={disableButtons.cancel}
-                isDisabled={disableButtons.cancel}
-                displayType={ButtonDisplayType.Secondary}
-                onClickHandler={closeModal}
-                externalClasses="text-[12px] py-3 px-4 mt-8 lg:text-[14px] font-primary"
-              />
-            )}
-            {!hideButtons.confirm && (
-              <Button
-                label={buttonsText.confirm as string}
-                type="button"
-                isLoading={disableButtons.confirm}
-                isDisabled={disableButtons.confirm}
-                displayType={ButtonDisplayType.Primary}
-                externalClasses="text-[12px] py-3 px-4 mt-8 lg:text-[14px] font-primary"
-              />
-            )}
+            <div className="flex justify-center gap-4">
+              {!hideButtons.cancel && (
+                <Button
+                  label={buttonsText.cancel as string}
+                  type="button"
+                  isLoading={disableButtons.cancel}
+                  isDisabled={disableButtons.cancel}
+                  displayType={ButtonDisplayType.Secondary}
+                  onClickHandler={closeModal}
+                  externalClasses="text-[12px] py-3 px-4 mt-8 lg:text-[14px] font-primary"
+                />
+              )}
+              {!hideButtons.confirm && (
+                <Button
+                  label={buttonsText.confirm as string}
+                  type="button"
+                  isLoading={disableButtons.confirm}
+                  isDisabled={disableButtons.confirm}
+                  displayType={ButtonDisplayType.Primary}
+                  externalClasses="text-[12px] py-3 px-4 mt-8 lg:text-[14px] font-primary"
+                />
+              )}
+            </div>
           </div>
-
           <Dialog.Close asChild>
             <button
               className="absolute top-3 right-3 text-primary cursor-pointer"

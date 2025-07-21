@@ -64,7 +64,7 @@ export interface IQuantityProps {
 }
 
 export interface IModalProps {
-  open: boolean;
+  isOpen: boolean;
   closeModal: () => void;
   confirmModal?: () => void;
   title: string;
