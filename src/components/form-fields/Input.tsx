@@ -28,8 +28,8 @@ const Input = <T extends FieldValues>({
             type={!isShow && type ? type : "text"}
             className={
               `p-3 border-[1px] text-[11px] font-primary placeholder-primary border-gray-400 hover:outline-primary focus:outline-primary rounded-sm w-full ${
-                type === "textarea" ? "h-10" : ""
-              }` + externalClasses
+                type === "textarea" ? "h-[70px]" : ""
+              } ` + externalClasses
             }
             placeholder={placeholder}
             disabled={isDisabled}

@@ -18,7 +18,7 @@ const AddAddress = () => {
           name="address_line_1"
           control={control}
           type="textarea"
-          placeholder="Enter an address"
+          placeholder="Flat, House no., Building, Company, Apartment"
           errors={errors}
           externalClasses="w-full mt-4 lg:text-[14px]"
         />
@@ -26,18 +26,27 @@ const AddAddress = () => {
           name="address_line_2"
           control={control}
           type="textarea"
-          placeholder="Enter an address"
+          placeholder="Area, Street, Sector, Village"
           errors={errors}
           externalClasses="w-full mt-4 lg:text-[14px]"
         />
-        {/* <ContactInput
-          name="contact_no"
+        <Input
+          name="landmark"
           control={control}
-          placeholder="Mobile Number"
+          type="text"
+          placeholder="Landmark"
           errors={errors}
-          externalClasses="mt-4 opacity-70 lg:text-[14px]"
+          externalClasses="w-full mt-4 lg:text-[14px]"
+        />
+        <Input
+          name="pincode"
+          control={control}
+          type="text"
+          placeholder="Pincode"
           isDisabled={true}
-        /> */}
+          errors={errors}
+          externalClasses="w-full mt-4 lg:text-[14px]"
+        />
       </form>
     </div>
   );

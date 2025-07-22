@@ -83,3 +83,14 @@ export interface IModalProps {
     cancel?: boolean;
   };
 }
+
+export interface IOption {
+  value: string | number;
+  label: string;
+}
+
+export interface ISelectProps {
+  defaultValue: string | number;
+  options: IOption[];
+  setValue: React.Dispatch<React.SetStateAction<string | number>>;
+}
