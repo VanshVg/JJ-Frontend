@@ -1,5 +1,6 @@
 import { ChangeEventHandler, JSX, MouseEvent } from "react";
 import { Control, FieldErrors, FieldValues, Path } from "react-hook-form";
+import { IconType } from "react-icons/lib";
 
 export enum ButtonDisplayType {
   Primary = "primary",
@@ -87,10 +88,16 @@ export interface IModalProps {
 export interface IOption {
   value: string | number;
   label: string;
+  icon?: IconType;
+  isDisabled?: boolean;
 }
 
-export interface ISelectProps {
-  defaultValue: string | number;
+export interface ISelectProps<T extends FieldValues> {
+  name: Path<T>;
+  control: FormControlProp<T>;
+  placeholder?: string;
+  externalClasses?: string;
+  isDisabled?: boolean;
+  errors?: FieldErrors;
   options: IOption[];
-  setValue: React.Dispatch<React.SetStateAction<string | number>>;
 }

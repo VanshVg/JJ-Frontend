@@ -15,3 +15,11 @@ export interface IEditProfile {
   lastname: string;
   contact_no: string;
 }
+
+export interface IAddAddress {
+  address_line_1: string;
+  address_line_2: string;
+  pincode: number;
+  landmark: string;
+  address_type: string;
+}

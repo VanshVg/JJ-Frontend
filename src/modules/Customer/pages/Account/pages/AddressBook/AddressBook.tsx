@@ -9,7 +9,7 @@ import { useState } from "react";
 import AddAddress from "./components/AddAddress";
 
 const AddressBook = () => {
-  const [openAddModal, setOpenAddModal] = useState<boolean>(true);
+  const [openAddModal, setOpenAddModal] = useState<boolean>(false);
 
   const closeAddModal = () => {
     setOpenAddModal(false);
@@ -67,8 +67,12 @@ const AddressBook = () => {
           title="Add Address"
           isOpen={openAddModal}
           closeModal={closeAddModal}
+          hideButtons={{
+            confirm: true,
+            cancel: true,
+          }}
         >
-          <AddAddress />
+          <AddAddress closeModal={closeAddModal} />
         </Modal>
       </div>
     </div>

@@ -7,6 +7,7 @@ import {
 } from "react-icons/ai";
 import { IAccountRoutes } from "../../../types";
 import { IMenuItems } from ".";
+import { IOption } from "../../../../../components/types";
 
 export const menuItems: IMenuItems[] = [
   {
@@ -47,3 +48,18 @@ export const menuItems: IMenuItems[] = [
 ];
 
 export const USERS_APP_BASE_PATH = "/users";
+
+export const ADDRESS_TYPE_OPTIONS: IOption[] = [
+  {
+    label: "Home",
+    value: "home",
+  },
+  {
+    label: "Work",
+    value: "work",
+  },
+  {
+    label: "Other",
+    value: "other",
+  },
+];

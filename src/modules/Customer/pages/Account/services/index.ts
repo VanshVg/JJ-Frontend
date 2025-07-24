@@ -1,5 +1,5 @@
-import { useAxiosPut } from "../../../../../hooks/useAxios";
-import { IEditProfile } from "../types";
+import { useAxiosPost, useAxiosPut } from "../../../../../hooks/useAxios";
+import { IAddAddress, IEditProfile } from "../types";
 import { USERS_APP_BASE_PATH } from "../types/constants";
 
 export const useEditProfileApi = () => {
@@ -10,4 +10,14 @@ export const useEditProfileApi = () => {
   };
 
   return { editProfileApi, isError, isLoading };
+};
+
+export const useAddAddressApi = () => {
+  const [callApi, { isError, isLoading }] = useAxiosPost();
+
+  const addAddressApi = async (payload: IAddAddress) => {
+    return callApi(`${USERS_APP_BASE_PATH}/address`, payload);
+  };
+
+  return { addAddressApi, isError, isLoading };
 };
