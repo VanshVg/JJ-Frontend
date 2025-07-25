@@ -20,6 +20,6 @@ export interface IAddAddress {
   address_line_1: string;
   address_line_2: string;
   pincode: number;
-  landmark: string;
+  landmark?: string;
   address_type: string;
 }

@@ -4,11 +4,11 @@ import Select from "../../../../../../../components/form-fields/Select";
 import { ADDRESS_TYPE_OPTIONS } from "../../../types/constants";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { addAddressSchema } from "../../../schemas";
-import { IAddAddress } from "../../../types";
 import Button from "../../../../../../../components/Button";
 import { ButtonDisplayType } from "../../../../../../../components/types";
 import { useAddAddressApi } from "../../../services";
 import { ResponseType } from "../../../../../../../types";
+import { IAddAddress } from "../../../types/index";
 
 const AddAddress = ({ closeModal }: { closeModal: () => void }) => {
   const {
@@ -31,7 +31,6 @@ const AddAddress = ({ closeModal }: { closeModal: () => void }) => {
     addressData: IAddAddress
   ) => {
     const { data } = await addAddressApi(addressData);
-    console.log(data);
     if (data && data.responseType === ResponseType.Success) {
       closeModal();
     }
