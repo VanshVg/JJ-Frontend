@@ -6,15 +6,17 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { addAddressSchema } from "../../../schemas";
 import Button from "../../../../../../../components/Button";
 import { ButtonDisplayType } from "../../../../../../../components/types";
-import { useAddAddressApi } from "../../../services";
+import { useEditAddressApi } from "../../../services";
 import { ResponseType } from "../../../../../../../types";
-import { AddressType, IAddAddress } from "../../../types/index";
+import { IAddAddress, IUserAddress } from "../../../types/index";
 
-const AddAddress = ({
+const EditAddress = ({
   closeModal,
+  addressData,
   changeAddressFlag,
 }: {
   closeModal: () => void;
+  addressData?: IUserAddress;
   changeAddressFlag: () => void;
 }) => {
   const {
@@ -23,20 +25,21 @@ const AddAddress = ({
     handleSubmit,
   } = useForm<IAddAddress>({
     defaultValues: {
-      address_line_1: "",
-      address_line_2: "",
+      address_line_1: addressData?.address_line_1,
+      address_line_2: addressData?.address_line_2,
       pincode: 393001,
-      address_type: AddressType.Home,
+      address_type: addressData?.address_type,
+      landmark: addressData?.landmark,
     },
     resolver: yupResolver(addAddressSchema),
   });
 
-  const { addAddressApi, isLoading } = useAddAddressApi();
+  const { editAddressApi, isLoading } = useEditAddressApi();
 
   const submitHandler: SubmitHandler<IAddAddress> = async (
     addressData: IAddAddress
   ) => {
-    const { data } = await addAddressApi(addressData);
+    const { data } = await editAddressApi(addressData);
     if (data && data.responseType === ResponseType.Success) {
       changeAddressFlag();
       closeModal();
@@ -103,4 +106,4 @@ const AddAddress = ({
   );
 };
 
-export default AddAddress;
+export default EditAddress;

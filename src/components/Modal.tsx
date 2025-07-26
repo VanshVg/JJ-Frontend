@@ -7,6 +7,7 @@ import Button from "./Button";
 const Modal = ({
   isOpen,
   closeModal,
+  confirmModal,
   title,
   children,
   //   width,
@@ -54,6 +55,7 @@ const Modal = ({
                   isDisabled={disableButtons.confirm}
                   displayType={ButtonDisplayType.Primary}
                   externalClasses="text-[12px] py-3 px-4 mt-8 lg:text-[14px] font-primary"
+                  onClickHandler={confirmModal}
                 />
               )}
             </div>
