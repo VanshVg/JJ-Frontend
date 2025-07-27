@@ -4,7 +4,7 @@ import {
   useAxiosPost,
   useAxiosPut,
 } from "../../../../../hooks/useAxios";
-import { IAddAddress, IEditProfile } from "../types";
+import { IAddAddress, IChangePassword, IEditProfile } from "../types";
 import { USERS_APP_BASE_PATH } from "../types/constants";
 
 export const useEditProfileApi = () => {
@@ -55,4 +55,14 @@ export const useDeleteAddressApi = () => {
   };
 
   return { deleteAddressApi, isError, isLoading };
+};
+
+export const useChangePasswordApi = () => {
+  const [callApi, { isError, isLoading }] = useAxiosPut();
+
+  const changePasswordApi = async (payload: IChangePassword) => {
+    return callApi(`${USERS_APP_BASE_PATH}/password`, payload);
+  };
+
+  return { changePasswordApi, isError, isLoading };
 };

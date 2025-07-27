@@ -17,6 +17,9 @@ const EditProfile = lazy(
 const AddressBook = lazy(
   () => import("./pages/Account/pages/AddressBook/AddressBook")
 );
+const ChangePassword = lazy(
+  () => import("./pages/Account/pages/ChangePassword/ChangePassword")
+);
 
 const customerRoutes: IRoutes[] = applySuspense([
   {
@@ -54,6 +57,10 @@ const customerRoutes: IRoutes[] = applySuspense([
           {
             path: IAccountRoutes.Address,
             element: <AddressBook />,
+          },
+          {
+            path: IAccountRoutes.ChangePassword,
+            element: <ChangePassword />,
           },
         ],
       },

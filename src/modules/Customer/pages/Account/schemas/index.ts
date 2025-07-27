@@ -2,6 +2,7 @@ import * as Yup from "yup";
 import {
   contactNoValidation,
   nameValidation,
+  passwordValidation,
 } from "../../../../../common/validation";
 import { AddressType } from "../types";
 
@@ -18,4 +19,12 @@ export const addAddressSchema = Yup.object({
   address_type: Yup.string()
     .oneOf(Object.values(AddressType))
     .required("Address Type is required"),
+});
+
+export const changePasswordSchema = Yup.object({
+  current_password: passwordValidation,
+  new_password: passwordValidation,
+  confirm_password: Yup.string()
+    .oneOf([Yup.ref("new_password")], "Passwords must match")
+    .required("Confirm Password is required"),
 });

@@ -38,3 +38,9 @@ export interface IUserAddress {
   pincode: number;
   address_type: AddressType;
 }
+
+export interface IChangePassword {
+  current_password: string;
+  new_password: string;
+  confirm_password: string;
+}
