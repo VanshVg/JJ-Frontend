@@ -4,6 +4,14 @@ export enum ICustomerRoutes {
   About = "/about",
   Orders = "/orders",
   Cart = "/cart",
-  Account = "/Account",
+  Account = "/account",
   Product = "/product",
+}
+
+export enum IAccountRoutes {
+  EditProfile = "edit-profile",
+  Address = "addresses",
+  ChangePassword = "change-password",
+  Reviews = "reviews",
+  Orders = "orders",
 }
