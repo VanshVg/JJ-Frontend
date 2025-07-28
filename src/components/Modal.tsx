@@ -1,4 +1,3 @@
-// Modal.jsx
 import * as Dialog from "@radix-ui/react-dialog";
 import { AiOutlineClose } from "react-icons/ai";
 import { ButtonDisplayType, IModalProps } from "./types";
