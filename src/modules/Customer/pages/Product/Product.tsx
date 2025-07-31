@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useFetchProductByIdApi } from "./services";
+import { useAddToCartApi, useFetchProductByIdApi } from "./services";
 import { ResponseType } from "../../../../types";
 import { IProductDetails } from "./types";
 import ProductImages from "./components/ProductImages";
@@ -10,6 +10,10 @@ import Quantity from "../../../../components/Quantity";
 import Button from "../../../../components/Button";
 import { ButtonDisplayType } from "../../../../components/types";
 import Footer from "../../components/Footer";
+import { getAuth } from "../../../../redux/slices/auth.slice";
+import { useDispatch, useSelector } from "react-redux";
+import { updateCart } from "../../../../redux/slices/cart.slice";
+import { ToastShow } from "../../../../redux/slices/toast.slice";
 
 const Product = () => {
   const [productDetails, setProductDetails] = useState<
@@ -19,13 +23,42 @@ const Product = () => {
 
   const productId = useParams()?.id;
 
+  const { isAuthenticated } = useSelector(getAuth);
+  const dispatch = useDispatch();
+
   const { fetchProductByIdApi, isLoading, isError } = useFetchProductByIdApi();
+  const { addToCartApi, isLoading: cartLoading } = useAddToCartApi();
 
   const fetchProductById = async () => {
     const { data } = await fetchProductByIdApi(Number(productId));
 
     if (data?.data && data?.responseType === ResponseType.Success) {
       setProductDetails(data.data);
+    }
+  };
+
+  const addProductToCart = async () => {
+    if (!isAuthenticated && productDetails) {
+      dispatch(
+        updateCart({
+          product: {
+            id: Number(productId),
+            brand: productDetails.brand,
+            name: productDetails.name,
+            selling_price: productDetails.selling_price,
+            available_quantity: productDetails.available_quantity,
+          },
+          quantity,
+        })
+      );
+      dispatch(
+        ToastShow({
+          message: "Product added to cart successfully",
+          type: "success",
+        })
+      );
+    } else {
+      await addToCartApi(Number(productId), quantity);
     }
   };
 
@@ -121,6 +154,9 @@ const Product = () => {
                 label="ADD TO CART"
                 displayType={ButtonDisplayType.Secondary}
                 externalClasses="justify-center text-[13px] py-[12px] px-[20px] rounded-sm w-full font-primary"
+                onClickHandler={addProductToCart}
+                isDisabled={cartLoading}
+                isLoading={cartLoading}
               />
               <Button
                 label="BUY NOW"

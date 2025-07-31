@@ -35,3 +35,15 @@ export enum SortTypes {
   Ascending = "ASC",
   Descending = "DESC",
 }
+
+export interface ICart {
+  cart_id?: number;
+  product: {
+    id: number;
+    name: string;
+    brand?: string;
+    selling_price: number;
+    available_quantity: number;
+  };
+  quantity: number;
+}
