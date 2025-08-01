@@ -13,6 +13,8 @@ import { useLoginApi } from "../../services";
 import { ResponseType } from "../../../../types";
 import { useDispatch } from "react-redux";
 import { setCredentials, setUser } from "../../../../redux/slices/auth.slice";
+import { useMergeCartsApi } from "../../../Customer/pages/Cart/services";
+import { clearCart } from "../../../../redux/slices/cart.slice";
 
 const Login = () => {
   const {
@@ -26,6 +28,7 @@ const Login = () => {
   const dispatch = useDispatch();
 
   const { loginApi, isLoading } = useLoginApi();
+  const { mergeCartsApi } = useMergeCartsApi();
 
   const submitHandler: SubmitHandler<ILogin> = async (loginData: ILogin) => {
     const { data } = await loginApi(loginData);
@@ -43,6 +46,10 @@ const Login = () => {
         })
       );
       navigate(ICustomerRoutes.Home);
+      const { data: mergeCartData } = await mergeCartsApi();
+      if (mergeCartData.responseType === ResponseType.Success) {
+        dispatch(clearCart());
+      }
     }
   };
 

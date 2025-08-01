@@ -22,5 +22,3 @@ export const categories = [
 ];
 
 export const PRODUCTS_APP_BASE_PATH = "/products";
-
-export const CART_APP_BASE_PATH = "/carts";

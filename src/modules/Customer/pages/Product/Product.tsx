@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useAddToCartApi, useFetchProductByIdApi } from "./services";
+import { useFetchProductByIdApi } from "./services";
 import { ResponseType } from "../../../../types";
 import { IProductDetails } from "./types";
 import ProductImages from "./components/ProductImages";
@@ -14,6 +14,7 @@ import { getAuth } from "../../../../redux/slices/auth.slice";
 import { useDispatch, useSelector } from "react-redux";
 import { updateCart } from "../../../../redux/slices/cart.slice";
 import { ToastShow } from "../../../../redux/slices/toast.slice";
+import { useAddToCartApi } from "../Cart/services";
 
 const Product = () => {
   const [productDetails, setProductDetails] = useState<
