@@ -44,6 +44,10 @@ export interface ICart {
     brand?: string;
     selling_price: number;
     available_quantity: number;
+    productImages?: {
+      image_url: string;
+    }[];
   };
+  is_selected: boolean;
   quantity: number;
 }

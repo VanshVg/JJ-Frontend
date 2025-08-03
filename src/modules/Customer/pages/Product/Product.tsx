@@ -48,6 +48,11 @@ const Product = () => {
             name: productDetails.name,
             selling_price: productDetails.selling_price,
             available_quantity: productDetails.available_quantity,
+            productImages: [
+              {
+                image_url: productDetails?.productImages?.[0]?.image_url,
+              },
+            ],
           },
           quantity,
         })
@@ -61,6 +66,7 @@ const Product = () => {
     } else {
       await addToCartApi(Number(productId), quantity);
     }
+    setQuantity(1);
   };
 
   useEffect(() => {

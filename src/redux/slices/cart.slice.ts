@@ -27,9 +27,10 @@ const cartSlice = createSlice({
             newQuantity <= action.payload.product.available_quantity
               ? newQuantity
               : action.payload.product.available_quantity,
+          is_selected: true,
         };
       } else {
-        state.cartData.push(action.payload);
+        state.cartData.push({ ...action.payload, is_selected: true });
       }
     },
   },

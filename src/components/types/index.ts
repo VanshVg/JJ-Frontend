@@ -50,8 +50,8 @@ export interface IContactInputProps<T extends FieldValues> {
 
 export interface ICheckboxProps {
   externalClasses?: string;
-  name: string;
-  value: string | number | readonly string[];
+  name?: string;
+  value?: string | number | readonly string[];
   onChange?: ChangeEventHandler<HTMLInputElement>;
   isChecked?: boolean;
   isDisabled?: boolean;
@@ -62,6 +62,8 @@ export interface IQuantityProps {
   quantity: number;
   setQuantity: React.Dispatch<React.SetStateAction<number>>;
   availableQuantity: number;
+  iconSize?: string;
+  textSize?: string;
 }
 
 export interface IModalProps {
