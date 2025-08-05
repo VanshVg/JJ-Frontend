@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import {
+  useAxiosDelete,
   useAxiosGet,
   useAxiosPost,
   useAxiosPut,
@@ -68,4 +69,14 @@ export const useToggleSelectionApi = () => {
   };
 
   return { toggleSelectionApi, isError, isLoading, isSuccess };
+};
+
+export const useRemoveFromCartApi = () => {
+  const [callApi, { isError, isLoading, isSuccess }] = useAxiosDelete();
+
+  const removeFromCartApi = async (productId?: number) => {
+    return callApi(`${CART_APP_BASE_PATH}/products/${productId}`);
+  };
+
+  return { removeFromCartApi, isError, isLoading, isSuccess };
 };

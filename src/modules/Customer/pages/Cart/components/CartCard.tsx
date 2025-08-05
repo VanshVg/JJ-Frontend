@@ -4,7 +4,7 @@ import { ICart } from "../../../../../types";
 import Quantity from "../../../../../components/Quantity";
 import { AiOutlineClose } from "react-icons/ai";
 import { rupeesSymbol } from "../../../../../types/constants";
-import { useUpdateCartApi } from "../services";
+import { useRemoveFromCartApi, useUpdateCartApi } from "../services";
 
 const CartCard = ({
   item,
@@ -21,6 +21,7 @@ const CartCard = ({
   const [isSelected, setIsSelected] = useState<boolean>(item.is_selected);
 
   const { updateCartApi } = useUpdateCartApi();
+  const { removeFromCartApi } = useRemoveFromCartApi();
 
   const updateCart = async (isNewSelected: boolean = isSelected) => {
     await updateCartApi(Number(item.id), {
@@ -29,6 +30,11 @@ const CartCard = ({
     });
     setIsItemUpdated((prev) => !prev);
     setIsAllSelected(undefined);
+  };
+
+  const removeFromCart = async () => {
+    await removeFromCartApi(item.product.id);
+    setIsItemUpdated((prev) => !prev);
   };
 
   useEffect(() => {
@@ -81,7 +87,7 @@ const CartCard = ({
             />
           </div>
         </div>
-        <div>
+        <div onClick={removeFromCart}>
           <AiOutlineClose className="text-[18px]" />
         </div>
       </div>

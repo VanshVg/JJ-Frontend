@@ -34,10 +34,8 @@ const Cart = () => {
       const { data } = await fetchCartApi();
       if (data.responseType === ResponseType.Success) {
         let isSomethingFalse = false;
-        console.log(data.data);
         for (const product of data.data) {
           if (String(product.is_selected) === "false") {
-            console.log("HEREEEEEEE");
             setInitialSelected(false);
             isSomethingFalse = true;
             break;
