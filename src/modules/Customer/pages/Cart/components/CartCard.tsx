@@ -9,9 +9,13 @@ import { useUpdateCartApi } from "../services";
 const CartCard = ({
   item,
   isAllSelected,
+  setIsItemUpdated,
+  setIsAllSelected,
 }: {
   item: ICart;
   isAllSelected?: boolean;
+  setIsItemUpdated: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsAllSelected: React.Dispatch<React.SetStateAction<boolean | undefined>>;
 }) => {
   const [quantity, setQuantity] = useState<number>(item.quantity);
   const [isSelected, setIsSelected] = useState<boolean>(item.is_selected);
@@ -23,6 +27,8 @@ const CartCard = ({
       quantity,
       is_selected: isNewSelected,
     });
+    setIsItemUpdated((prev) => !prev);
+    setIsAllSelected(undefined);
   };
 
   useEffect(() => {

@@ -15,7 +15,8 @@ const Cart = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [cartProducts, setCartProducts] = useState<ICart[]>([]);
   const [isAllSelected, setIsAllSelected] = useState<boolean>();
-  const [initialSelected, setIsInitialSelected] = useState<boolean>();
+  const [initialSelected, setInitialSelected] = useState<boolean>();
+  const [isItemUpdated, setIsItemUpdated] = useState<boolean>(false);
 
   const { fetchCartApi } = useFetchCartApi();
   const { toggleSelectionApi } = useToggleSelectionApi();
@@ -33,15 +34,17 @@ const Cart = () => {
       const { data } = await fetchCartApi();
       if (data.responseType === ResponseType.Success) {
         let isSomethingFalse = false;
+        console.log(data.data);
         for (const product of data.data) {
           if (String(product.is_selected) === "false") {
-            setIsInitialSelected(false);
+            console.log("HEREEEEEEE");
+            setInitialSelected(false);
             isSomethingFalse = true;
             break;
           }
         }
         if (!isSomethingFalse) {
-          setIsInitialSelected(true);
+          setInitialSelected(true);
         }
         setCartProducts(data.data);
       }
@@ -50,12 +53,14 @@ const Cart = () => {
   };
 
   const toggleAllSelection = async () => {
-    await toggleSelectionApi(isAllSelected);
+    await toggleSelectionApi(
+      typeof isAllSelected === "boolean" ? !isAllSelected : !initialSelected
+    );
   };
 
   useEffect(() => {
     fetchCartData();
-  }, []);
+  }, [isItemUpdated]);
 
   if (isLoading) {
     return <p className="text-center mt-5">Loading...</p>;
@@ -82,7 +87,13 @@ const Cart = () => {
           <Checkbox
             isChecked={isAllSelected ?? initialSelected}
             onChange={async () => {
-              setIsAllSelected((prev) => !prev);
+              setIsAllSelected((prev) => {
+                if (typeof prev === "boolean") {
+                  return !prev;
+                } else {
+                  return !initialSelected;
+                }
+              });
               toggleAllSelection();
             }}
           />
@@ -95,6 +106,8 @@ const Cart = () => {
               item={item}
               isAllSelected={isAllSelected}
               key={item.product.id}
+              setIsItemUpdated={setIsItemUpdated}
+              setIsAllSelected={setIsAllSelected}
             />
           ))}
         </div>
