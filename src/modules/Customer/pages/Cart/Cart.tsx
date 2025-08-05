@@ -15,6 +15,7 @@ const Cart = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [cartProducts, setCartProducts] = useState<ICart[]>([]);
   const [isAllSelected, setIsAllSelected] = useState<boolean>();
+  const [initialSelected, setIsInitialSelected] = useState<boolean>();
 
   const { fetchCartApi } = useFetchCartApi();
   const { toggleSelectionApi } = useToggleSelectionApi();
@@ -34,13 +35,13 @@ const Cart = () => {
         let isSomethingFalse = false;
         for (const product of data.data) {
           if (String(product.is_selected) === "false") {
-            setIsAllSelected(false);
+            setIsInitialSelected(false);
             isSomethingFalse = true;
             break;
           }
         }
         if (!isSomethingFalse) {
-          setIsAllSelected(true);
+          setIsInitialSelected(true);
         }
         setCartProducts(data.data);
       }
@@ -79,7 +80,7 @@ const Cart = () => {
       <div className="w-[90%] mx-auto">
         <div className="flex mb-4 items-center gap-2">
           <Checkbox
-            isChecked={isAllSelected}
+            isChecked={isAllSelected ?? initialSelected}
             onChange={async () => {
               setIsAllSelected((prev) => !prev);
               toggleAllSelection();

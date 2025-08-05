@@ -37,6 +37,7 @@ export enum SortTypes {
 }
 
 export interface ICart {
+  id?: number;
   cart_id?: number;
   product: {
     id: number;

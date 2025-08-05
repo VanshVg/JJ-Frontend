@@ -18,12 +18,21 @@ const CartCard = ({
 
   const { updateCartApi } = useUpdateCartApi();
 
-  const updateCart = async () => {
-    await updateCartApi({ quantity, is_selected: isSelected });
+  const updateCart = async (isNewSelected: boolean = isSelected) => {
+    await updateCartApi(Number(item.id), {
+      quantity,
+      is_selected: isNewSelected,
+    });
   };
 
   useEffect(() => {
-    if (isAllSelected) {
+    if (item.quantity !== quantity) {
+      updateCart();
+    }
+  }, [quantity]);
+
+  useEffect(() => {
+    if (typeof isAllSelected === "boolean") {
       setIsSelected(isAllSelected);
     }
   }, [isAllSelected]);
@@ -36,7 +45,7 @@ const CartCard = ({
             isChecked={isSelected}
             onChange={() => {
               setIsSelected((prev) => !prev);
-              updateCart();
+              updateCart(!isSelected);
             }}
           />
         </div>

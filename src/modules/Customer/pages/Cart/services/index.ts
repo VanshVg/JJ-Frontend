@@ -47,11 +47,14 @@ export const useFetchCartApi = () => {
 export const useUpdateCartApi = () => {
   const [callApi, { isError, isLoading, isSuccess }] = useAxiosPut();
 
-  const updateCartApi = async (payload: {
-    quantity?: number;
-    is_selected?: boolean;
-  }) => {
-    return callApi(`${CART_APP_BASE_PATH}/products/:id`, payload);
+  const updateCartApi = async (
+    cartProductId: number,
+    payload: {
+      quantity?: number;
+      is_selected?: boolean;
+    }
+  ) => {
+    return callApi(`${CART_APP_BASE_PATH}/products/${cartProductId}`, payload);
   };
 
   return { updateCartApi, isError, isLoading, isSuccess };
