@@ -5,17 +5,25 @@ import Quantity from "../../../../../components/Quantity";
 import { AiOutlineClose } from "react-icons/ai";
 import { rupeesSymbol } from "../../../../../types/constants";
 import { useRemoveFromCartApi, useUpdateCartApi } from "../services";
+import { useDispatch, useSelector } from "react-redux";
+import { getAuth } from "../../../../../redux/slices/auth.slice";
+import {
+  removeProductFromCart,
+  updateCartData,
+} from "../../../../../redux/slices/cart.slice";
 
 const CartCard = ({
   item,
   isAllSelected,
   setIsItemUpdated,
   setIsAllSelected,
+  setCartProducts,
 }: {
   item: ICart;
   isAllSelected?: boolean;
   setIsItemUpdated: React.Dispatch<React.SetStateAction<boolean>>;
   setIsAllSelected: React.Dispatch<React.SetStateAction<boolean | undefined>>;
+  setCartProducts: React.Dispatch<React.SetStateAction<ICart[]>>;
 }) => {
   const [quantity, setQuantity] = useState<number>(item.quantity);
   const [isSelected, setIsSelected] = useState<boolean>(item.is_selected);
@@ -23,18 +31,38 @@ const CartCard = ({
   const { updateCartApi } = useUpdateCartApi();
   const { removeFromCartApi } = useRemoveFromCartApi();
 
+  const { isAuthenticated } = useSelector(getAuth);
+
+  const dispatch = useDispatch();
+
   const updateCart = async (isNewSelected: boolean = isSelected) => {
-    await updateCartApi(Number(item.id), {
-      quantity,
-      is_selected: isNewSelected,
-    });
+    if (isAuthenticated) {
+      await updateCartApi(Number(item.id), {
+        quantity,
+        is_selected: isNewSelected,
+      });
+    } else {
+      dispatch(
+        updateCartData({
+          quantity,
+          is_selected: isNewSelected,
+          productId: item.product.id,
+        })
+      );
+    }
     setIsItemUpdated((prev) => !prev);
     setIsAllSelected(undefined);
   };
 
   const removeFromCart = async () => {
-    await removeFromCartApi(item.product.id);
-    setIsItemUpdated((prev) => !prev);
+    if (isAuthenticated) {
+      await removeFromCartApi(item.product.id);
+    } else {
+      dispatch(removeProductFromCart({ productId: item.product.id }));
+    }
+    setCartProducts((prev) =>
+      prev.filter((e) => e.product.id !== item.product.id)
+    );
   };
 
   useEffect(() => {

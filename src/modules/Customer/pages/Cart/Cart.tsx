@@ -1,6 +1,6 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getAuth } from "../../../../redux/slices/auth.slice";
-import { getCart } from "../../../../redux/slices/cart.slice";
+import { getCart, toggleSelection } from "../../../../redux/slices/cart.slice";
 import { useEffect, useState } from "react";
 import { ICart, ResponseType } from "../../../../types";
 import Button from "../../../../components/Button";
@@ -24,36 +24,53 @@ const Cart = () => {
   const { isAuthenticated } = useSelector(getAuth);
   const { cartData } = useSelector(getCart);
 
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
 
   const fetchCartData = async () => {
     setIsLoading(true);
+    const initialCartData: ICart[] = [];
+
     if (!isAuthenticated) {
+      initialCartData.push(...cartData);
       setCartProducts(cartData);
     } else {
       const { data } = await fetchCartApi();
       if (data.responseType === ResponseType.Success) {
-        let isSomethingFalse = false;
-        for (const product of data.data) {
-          if (String(product.is_selected) === "false") {
-            setInitialSelected(false);
-            isSomethingFalse = true;
-            break;
-          }
-        }
-        if (!isSomethingFalse) {
-          setInitialSelected(true);
-        }
+        initialCartData.push(...data.data);
         setCartProducts(data.data);
       }
+    }
+    let isSomethingFalse = false;
+    for (const product of initialCartData) {
+      if (String(product.is_selected) === "false") {
+        setInitialSelected(false);
+        isSomethingFalse = true;
+        break;
+      }
+    }
+    if (!isSomethingFalse) {
+      setInitialSelected(true);
     }
     setIsLoading(false);
   };
 
   const toggleAllSelection = async () => {
-    await toggleSelectionApi(
-      typeof isAllSelected === "boolean" ? !isAllSelected : !initialSelected
-    );
+    if (isAuthenticated) {
+      await toggleSelectionApi(
+        typeof isAllSelected === "boolean" ? !isAllSelected : !initialSelected
+      );
+    } else {
+      dispatch(
+        toggleSelection({
+          toggleType:
+            typeof isAllSelected === "boolean"
+              ? !isAllSelected
+              : !initialSelected,
+        })
+      );
+    }
   };
 
   useEffect(() => {
@@ -106,6 +123,7 @@ const Cart = () => {
               key={item.product.id}
               setIsItemUpdated={setIsItemUpdated}
               setIsAllSelected={setIsAllSelected}
+              setCartProducts={setCartProducts}
             />
           ))}
         </div>
