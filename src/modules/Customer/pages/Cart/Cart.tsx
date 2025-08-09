@@ -17,12 +17,13 @@ const Cart = () => {
   const [isAllSelected, setIsAllSelected] = useState<boolean>();
   const [initialSelected, setInitialSelected] = useState<boolean>();
   const [isItemUpdated, setIsItemUpdated] = useState<boolean>(false);
+  const [totalPrice, setTotalPrice] = useState<number>(0);
 
   const { fetchCartApi } = useFetchCartApi();
   const { toggleSelectionApi } = useToggleSelectionApi();
 
   const { isAuthenticated } = useSelector(getAuth);
-  const { cartData } = useSelector(getCart);
+  const { cartData, totalPrice: price } = useSelector(getCart);
 
   const dispatch = useDispatch();
 
@@ -35,11 +36,13 @@ const Cart = () => {
     if (!isAuthenticated) {
       initialCartData.push(...cartData);
       setCartProducts(cartData);
+      setTotalPrice(price);
     } else {
       const { data } = await fetchCartApi();
       if (data.responseType === ResponseType.Success) {
-        initialCartData.push(...data.data);
-        setCartProducts(data.data);
+        initialCartData.push(...data.data.cartData);
+        setCartProducts(data.data.cartData);
+        setTotalPrice(data.data.totalPrice);
       }
     }
     let isSomethingFalse = false;
@@ -98,7 +101,10 @@ const Cart = () => {
   return (
     <div className="mt-6 text-primary">
       <div className="w-[90%] mx-auto">
-        <div className="flex mb-4 items-center gap-2">
+        <p className="underline font-secondary text-right text-primary mt-5 mr-3 cursor-pointer sm:text-[18px] lg:hidden">
+          View Summary
+        </p>
+        <div className="flex mb-4 items-center gap-2 mt-2">
           <Checkbox
             isChecked={isAllSelected ?? initialSelected}
             onChange={async () => {

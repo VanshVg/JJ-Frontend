@@ -4,6 +4,7 @@ import { ICart } from "../../types";
 
 const initialState: CartInterface = {
   cartData: [],
+  totalPrice: 0,
 };
 
 const cartSlice = createSlice({
@@ -32,6 +33,13 @@ const cartSlice = createSlice({
       } else {
         state.cartData.push({ ...action.payload, is_selected: true });
       }
+
+      state.totalPrice = state.cartData.reduce((acc, item) => {
+        if (item.is_selected) {
+          return acc + item.product.selling_price * item.quantity;
+        }
+        return acc;
+      }, 0);
     },
 
     toggleSelection(
@@ -73,6 +81,12 @@ const cartSlice = createSlice({
           return e;
         }
       });
+      state.totalPrice = state.cartData.reduce((acc, item) => {
+        if (item.is_selected) {
+          return acc + item.product.selling_price * item.quantity;
+        }
+        return acc;
+      }, 0);
     },
   },
 });

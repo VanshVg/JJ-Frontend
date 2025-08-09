@@ -21,4 +21,5 @@ export interface SearchInterface {
 
 export interface CartInterface {
   cartData: ICart[];
+  totalPrice: number;
 }
