@@ -11,6 +11,8 @@ import {
   removeProductFromCart,
   updateCartData,
 } from "../../../../../redux/slices/cart.slice";
+import { useNavigate } from "react-router-dom";
+import { ICustomerRoutes } from "../../../types";
 
 const CartCard = ({
   item,
@@ -34,6 +36,7 @@ const CartCard = ({
   const { isAuthenticated } = useSelector(getAuth);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const updateCart = async (isNewSelected: boolean = isSelected) => {
     if (isAuthenticated) {
@@ -92,7 +95,10 @@ const CartCard = ({
         <div className="w-[27%] flex items-center justify-center">
           <img
             src={item?.product?.productImages?.[0].image_url}
-            className="w-[100px] h-[100px] object-contain"
+            onClick={() =>
+              navigate(`${ICustomerRoutes.Product + "/" + item.product.id}`)
+            }
+            className="w-[100px] h-[100px] object-contain cursor-pointer"
           />
         </div>
         <div className="w-[67%] flex flex-col text-left">
