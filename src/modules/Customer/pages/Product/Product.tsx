@@ -55,6 +55,7 @@ const Product = () => {
             ],
           },
           quantity,
+          is_selected: true,
         })
       );
       dispatch(
