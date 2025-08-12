@@ -5,6 +5,8 @@ const Quantity = ({
   quantity,
   setQuantity,
   availableQuantity,
+  iconSize = "24px",
+  textSize = "18px",
 }: IQuantityProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let value = parseInt(e.target.value);
@@ -22,14 +24,14 @@ const Quantity = ({
         onClick={() => setQuantity((prev) => (prev > 1 ? prev - 1 : 1))}
         className="p-1 cursor-pointer transition-all "
       >
-        <AiFillMinusSquare className="text-[24px]" />
+        <AiFillMinusSquare className={`text-[${iconSize}]`} />
       </button>
 
       <input
         type="number"
         value={quantity}
         onChange={handleChange}
-        className="w-6 text-center text-lg border-none focus:outline-none"
+        className={`w-6 text-center text-[${textSize}] border-none focus:outline-none`}
         min={1}
         max={availableQuantity}
       />
@@ -43,7 +45,7 @@ const Quantity = ({
         }
         className="p-1 cursor-pointer transition-all"
       >
-        <AiFillPlusSquare className="text-[24px]" />
+        <AiFillPlusSquare className={`text-[${iconSize}]`} />
       </button>
     </div>
   );

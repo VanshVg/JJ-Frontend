@@ -1,4 +1,4 @@
-import { IUser } from "../../types";
+import { ICart, IUser } from "../../types";
 import { store } from "../store";
 
 export type RootState = ReturnType<typeof store.getState>;
@@ -17,4 +17,9 @@ export interface AuthInterface {
 
 export interface SearchInterface {
   query: string | null;
+}
+
+export interface CartInterface {
+  cartData: ICart[];
+  totalPrice: number;
 }
