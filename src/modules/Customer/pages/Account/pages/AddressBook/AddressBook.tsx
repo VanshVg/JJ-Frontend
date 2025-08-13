@@ -13,6 +13,11 @@ import { ResponseType } from "../../../../../../types";
 import { AddressType, IUserAddress } from "../../types";
 import { MdLocalConvenienceStore } from "react-icons/md";
 import EditAddress from "./components/EditAddress";
+import { useDispatch } from "react-redux";
+import {
+  removeAddress,
+  saveAddresses,
+} from "../../../../../../redux/slices/address.slice";
 
 const AddressBook = () => {
   const [openAddModal, setOpenAddModal] = useState<boolean>(false);
@@ -24,6 +29,8 @@ const AddressBook = () => {
 
   const { fetchUserAddressApi, isLoading } = useFetchUserAddressApi();
   const { deleteAddressApi, isLoading: deleteLoading } = useDeleteAddressApi();
+
+  const dispatch = useDispatch();
 
   const closeAddModal = () => {
     setOpenAddModal(false);
@@ -41,6 +48,7 @@ const AddressBook = () => {
     const { data } = await fetchUserAddressApi();
     if (data && data.responseType === ResponseType.Success) {
       setUserAddresses(data?.data?.addresses);
+      dispatch(saveAddresses([...data.data.addresses]));
     }
   };
 
@@ -50,6 +58,7 @@ const AddressBook = () => {
 
   const deleteUserAddress = async (addressId?: number) => {
     await deleteAddressApi(addressId);
+    dispatch(removeAddress({ addressId: Number(addressId) }));
   };
 
   useEffect(() => {
