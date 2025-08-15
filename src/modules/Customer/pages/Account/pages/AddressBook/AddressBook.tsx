@@ -103,19 +103,24 @@ const AddressBook = () => {
               >
                 <div className="border-gray-400 border-[1px] p-2 rounded-md lg:h-[145px] flex flex-col justify-between">
                   <div>
-                    <div className="flex items-center gap-2">
-                      {address.address_type === AddressType.Work && (
-                        <BsBuildingFill />
+                    <div className="flex justify-between">
+                      <div className="flex items-center gap-2">
+                        {address.address_type === AddressType.Work && (
+                          <BsBuildingFill />
+                        )}
+                        {address.address_type === AddressType.Home && (
+                          <AiFillHome />
+                        )}
+                        {address.address_type === AddressType.Other && (
+                          <MdLocalConvenienceStore />
+                        )}
+                        <h2 className="font-semibold capitalize">
+                          {address.address_type}
+                        </h2>
+                      </div>
+                      {address.is_primary && (
+                        <p className="opacity-80 text-[14px]">Primary</p>
                       )}
-                      {address.address_type === AddressType.Home && (
-                        <AiFillHome />
-                      )}
-                      {address.address_type === AddressType.Other && (
-                        <MdLocalConvenienceStore />
-                      )}
-                      <h2 className="font-semibold capitalize">
-                        {address.address_type}
-                      </h2>
                     </div>
                     <p className="text-left mt-2 opacity-80 text-[14px] line-clamp-3">
                       {address.address_line_1}, {address.address_line_2},{" "}

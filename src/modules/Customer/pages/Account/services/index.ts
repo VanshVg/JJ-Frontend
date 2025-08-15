@@ -40,8 +40,8 @@ export const useFetchUserAddressApi = () => {
 export const useEditAddressApi = () => {
   const [callApi, { isError, isLoading }] = useAxiosPut();
 
-  const editAddressApi = async (payload: IAddAddress) => {
-    return callApi(`${USERS_APP_BASE_PATH}/address`, payload);
+  const editAddressApi = async (payload: IAddAddress, addressId: number) => {
+    return callApi(`${USERS_APP_BASE_PATH}/address/${addressId}`, payload);
   };
 
   return { editAddressApi, isError, isLoading };

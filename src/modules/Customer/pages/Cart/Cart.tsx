@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { useFetchCartApi, useToggleSelectionApi } from "./services";
 import Checkbox from "../../../../components/form-fields/Checkbox";
 import CartCard from "./components/CartCard";
-import { rupeesSymbol } from "../../../../types/constants";
+import { deliveryFee, rupeesSymbol } from "../../../../types/constants";
 
 const Cart = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -148,18 +148,20 @@ const Cart = () => {
                 {rupeesSymbol}
               </p>
             </div>
-            <div className="flex justify-between">
-              <p className="text-[14px]">Delivery Fee</p>
-              <p>
-                {15}
-                {rupeesSymbol}
-              </p>
-            </div>
+            {totalPrice > 0 && (
+              <div className="flex justify-between">
+                <p className="text-[14px]">Delivery Fee</p>
+                <p>
+                  {deliveryFee}
+                  {rupeesSymbol}
+                </p>
+              </div>
+            )}
             <div className="h-[1px] bg-primary opacity-50 mt-2" />
             <div className="flex justify-between mt-2">
               <p className="text-[16px] font-bold">Total</p>
               <p>
-                {totalPrice + 15}
+                {totalPrice > 0 ? totalPrice + deliveryFee : 0}
                 {rupeesSymbol}
               </p>
             </div>
@@ -167,7 +169,7 @@ const Cart = () => {
               label="Checkout"
               displayType={ButtonDisplayType.Primary}
               externalClasses="mx-auto mt-10 py-2 px-10 text-[16px]"
-              // onClickHandler={() => navigate(ICustomerRoutes.Shop)}
+              isDisabled={totalPrice <= 0}
             />
           </div>
         </div>

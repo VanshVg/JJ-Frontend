@@ -9,6 +9,10 @@ import { ButtonDisplayType } from "../../../../../../../components/types";
 import { useAddAddressApi } from "../../../services";
 import { ResponseType } from "../../../../../../../types";
 import { AddressType, IAddAddress } from "../../../types/index";
+import { useDispatch } from "react-redux";
+import { addAddress } from "../../../../../../../redux/slices/address.slice";
+import Checkbox from "../../../../../../../components/form-fields/Checkbox";
+import { useState } from "react";
 
 const AddAddress = ({
   closeModal,
@@ -31,14 +35,22 @@ const AddAddress = ({
     resolver: yupResolver(addAddressSchema),
   });
 
+  const [isPrimary, setIsPrimary] = useState<string>("false");
+
   const { addAddressApi, isLoading } = useAddAddressApi();
+
+  const dispatch = useDispatch();
 
   const submitHandler: SubmitHandler<IAddAddress> = async (
     addressData: IAddAddress
   ) => {
-    const { data } = await addAddressApi(addressData);
+    const { data } = await addAddressApi({
+      ...addressData,
+      is_primary: Boolean(isPrimary),
+    });
     if (data && data.responseType === ResponseType.Success) {
       changeAddressFlag();
+      dispatch(addAddress({ ...data.data }));
       closeModal();
     }
   };
@@ -90,6 +102,22 @@ const AddAddress = ({
           externalClasses="w-full mt-4 lg:text-[14px]"
           placeholder="Address Type"
         />
+        <div className="mt-4">
+          <Checkbox
+            name="is_primary"
+            value={isPrimary}
+            label={"Set as primary address"}
+            onChange={(e) => {
+              if (e.target.value === "false") {
+                setIsPrimary("true");
+              } else {
+                setIsPrimary("false");
+              }
+            }}
+            isChecked={isPrimary === "true"}
+            externalClasses="justify-start"
+          />
+        </div>
         <Button
           label="Add"
           type="submit"
