@@ -1,3 +1,4 @@
+import { IUserAddress } from "../../modules/Customer/pages/Account/types";
 import { ICart, IUser } from "../../types";
 import { store } from "../store";
 
@@ -22,4 +23,8 @@ export interface SearchInterface {
 export interface CartInterface {
   cartData: ICart[];
   totalPrice: number;
+}
+
+export interface AddressInterface {
+  addresses: IUserAddress[];
 }

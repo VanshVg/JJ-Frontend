@@ -28,6 +28,7 @@ export interface IAddAddress {
   pincode: number;
   landmark?: string;
   address_type: AddressType;
+  is_primary?: boolean;
 }
 
 export interface IUserAddress {
@@ -37,6 +38,7 @@ export interface IUserAddress {
   landmark?: string;
   pincode: number;
   address_type: AddressType;
+  is_primary?: boolean;
 }
 
 export interface IChangePassword {

@@ -6,6 +6,7 @@ import { toastReducer } from "./slices/toast.slice";
 import { authReducer } from "./slices/auth.slice";
 import { searchReducer } from "./slices/search.slice";
 import { cartReducer } from "./slices/cart.slice";
+import { addressReducer } from "./slices/address.slice";
 
 const persistConfig = {
   key: "JJ",
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   auth: authReducer,
   search: searchReducer,
   cart: cartReducer,
+  address: addressReducer,
 });
 
 export default persistReducer(persistConfig, rootReducer);
