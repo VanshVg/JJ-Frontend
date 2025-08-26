@@ -8,12 +8,15 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { useDebounce } from "../../../../hooks/useDebounce";
 import { useSelector } from "react-redux";
 import { getSearchQuery } from "../../../../redux/slices/search.slice";
+import { useLocation } from "react-router-dom";
 
 const Shop = () => {
+  const location = useLocation();
+
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
   const [filters, setFilters] = useState<IProductFilters>({
     priceRange: [50, 2500],
-    categories: [],
+    categories: [...(location?.state?.category && [location?.state?.category])],
   });
   const [products, setProducts] = useState<IProducts[]>([]);
   const [page, setPage] = useState<number>(1);

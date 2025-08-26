@@ -1,6 +1,10 @@
+import { useNavigate } from "react-router-dom";
 import { categoryImagesData } from "../types/constants";
+import { ICustomerRoutes } from "../../../types";
 
 const CategorySection = () => {
+  const navigate = useNavigate();
+
   return (
     <section>
       <h1 className="font-primary text-[25px] sm:text-[30px] md:text-[35px] lg:text-[40px] xl:text-[45px] italic">
@@ -12,6 +16,11 @@ const CategorySection = () => {
             <div
               className="w-[25%] relative group cursor-pointer"
               key={image.imageUrl}
+              onClick={() =>
+                navigate(ICustomerRoutes.Shop, {
+                  state: { category: image.label },
+                })
+              }
             >
               <img
                 src={image.imageUrl}

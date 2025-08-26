@@ -15,3 +15,7 @@ export enum IAccountRoutes {
   Reviews = "reviews",
   Orders = "orders",
 }
+
+export enum IAdminRoutes {
+  Home = "/admin",
+}

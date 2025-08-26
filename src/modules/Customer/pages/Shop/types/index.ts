@@ -18,8 +18,8 @@ export interface IMobileSidebarProps extends IFiltersProps {
 export interface IMainSidebarProps extends IFiltersProps {}
 
 export interface IProductAPiFilters {
-  minPrice: number;
-  maxPrice: number;
+  minPrice?: number;
+  maxPrice?: number;
   limit?: number;
   page?: number;
   search?: string | null;

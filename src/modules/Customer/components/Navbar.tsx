@@ -6,9 +6,17 @@ import {
   navMenuMiddleElements,
 } from "../types/constants";
 import Search from "../../../components/Search";
+import { IAdminRoutes } from "../types";
+import Button from "../../../components/Button";
+import { ButtonDisplayType } from "../../../components/types";
+import { useSelector } from "react-redux";
+import { getAuth } from "../../../redux/slices/auth.slice";
+import { UserRoles } from "../../../types";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const { userData } = useSelector(getAuth);
 
   const navigate = useNavigate();
   const path = useLocation().pathname;
@@ -58,6 +66,14 @@ const Navbar = () => {
               </div>
             );
           })}
+          {userData?.role === UserRoles.Admin && (
+            <Button
+              label="Admin Panel"
+              displayType={ButtonDisplayType.Primary}
+              externalClasses="justify-center text-[13px] py-[5px] px-[12px] rounded-sm w-full"
+              onClickHandler={() => navigate(IAdminRoutes.Home)}
+            />
+          )}
         </div>
         <div className="md:hidden">
           <AiOutlineMenu
