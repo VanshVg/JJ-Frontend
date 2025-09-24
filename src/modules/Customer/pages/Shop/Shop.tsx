@@ -16,7 +16,7 @@ const Shop = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
   const [filters, setFilters] = useState<IProductFilters>({
     priceRange: [50, 2500],
-    categories: [...(location?.state?.category && [location?.state?.category])],
+    categories: [location?.state?.category ? location?.state?.category : []],
   });
   const [products, setProducts] = useState<IProducts[]>([]);
   const [page, setPage] = useState<number>(1);
