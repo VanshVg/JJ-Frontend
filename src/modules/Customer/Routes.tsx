@@ -8,6 +8,9 @@ const Home = lazy(() => import("./pages/Home/Home"));
 const Shop = lazy(() => import("./pages/Shop/Shop"));
 const About = lazy(() => import("./pages/About/About"));
 const Orders = lazy(() => import("./pages/Orders/Orders"));
+const OrderDetail = lazy(() => import("./pages/Orders/OrderDetail"));
+const OrderConfirmation = lazy(() => import("./pages/Orders/OrderConfirmation"));
+const Checkout = lazy(() => import("./pages/Checkout/Checkout"));
 const Cart = lazy(() => import("./pages/Cart/Cart"));
 const Account = lazy(() => import("./pages/Account/Account"));
 const Product = lazy(() => import("./pages/Product/Product"));
@@ -67,6 +70,18 @@ const customerRoutes: IRoutes[] = applySuspense([
       {
         path: ICustomerRoutes.Product + "/:id",
         element: <Product />,
+      },
+      {
+        path: ICustomerRoutes.Checkout,
+        element: <Checkout />,
+      },
+      {
+        path: ICustomerRoutes.Orders + "/:id",
+        element: <OrderDetail />,
+      },
+      {
+        path: ICustomerRoutes.OrderConfirmation + "/:id",
+        element: <OrderConfirmation />,
       },
     ],
   },

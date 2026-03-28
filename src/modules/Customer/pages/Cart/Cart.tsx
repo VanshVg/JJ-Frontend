@@ -7,6 +7,7 @@ import Button from "../../../../components/Button";
 import { ButtonDisplayType } from "../../../../components/types";
 import { ICustomerRoutes } from "../../types";
 import { useNavigate } from "react-router-dom";
+import { IAuthenticationRoutes } from "../../../Authentication/types";
 import { useFetchCartApi, useToggleSelectionApi } from "./services";
 import Checkbox from "../../../../components/form-fields/Checkbox";
 import CartCard from "./components/CartCard";
@@ -170,6 +171,13 @@ const Cart = () => {
               displayType={ButtonDisplayType.Primary}
               externalClasses="mx-auto mt-10 py-2 px-10 text-[16px]"
               isDisabled={totalPrice <= 0}
+              onClickHandler={() => {
+                if (isAuthenticated) {
+                  navigate(ICustomerRoutes.Checkout);
+                } else {
+                  navigate(IAuthenticationRoutes.Login);
+                }
+              }}
             />
           </div>
         </div>
