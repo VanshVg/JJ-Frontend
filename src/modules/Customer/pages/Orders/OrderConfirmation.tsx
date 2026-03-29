@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { QRCodeSVG } from "qrcode.react";
 import { useFetchOrderByIdApi } from "./services";
 import { ResponseType } from "../../../../types";
 import { IOrder } from "./types";
@@ -8,6 +9,9 @@ import { rupeesSymbol } from "../../../../types/constants";
 import Button from "../../../../components/Button";
 import { ButtonDisplayType } from "../../../../components/types";
 import { BsCheckCircleFill } from "react-icons/bs";
+
+const UPI_ID = import.meta.env.VITE_UPI_ID as string | undefined;
+const STORE_NAME = "JJ Grocery";
 
 const OrderConfirmation = () => {
   const { id } = useParams<{ id: string }>();
@@ -113,6 +117,26 @@ const OrderConfirmation = () => {
           </span>
         </div>
       </div>
+
+      {/* UPI QR Payment */}
+      {UPI_ID && (
+        <div className="border border-gray-200 rounded-md p-5 mb-5 text-center">
+          <h2 className="font-semibold text-[16px] mb-1">Pay via UPI</h2>
+          <p className="text-[13px] opacity-60 mb-4">
+            Scan to pay {rupeesSymbol}{Number(order.total_amount).toFixed(2)} — skip the cash hassle
+          </p>
+          <div className="flex justify-center mb-4">
+            <QRCodeSVG
+              value={`upi://pay?pa=${UPI_ID}&pn=${encodeURIComponent(STORE_NAME)}&am=${Number(order.total_amount).toFixed(2)}&tn=${encodeURIComponent(`Order #${order.id}`)}&cu=INR`}
+              size={180}
+              level="M"
+            />
+          </div>
+          <p className="text-[12px] opacity-50">
+            Works with PhonePe, GPay, Paytm, and any UPI app
+          </p>
+        </div>
+      )}
 
       {/* Payment & Status */}
       <div className="border border-gray-200 rounded-md p-5 mb-5">
