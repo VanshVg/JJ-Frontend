@@ -34,6 +34,7 @@ export interface IProducts {
   MRP: number;
   discount: number | null;
   selling_price: number;
+  available_quantity: number;
   average_rating: number | null;
   created_at: Date;
   category: {
