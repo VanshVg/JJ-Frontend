@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { getAuth } from "../../../../redux/slices/auth.slice";
-import { getCart, toggleSelection } from "../../../../redux/slices/cart.slice";
+import { getCart, setTotalPrice as setReduxTotalPrice, toggleSelection } from "../../../../redux/slices/cart.slice";
 import { useEffect, useState } from "react";
 import { ICart, ResponseType } from "../../../../types";
 import Button from "../../../../components/Button";
@@ -45,6 +45,7 @@ const Cart = () => {
         initialCartData.push(...data.data.cartData);
         setCartProducts(data.data.cartData);
         setTotalPrice(data.data.totalPrice);
+        dispatch(setReduxTotalPrice(data.data.totalPrice));
       }
     }
     let isSomethingFalse = false;
