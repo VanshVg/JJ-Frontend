@@ -20,4 +20,8 @@ export enum IAccountRoutes {
 
 export enum IAdminRoutes {
   Home = "/admin",
+  Orders = "/admin/orders",
+  Products = "/admin/products",
+  ProductNew = "/admin/products/new",
+  Customers = "/admin/customers",
 }

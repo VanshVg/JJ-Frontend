@@ -61,6 +61,10 @@ const cartSlice = createSlice({
       );
     },
 
+    setTotalPrice(state: CartInterface, action: PayloadAction<number>) {
+      state.totalPrice = action.payload;
+    },
+
     updateCartData(
       state: CartInterface,
       action: PayloadAction<{
@@ -101,6 +105,7 @@ export const {
   toggleSelection,
   removeProductFromCart,
   updateCartData,
+  setTotalPrice,
 } = cartSlice.actions;
 
 export default cartSlice;
