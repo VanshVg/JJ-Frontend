@@ -1,7 +1,6 @@
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { IAdminRoutes } from "../customer/types";
-import { ICustomerRoutes } from "../customer/types";
+import { IAdminRoutes, ICustomerRoutes } from "../Customer/types";
 import { setLogoutData } from "../../redux/slices/auth.slice";
 
 const navItems = [
